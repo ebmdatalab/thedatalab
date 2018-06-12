@@ -1,0 +1,23 @@
+{% load imagefit %}
+<h1>{{ thing.title }}</h1>
+{% for author in thing.authors.all %}
+By {{ author.title }}
+{% endfor %}
+<p>
+  <img src="{{ thing.image.name|resize:'200x200'}}">{{ thing.description }}
+</p>
+
+
+{% for var, related_things in klasses.items %}
+<h3>{{ var }}</h3>
+<ul>
+  {% for related_thing in related_things %}
+  {% if related_thing != thing %}
+  <li>
+    {{related_thing.title}}
+    <a href="{{ related_thing.get_absolute_url }}">Read more...</a>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>
+  {% endfor %}

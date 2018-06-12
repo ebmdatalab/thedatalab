@@ -1,0 +1,13 @@
+venv
+*~
+.~lock*
+.ipynb_checkpoints
+rundev
+ghostdriver.log
+__pycache__/
+#*#
+*pyc
+environment
+collected_static/
+data/
+*/combined_letters.pdf
