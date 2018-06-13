@@ -8,11 +8,13 @@ from frontend.models import Software
 from frontend.models import Dataset
 from frontend.models import Author
 
+from markdownx.admin import MarkdownxModelAdmin
 
-admin.site.register(Topic)
-admin.site.register(Blog)
-admin.site.register(Paper)
-admin.site.register(Tool)
-admin.site.register(Software)
-admin.site.register(Dataset)
-admin.site.register(Author)
+
+admin.site.register(Topic, MarkdownxModelAdmin)
+admin.site.register(Blog, MarkdownxModelAdmin)
+admin.site.register(Paper, MarkdownxModelAdmin)
+admin.site.register(Tool, MarkdownxModelAdmin)
+admin.site.register(Software, MarkdownxModelAdmin)
+admin.site.register(Dataset, MarkdownxModelAdmin)
+admin.site.register(Author, MarkdownxModelAdmin)

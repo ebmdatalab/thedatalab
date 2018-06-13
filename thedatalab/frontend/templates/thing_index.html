@@ -1,0 +1,36 @@
+{% extends '_base.html' %}
+{% load imagefit %}
+{% load thedatalab_extras %}
+
+{% block content %}
+
+<div style="display: flex; flex-direction: column" class="paper">
+  <div class="title">
+    <h1>{{ title }}</h1>
+  </div>
+
+  <div class="related">
+    <ul>
+      {% for thing in things %}
+      <li style="display: flex; margin-bottom: 1rem">
+        <img src="{{ thing.image.name|resize:'100x70'}}" width="100" height="70" style="margin-right: 10px;">
+        <div style="flex-direction: column">
+          <div>
+            <strong>{{thing.title}}</strong>
+            {% if thing.show_date %}
+            {{ thing.published_at|date:"c" }}
+            {% endif %}
+          </div>
+          <div>
+            {{thing.description}}
+          </div>
+          <div>
+            <a href="{{ thing.get_absolute_url }}">Read more...</a>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

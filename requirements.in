@@ -1,6 +1,8 @@
 django
 django_compressor
+django-libsass
 django-tagulous
 django-imagefit
 Pillow
 django-extensions
+django-markdownx

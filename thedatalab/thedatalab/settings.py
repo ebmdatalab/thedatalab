@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'tagulous',
     'imagefit',
+    'markdownx',
     'compressor',
     'frontend'
 ]
@@ -128,3 +129,22 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "public")
 MEDIA_URL = "/public/"
 IMAGEFIT_ROOT = MEDIA_ROOT
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
+COMPRESS_ROOT = 'static'
+
+COMPRESS_CSS_FILTERS = [
+  'compressor.filters.css_default.CssAbsoluteFilter',
+  'compressor.filters.cssmin.CSSCompressorFilter'
+]
+
+COMPRESS_ENABLED = False
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
