@@ -1,0 +1,49 @@
+---
+# this ensures Jekyll reads the file to be transformed into CSS later
+# only Main files contain this front matter, not partials.
+---
+
+//@import "typography";
+.sidenav {
+  background-color: #e3f2fd
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,0.8);
+}
+
+.related ul {
+  padding: 0;
+}
+
+.abstract {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  h2 {
+    font-size: 1em;
+  }
+  .authors {
+    font-weight: bold;
+  }
+  .location {
+
+  }
+}
+
+.strapline {
+  color: white;
+  font-size: 1.1rem;
+}
+
+.content-type {
+  display: inline;
+  color: #28a745!important;
+  padding-right: 5px;
+}

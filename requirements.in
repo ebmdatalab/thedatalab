@@ -1,4 +1,5 @@
 django
+django_compressor
 django-tagulous
 django-imagefit
 Pillow

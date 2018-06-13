@@ -1,23 +1,47 @@
+{% extends '_base.html' %}
 {% load imagefit %}
-<h1>{{ thing.title }}</h1>
-{% for author in thing.authors.all %}
-By {{ author.title }}
-{% endfor %}
-<p>
-  <img src="{{ thing.image.name|resize:'200x200'}}">{{ thing.description }}
-</p>
 
+{% block content %}
 
-{% for var, related_things in klasses.items %}
-<h3>{{ var }}</h3>
-<ul>
-  {% for related_thing in related_things %}
-  {% if related_thing != thing %}
-  <li>
-    {{related_thing.title}}
-    <a href="{{ related_thing.get_absolute_url }}">Read more...</a>
-  </li>
-  {% endif %}
-  {% endfor %}
-</ul>
-  {% endfor %}
+<div style="display: flex; flex-direction: column" class="paper">
+  <div class="title">
+    <h1>{{ thing.title }}</h1>
+    {% for author in thing.authors.all %}
+      By {{ author.title }}
+    {% endfor %}
+  </div>
+  <div style="display: flex">
+    <img src="{{ thing.image.name|resize:'300x200'}}" style="margin-right: 10px;">
+    <div class="abstract">
+      {{ thing.description }}
+    </div>
+  </div>
+  <div class="related">
+
+    {% for var, related_things in klasses.items %}
+    <h2>{{ var }}</h2>
+    <ul>
+      {% for related_thing in related_things %}
+      {% if related_thing != thing %}
+      <li style="display: flex; margin-bottom: 1rem">
+        <img src="{{ thing.image.name|resize:'100x70'}}" width="100" height="70" style="margin-right: 10px;">
+        <div style="flex-direction: column">
+          <div>
+            <style class="content-type">[blog]</style>
+            <strong>{{related_thing.title}}</strong>
+          </div>
+          <div>
+            {{related_thing.description}}
+          </div>
+          <div>
+            <a href="{{ related_thing.get_absolute_url }}">Read more...</a>
+          </div>
+        </div>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
