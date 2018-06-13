@@ -16,10 +16,10 @@
       {{ thing.description }}
     </div>
   </div>
-  <div class="related">
 
-    {% for var, related_things in klasses.items %}
-    <h2>{{ var }}</h2>
+  <div class="related">
+    {% for heading, related_things in klasses.items %}
+    <h2>{{ heading }}</h2>
     <ul>
       {% for related_thing in related_things %}
       {% if related_thing != thing %}
