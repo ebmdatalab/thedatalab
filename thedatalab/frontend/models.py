@@ -8,18 +8,44 @@ from markdownx.models import MarkdownxField
 
 class InternalThing(models.Model):
     title = models.CharField(max_length=200)
-    navigation_title = models.CharField(max_length=30)
+    short_title = models.CharField(max_length=30)
     description = MarkdownxField()
+    long_text = MarkdownxField(blank=True, null=True)
     image = models.ImageField()
     created_at = models.DateField(auto_now_add=True)
     published_at = models.DateField(blank=True, null=True)
     authors = models.ManyToManyField('Author', blank=True)
 
+    @classmethod
+    def model_name(cls):
+        return cls.__name__.lower()
+
+    @classmethod
+    def include_name(cls, part):
+        return "_{}_{}.html".format(cls.model_name(), part)
+
+    @classmethod
+    def header_include_name(cls):
+        return cls.include_name('header')
+
+    @classmethod
+    def body_include_name(cls):
+        return cls.include_name('body')
+
+    @classmethod
+    def related_include_name(cls):
+        return cls.include_name('related')
+
+    def get_class(self):
+        """For use in templates
+        """
+        return self.__class__
+
     def get_absolute_url(self):
-        return reverse('show_' + self.__class__.__name__.lower(), args=[self.pk])
+        return reverse('show_' + self.__class__.model_name(), args=[self.pk])
 
     def __str__(self):
-        return "{} ({})".format(self.navigation_title, self.title)
+        return "{} ({})".format(self.short_title, self.title)
 
     class Meta:
         abstract = True
@@ -29,6 +55,7 @@ class InternalThing(models.Model):
 class ExternalThing(InternalThing):
     doi = models.CharField(max_length=200, unique=True, blank=True, null=True)
     url = models.URLField(max_length=200, unique=True)
+
     class Meta:
         abstract = True
 
@@ -56,7 +83,6 @@ class Author(InternalThing):
 
 class Paper(ExternalThing):
     tags = TagField()
-    abstract = MarkdownxField()
     citation = models.CharField(max_length=200)
 
 

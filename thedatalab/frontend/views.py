@@ -18,11 +18,12 @@ def show_thing(request, slug, thing_type=None):
     from frontend.models import Dataset
     from frontend.models import Topic
     thing = thing_type.objects.get(pk=slug)
-    thing_index_name = thing.__class__.__name__.lower() + '_index'
+    thing_name = thing.__class__.__name__.lower()
+    index_url_name =  thing_name + '_index'
     thing_plural = thing.__class__.__name__.lower() + "s"
     context = {
         'thing': thing,
-        'thing_index': thing_index_name,
+        'index_url_name': index_url_name,
         'thing_plural': thing_plural,
         'klasses': {'Papers': Paper,
                     'Blogs': Blog,

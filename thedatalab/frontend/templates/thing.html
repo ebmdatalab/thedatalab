@@ -1,83 +1,14 @@
 {% extends '_base.html' %}
-{% load imagefit %}
-{% load thedatalab_extras %}
 
 {% block content %}
 
 <div style="display: flex; flex-direction: column" class="paper">
-  <div class="title">
-    <h1>{{ thing.navigation_title }}</h1>
-    {% if thing.authors.count %}
-      By
-      {% for author in thing.authors.all %}
-        <a href="{{ author.get_absolute_url }}">{{ author.title }}</a>{% if not forloop.last %}, {% else %}. {% endif %}
-      {% endfor %}
-    {% endif %}
-  </div>
+  {% include thing.get_class.header_include_name %}
 
-  {% if thing.citation %}
-  <div>
-    {{ thing.citation }}
-  </div>
-  {% endif %}
-
-  <div style="display: flex">
-    <img src="{{ thing.image.name|resize:'360x220c'}}" style="margin-right: 10px;" width="360" height="220">
-    <div class="abstract">
-      {% if thing.abstract %}
-        {{ thing.abstract|show_markdown|safe }}
-      {% else %}
-        {{ thing.description|show_markdown|safe }}
-      {% endif %}
-    </div>
-  </div>
-
-  {% if thing.url %}
-  <div>
-    <a class="btn btn-primary" href="{{ thing.url }}">View external resource</a>
-  </div>
-  {% endif %}
   <hr>
+  {% include thing.get_class.body_include_name %}
 
-  {% if thing.is_topic or thing.is_author %}
-  {% if thing.is_author %}
-  <h2>Things {{ thing.title }} has authored:</h2>
-  {% endif %}
-  <div class="related">
-    {% for heading, related_things in klasses.items %}
-    <h2>{{ heading }}</h2>
-    <ul>
-      {% for related_thing in related_things %}
-      {% if related_thing != thing %}
-      <li style="display: flex; margin-bottom: 1rem; border-bottom: solid gray 1px">
-        <img src="{{ related_thing.image.name|resize:'200x140c'}}" width="200" height="140" style="margin-right: 10px; width: 200px">
-        <div style="flex-direction: column">
-          <div>
-            <strong>{{related_thing.title}}</strong>
-            {% if related_thing.citation %}<br>{% endif %}<span class="citation">{{ related_thing.citation }}</span>
-            {% if related_thing.show_date %}
-            {{ related_thing.published_at|date:"c" }}
-            {% endif %}
-          </div>
-          <div>
-            {{related_thing.description|show_markdown|safe}}
-          </div>
-          <div>
-            <a href="{{ related_thing.get_absolute_url }}">Read more...</a>
-          </div>
-        </div>
-      </li>
-      {% endif %}
-      {% endfor %}
-    </ul>
-    {% endfor %}
-  </div>
-  {% else %}
-  <div>
-    <h1>Related resources</h1>
-    This resource is about <a href="{{ topics.first.get_absolute_url }}">{{ topics.first.navigation_title }}</a>.  <a href="{% url thing_index %}">View all {{ thing_plural }}</a>.
-  </div>
-  {% endif %}
+  {% include thing.get_class.related_include_name %}
 
 </div>
 {% endblock %}

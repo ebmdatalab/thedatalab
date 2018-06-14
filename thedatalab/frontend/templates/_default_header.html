@@ -1,0 +1,15 @@
+  <div class="title">
+    <h1>{{ thing.title }}</h1>
+    {% if thing.authors.count %}
+      By
+      {% for author in thing.authors.all %}
+        <a href="{{ author.get_absolute_url }}">{{ author.title }}</a>{% if not forloop.last %}, {% else %}. {% endif %}
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  {% if thing.citation %}
+  <div>
+    {{ thing.citation }}
+  </div>
+  {% endif %}

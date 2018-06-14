@@ -1,0 +1,19 @@
+{% load thedatalab_extras %}
+{% load imagefit %}
+
+  <div style="display: flex">
+    <img src="{{ thing.image.name|resize:'360x220c'}}" style="margin-right: 10px;" width="360" height="220">
+    <div class="abstract">
+      {% if thing.long_text %}
+        {{ thing.long_text|show_markdown|safe }}
+      {% else %}
+        {{ thing.description|show_markdown|safe }}
+      {% endif %}
+    </div>
+  </div>
+
+  {% if thing.url %}
+  <div>
+    <a class="btn btn-primary" href="{{ thing.url }}">View external resource</a>
+  </div>
+  {% endif %}
