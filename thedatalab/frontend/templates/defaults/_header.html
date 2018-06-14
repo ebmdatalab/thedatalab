@@ -1,5 +1,9 @@
 <div class="header">
   <h1>{{ thing.title }}</h1>
+  <p class="resource-type text-success">
+    [{{ thing.get_class.model_name }}]
+  </p>
+
   {% if thing.authors.count %}
   <p class="authors">
     Contributors:
