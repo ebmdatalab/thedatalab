@@ -9,7 +9,23 @@ from markdownx.models import MarkdownxField
 
 import tagulous.models
 
-class Topics(tagulous.models.TagTreeModel):
+class TopicTags(tagulous.models.TagTreeModel):
+    def pathslug(self):
+        return self.path.replace("/", "-")
+
+    def topic(self):
+        return self.topic_set.first()
+
+    def save(self, *args, **kwargs):
+        if self.topic_set.count() == 0:
+            self.topic_set.create(
+                title=self.label,
+                short_title=self.label,
+                description=self.label,
+
+            )
+        super(TopicTags, self).save(*args, **kwargs)
+
     class TagMeta:
         # Tag options
         force_lowercase = False
@@ -30,19 +46,15 @@ class Topics(tagulous.models.TagTreeModel):
                    "Science/RCTs"]
 
 
-
-
-
-class InternalThing(models.Model):
+class BaseThing(models.Model):
     title = models.CharField(max_length=200)
     short_title = models.CharField(max_length=30)
     description = MarkdownxField()
     long_text = MarkdownxField(blank=True, null=True)
-    image = models.ImageField()
+    image = models.ImageField(default='default.png')
     created_at = models.DateField(auto_now_add=True)
     published_at = models.DateField(blank=True, null=True)
     authors = models.ManyToManyField('Author', blank=True)
-    topics = TagField(blank=True, null=True, to=Topics)
 
     @classmethod
     def model_name(cls):
@@ -60,6 +72,10 @@ class InternalThing(models.Model):
         return select_template(
             ["{}/{}".format(cls.model_name(), template_name),
              "defaults/{}".format(template_name)])
+
+    @classmethod
+    def index_url_name(cls):
+        return cls.model_name() + '_index'
 
     @classmethod
     def header_include_name(cls):
@@ -93,7 +109,11 @@ class InternalThing(models.Model):
         ordering = ('-published_at',)
 
 
-class ExternalThing(InternalThing):
+class ThingWithTopics(BaseThing):
+    topics = TagField(blank=True, null=True, to=TopicTags)
+
+
+class ExternalThing(ThingWithTopics):
     doi = models.CharField(max_length=200, unique=True, blank=True, null=True)
     url = models.URLField(max_length=200, unique=True)
 
@@ -101,17 +121,19 @@ class ExternalThing(InternalThing):
         abstract = True
 
 
-class Topic(InternalThing):
+class Topic(BaseThing):
+    topic_tag = SingleTagField(to=TopicTags)
+
     def is_topic(self):
         return True
 
 
-class Blog(InternalThing):
+class Blog(ThingWithTopics):
     def show_date(self):
         return True
 
 
-class Author(InternalThing):
+class Author(ThingWithTopics):
     def is_author(self):
         return True
 

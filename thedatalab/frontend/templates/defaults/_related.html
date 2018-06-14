@@ -1,12 +1,12 @@
 {% load imagefit %}
 {% load thedatalab_extras %}
 
+<div class="related">
 {% if thing.is_topic or thing.is_author %}
   {% if thing.is_author %}
     <h3>{{ thing.title }}'s contributions:</h3>
   {% endif %}
 
-  <div class="related">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       {% for heading in klasses.keys %}
       <li class="nav-item">
@@ -33,8 +33,47 @@
     </div>
 
 {% else %}
-  <div>
-    <h1>Related resources</h1>
-    This resource is about <a href="{{ topics.first.get_absolute_url }}">{{ topics.first.navigation_title }}</a>.  <a href="{% url index_url_name %}">View all {{ thing_plural }}</a>.
-  </div>
+    <h3>Related resources</h3>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      {% if other_things_of_same_type %}
+      <li class="nav-item">
+        <a class="nav-link active" id="thing-tab" data-toggle="tab" data-target="#thing" role="tab" aria-controls="thing" aria-selected="true">More recent {{ thing_plural }}</a>
+      </li>
+      {% endif %}
+      {% for topic in topics.keys %}
+      <li class="nav-item">
+        <a class="nav-link {% if not other_things_of_same_type %}active{% endif%}" id="{{ topic.pathslug }}-tab" data-toggle="tab" data-target="#{{ topic.pathslug }}" role="tab" aria-controls="{{ topic.pathslug }}">{{ topic }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <div class="tab-content" id="related-tab-content">
+      {% if other_things_of_same_type %}
+      <div class="tab-pane fade show active" id="thing" role="tabpanel" aria-labelledby="thing-tab">
+      {% for related_thing in other_things_of_same_type %}
+        <div style="display: flex; margin-bottom: 1rem; border-bottom: solid gray 1px">
+          <img src="{{ related_thing.image.name|resize:'200x140c'}}" width="200" height="140" style="margin-right: 10px; width: 200px">
+          <div style="flex-direction: column">
+            {% include thing.get_class.related_item_include_name  %}
+          </div>
+        </div>
+      {% endfor %}
+      <a href="{% url thing.get_class.index_url_name %}">View all {{ thing.get_class.model_name }}s</a>
+      </div>
+      {% endif %}
+    {% for topic, related_things in topics.items %}
+      <div class="tab-pane fade show {% if not other_things_of_same_type %}active{% endif%}" id="{{ topic.pathslug }}" role="tabpanel" aria-labelledby="{{ topic.pathslug }}-tab">
+      {% for related_thing in related_things %}
+          <div style="display: flex; margin-bottom: 1rem; border-bottom: solid gray 1px">
+            <img src="{{ related_thing.image.name|resize:'200x140c'}}" width="200" height="140" style="margin-right: 10px; width: 200px">
+            <div style="flex-direction: column">
+              {% include thing.get_class.related_item_include_name  %}
+            </div>
+          </div>
+       {% endfor %}
+      <a href="{% url 'show_topic' slug=topic.topic_set.first.pk %}">View everything in topic {{ topic.name }}</a>
+      </div>
+    {% endfor %}
+    </div>
 {% endif %}
+</div>
