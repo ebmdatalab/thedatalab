@@ -1,5 +1,6 @@
 {% load imagefit %}
 {% load thedatalab_extras %}
+
   {% if thing.is_topic or thing.is_author %}
   {% if thing.is_author %}
   <h2>Things {{ thing.title }} has authored:</h2>
@@ -13,7 +14,19 @@
       <li style="display: flex; margin-bottom: 1rem; border-bottom: solid gray 1px">
         <img src="{{ related_thing.image.name|resize:'200x140c'}}" width="200" height="140" style="margin-right: 10px; width: 200px">
         <div style="flex-direction: column">
-          {% include thing.get_class.related_item_include_name  %}
+          <div>
+            <strong>{{related_thing.title}}</strong>
+            {% if related_thing.citation %}<br>{% endif %}<span class="citation">{{ related_thing.citation }}</span>
+            {% if related_thing.show_date %}
+            {{ related_thing.published_at|date:"c" }}
+            {% endif %}
+          </div>
+          <div>
+            {{related_thing.description|show_markdown|safe}}
+          </div>
+          <div>
+            <a href="{{ related_thing.get_absolute_url }}" class="text-info">Learn more</a>
+          </div>
         </div>
       </li>
       {% endif %}

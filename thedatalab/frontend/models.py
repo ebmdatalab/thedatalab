@@ -47,6 +47,10 @@ class InternalThing(models.Model):
     def related_include_name(cls):
         return cls.include_name('related')
 
+    @classmethod
+    def related_item_include_name(cls):
+        return cls.include_name('related_item')
+
     def get_class(self):
         """For use in templates
         """
