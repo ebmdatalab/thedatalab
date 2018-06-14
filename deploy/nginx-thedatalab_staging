@@ -1,0 +1,34 @@
+upstream thedatalab_staging {
+    server unix:/tmp/gunicorn-thedatalab_staging.sock fail_timeout=0;
+    keepalive 60;
+}
+
+# Listen on HTTPS
+server {
+    listen 80;
+    listen [::]:80;
+    server_name staging-thedatalab.ebmdatalab.net;
+
+    resolver 8.8.8.8 8.8.4.4 valid=300s;
+    resolver_timeout 5s;
+
+    client_max_body_size 200M;
+
+    location / {
+        access_log /var/log/nginx/thedatalab_staging.access.log;
+        error_log /var/log/nginx/thedatalab_staging.error.log;
+
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $http_host;
+
+        proxy_pass http://thedatalab_staging;
+    }
+
+    location /static {
+        alias   /var/www/thedatalab/thedatalab/static;
+        expires max;
+        access_log off;
+    }
+}
