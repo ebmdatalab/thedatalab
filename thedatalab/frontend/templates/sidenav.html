@@ -1,11 +1,11 @@
 {% for root_topic in root_topics %}
-<ul class="nav flex-column sidenav">
+<ul class="nav nav-pills flex-column sidenav">
   <li class="nav-item">
-    <a class="nav-link active" href="#">{{ root_topic.topic.short_title }}</a>
+    <a class="nav-link" href="#">{{ root_topic.topic.short_title }}</a>
     <ul>
       {% for sub_topic in root_topic.children.all %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'show_topic' slug=sub_topic.topic.pk %}">{{ sub_topic.topic.short_title }}</a>
+          <a class="nav-link {% if sub_topic.topic.get_absolute_url == request.path %}active{% endif %}" href="{{ sub_topic.topic.get_absolute_url }}">{{ sub_topic.topic.short_title }}</a>
         </li>
       {% endfor %}
     </ul>
