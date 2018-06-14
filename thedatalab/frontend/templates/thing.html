@@ -60,7 +60,7 @@
             {% endif %}
           </div>
           <div>
-            {{related_thing.description}}
+            {{related_thing.description|show_markdown|safe}}
           </div>
           <div>
             <a href="{{ related_thing.get_absolute_url }}">Read more...</a>
