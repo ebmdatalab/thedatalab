@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.db import models
+from django.template.loader import select_template
+
 from tagulous.models import SingleTagField, TagField
 from frontend import views
 from django.urls import reverse
@@ -22,7 +24,16 @@ class InternalThing(models.Model):
 
     @classmethod
     def include_name(cls, part):
-        return "_{}_{}.html".format(cls.model_name(), part)
+        """Look up fragments for displaying individual thing.
+
+        If a thing-specific fragment exists in a templates
+        subdirectory, return that; otherwise return a default.
+
+        """
+        template_name = "_{}.html".format(part)
+        return select_template(
+            ["{}/{}".format(cls.model_name(), template_name),
+             "defaults/{}".format(template_name)])
 
     @classmethod
     def header_include_name(cls):
