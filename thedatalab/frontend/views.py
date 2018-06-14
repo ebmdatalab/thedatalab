@@ -19,6 +19,8 @@ def show_thing(request, slug, thing_type=None):
     from frontend.models import Software
     from frontend.models import Dataset
     from frontend.models import Topic
+    from frontend.models import TopicTags
+
     thing = thing_type.objects.get(pk=slug)
     thing_name = thing.__class__.__name__.lower()
     index_url_name =  thing_name + '_index'
@@ -32,7 +34,8 @@ def show_thing(request, slug, thing_type=None):
         'thing': thing,
         'index_url_name': index_url_name,
         'thing_plural': thing_plural,
-        'klasses': {}
+        'klasses': {},
+        'root_topics': TopicTags.objects.filter(level=1)
     }
     if thing.__class__.__name__ == 'Author':
         klass_filter = {'authors': thing}
@@ -63,11 +66,11 @@ def show_thing(request, slug, thing_type=None):
             context['other_things_of_same_type'] = other_things_of_same_type
 
     context['related_title'] = "Related resources"
-
     return render(request, 'thing.html', context=context)
 
 
 def thing_index(request, thing_type=None):
+    from frontend.models import Author
     from frontend.models import Paper
     from frontend.models import Blog
     from frontend.models import Tool
@@ -76,17 +79,22 @@ def thing_index(request, thing_type=None):
     from frontend.models import Topic
     from frontend.models import TopicTags
     context = {
-        'title': "All {}s".format(thing_type.__name__)
+        'title': "All {}s".format(thing_type.__name__),
+        'root_topics': TopicTags.objects.filter(level=1)
     }
     context['topics'] = defaultdict(list)
-    for topic in TopicTags.objects.all():
-        klass_filter = {'topics': topic}
-        context['topics'][topic].extend(thing_type.objects.filter(**klass_filter))
-        # sort them, most recent first
-        context['topics'][topic] = sorted(
-            context['topics'][topic],
-            key=lambda x: date.today() - (x.published_at or date.today()))
-    context['topics'] = clean_klasses(context['topics'], None)
+    # If authors, we just want all of them
+    if thing_type == Author:
+        context['topics']['Authors'] = Author.objects.all()
+    else:
+        for topic in TopicTags.objects.all():
+            klass_filter = {'topics': topic}
+            context['topics'][topic].extend(thing_type.objects.filter(**klass_filter))
+            # sort them, most recent first
+            context['topics'][topic] = sorted(
+                context['topics'][topic],
+                key=lambda x: date.today() - (x.published_at or date.today()))
+        context['topics'] = clean_klasses(context['topics'], None)
     context['topics'] = dict(context['topics'])
     context['related_title'] = ""
     return render(request, 'thing_index.html', context=context)

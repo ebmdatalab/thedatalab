@@ -1,54 +1,15 @@
+{% for root_topic in root_topics %}
 <ul class="nav flex-column sidenav">
   <li class="nav-item">
-    <a class="nav-link active" href="#">Health Data</a>
+    <a class="nav-link active" href="#">{{ root_topic.topic.short_title }}</a>
     <ul>
-      <li class="nav-item">
-        <a class="nav-link" href="/topic/2/">OpenPrescribing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Variation</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Changing behaviour</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">RCTs</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Data Science</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Research</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Policy</a>
-      </li>
+      {% for sub_topic in root_topic.children.all %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'show_topic' slug=sub_topic.topic.pk %}">{{ sub_topic.topic.short_title }}</a>
+        </li>
+      {% endfor %}
     </ul>
   </li>
 </ul>
 <hr>
-<ul class="nav flex-column sidenav">
-  <li class="nav-item">
-    <a class="nav-link active" href="#">Better Science</a>
-    <ul>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Trial reporting</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">TrialsTrackers</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Retractions</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Conflicts of Interest</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Policy</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">RCTs</a>
-      </li>
-    </ul>
-  </li>
-</ul>
+{% endfor %}

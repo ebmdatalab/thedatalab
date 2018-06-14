@@ -6,7 +6,7 @@ html {
   background-color: #e3f2fd
 }
 
-header {
+.header {
   margin-bottom: 20px;
 }
 
@@ -61,6 +61,13 @@ header {
 .related {
   padding-top: 20px;
 }
+
+.related-thing-container {
+  display: flex;
+  margin-bottom: 1rem;
+  border-bottom: solid #e3f2fd 1px;
+}
+
 .related-thing {
   .publication-date {
     font-size: 0.7rem;
@@ -72,4 +79,14 @@ header {
     font-weight: bold;
     margin-bottom: 0;
   }
+
+  .resource-type {
+    margin: 0;
+    font-size: 0.7em;
+  }
+}
+
+.resource-type {
+  margin-bottom: 10px;
+  font-size: 0.7em;
 }

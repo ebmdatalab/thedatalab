@@ -21,7 +21,7 @@
       <div class="tab-pane fade show {% if forloop.first %}active{% endif %}" id="{{ heading }}" role="tabpanel" aria-labelledby="{{ heading }}-tab">
       {% for related_thing in related_things %}
         {% if related_thing != thing %}
-          <div style="display: flex; margin-bottom: 1rem; border-bottom: solid gray 1px">
+          <div class="related-thing-container">
             <img src="{{ related_thing.image.name|resize:'200x140c'}}" width="200" height="140" style="margin-right: 10px; width: 200px">
             <div style="flex-direction: column">
               {% include thing.get_class.related_item_include_name  %}
@@ -44,11 +44,13 @@
         <a class="nav-link active" id="thing-tab" data-toggle="tab" data-target="#thing" role="tab" aria-controls="thing" aria-selected="true">More recent {{ thing_plural }}</a>
       </li>
       {% endif %}
+      {% if topic.keys|length > 1 %}
       {% for topic in topics.keys %}
       <li class="nav-item">
         <a class="nav-link {% if forloop.first and not other_things_of_same_type %}active{% endif%}" id="{{ topic.pathslug }}-tab" data-toggle="tab" data-target="#{{ topic.pathslug }}" role="tab" aria-controls="{{ topic.pathslug }}">{{ topic }}</a>
       </li>
       {% endfor %}
+      {% endif %}
     </ul>
 
     <div class="tab-content" id="related-tab-content">
@@ -68,14 +70,16 @@
       {% for topic, related_things in topics.items %}
         <div class="tab-pane fade show {% if forloop.first and not other_things_of_same_type %}active{% endif%}" id="{{ topic.pathslug }}" role="tabpanel" aria-labelledby="{{ topic.pathslug }}-tab">
         {% for related_thing in related_things %}
-            <div style="display: flex; margin-bottom: 1rem; border-bottom: solid gray 1px">
+            <div class="related-thing-container">
               <img src="{{ related_thing.image.name|resize:'200x140c'}}" width="200" height="140" style="margin-right: 10px; width: 200px">
               <div style="flex-direction: column">
                 {% include related_thing.get_class.related_item_include_name  %}
               </div>
             </div>
-         {% endfor %}
-        <a href="{% url 'show_topic' slug=topic.topic_set.first.pk %}">View everything in topic {{ topic.name }}</a>
+        {% endfor %}
+        {% if topic.topic_set.count %}
+            <a href="{% url 'show_topic' slug=topic.topic_set.first.pk %}">View everything in topic {{ topic.name }}</a>
+        {% endif %}
         </div>
       {% endfor %}
     </div>
