@@ -1,14 +1,19 @@
 {% load thedatalab_extras %}
-          <div>
-            <strong>{{related_thing.title}}</strong>
-            {% if related_thing.citation %}<br>{% endif %}<span class="citation">{{ related_thing.citation }}</span>
-            {% if related_thing.show_date %}
-            {{ related_thing.published_at|date:"c" }}
-            {% endif %}
-          </div>
-          <div>
-            {{related_thing.description|show_markdown|safe}}
-          </div>
-          <div>
-            <a href="{{ related_thing.get_absolute_url }}">Read more...</a>
-          </div>
+<div class="related-thing">
+  <span class="publication-date">
+      {{ related_thing.published_at|date:"d F, Y" }}
+  </span>
+  <h3 class="text-info"><a href="{{ related_thing.get_absolute_url }}">{{related_thing.title}}</a></h3>
+  <p class="resource-type text-success">
+    [{{ related_thing.get_class.model_name }}]
+  </p>
+
+  {% if related_thing.citation %}
+    <p class="citation">
+      {{ related_thing.citation }}
+    </p>
+  {% endif %}
+</div>
+<div>
+  {{related_thing.description|show_markdown|safe}}
+</div>
