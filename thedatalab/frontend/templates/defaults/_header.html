@@ -1,15 +1,24 @@
-  <div class="title">
-    <h1>{{ thing.title }}</h1>
-    {% if thing.authors.count %}
-      By
-      {% for author in thing.authors.all %}
-        <a href="{{ author.get_absolute_url }}">{{ author.title }}</a>{% if not forloop.last %}, {% else %}. {% endif %}
-      {% endfor %}
-    {% endif %}
-  </div>
-
-  {% if thing.citation %}
-  <div>
-    {{ thing.citation }}
-  </div>
+<div class="header">
+  <h1>{{ thing.title }}</h1>
+  {% if thing.authors.count %}
+  <p class="authors">
+    Contributors:
+    {% for author in thing.authors.all %}
+      <a href="{{ author.get_absolute_url }}">{{ author.title }}</a>{% if not forloop.last %}, {% else %}. {% endif %}
+    {% endfor %}
+  </p>
   {% endif %}
+
+
+{% if thing.citation %}
+<p class="citation">
+  Published in {{ thing.citation }}
+</p>
+{% endif %}
+
+{% if thing.url %}
+<p class="view-external-resource">
+  <a class="text-primary" href="{{ thing.url }}">View the {{ thing.get_class.model_name }}</a>
+</p>
+{% endif %}
+</div>

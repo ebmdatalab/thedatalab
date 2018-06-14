@@ -48,7 +48,11 @@ header {
 
 .citation {
   font-style: italic;
+}
+
+.citation, .view-external-resource, .authors {
   font-size: 0.7rem;
+  margin-bottom: 0;
 }
 
 #related-tab-content {
