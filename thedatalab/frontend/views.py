@@ -62,6 +62,7 @@ def show_thing(request, slug, thing_type=None):
         if other_things_of_same_type.count():
             context['other_things_of_same_type'] = other_things_of_same_type
 
+    context['related_title'] = "Related resources"
 
     return render(request, 'thing.html', context=context)
 
@@ -73,10 +74,19 @@ def thing_index(request, thing_type=None):
     from frontend.models import Software
     from frontend.models import Dataset
     from frontend.models import Topic
-    things = thing_type.objects.all()
-
+    from frontend.models import TopicTags
     context = {
-        'things': things,
         'title': "All {}s".format(thing_type.__name__)
     }
+    context['topics'] = defaultdict(list)
+    for topic in TopicTags.objects.all():
+        klass_filter = {'topics': topic}
+        context['topics'][topic].extend(thing_type.objects.filter(**klass_filter))
+        # sort them, most recent first
+        context['topics'][topic] = sorted(
+            context['topics'][topic],
+            key=lambda x: date.today() - (x.published_at or date.today()))
+    context['topics'] = clean_klasses(context['topics'], None)
+    context['topics'] = dict(context['topics'])
+    context['related_title'] = ""
     return render(request, 'thing_index.html', context=context)
