@@ -34,16 +34,16 @@ def show_thing(request, slug, thing_type=None):
     if thing.__class__.__name__ == 'Author':
         klass_filter = {'authors': thing}
     else:
-        klass_filter = {'tags__slug__in': [x.slug for x in thing.tags.all()]}
+        klass_filter = {'topics__in': [x for x in thing.topics.all()]}
     for var, klass in context['klasses'].items():
         context['klasses'][var] = klass.objects.filter(**klass_filter)
     # drop empty klasses
     context['klasses'] = clean_klasses(context['klasses'], thing)
 
     # Create links to related topics
-    topic_tags = [x for x in thing.tags.all() if '-' in str(x)]
+    topic_tags = [x for x in thing.topics.all() if '-' in str(x)]
     context['topics'] = Topic.objects.filter(
-        tags__slug__in=topic_tags
+        topics__in=topic_tags
     )
     return render(request, 'thing.html', context=context)
 

@@ -7,6 +7,31 @@ from frontend import views
 from django.urls import reverse
 from markdownx.models import MarkdownxField
 
+import tagulous.models
+
+class Topics(tagulous.models.TagTreeModel):
+    class TagMeta:
+        # Tag options
+        force_lowercase = False
+        space_delimiter = False
+        # Run `python manage.py initial_tags` if you change:
+        initial = ["Health/OpenPrescribing",
+                   "Health/Variation",
+                   "Health/Changing Behaviour",
+                   "Health/RCTs",
+                   "Health/Data Science",
+                   "Health/Research",
+                   "Health/Policy",
+                   "Science/Trial Reporting",
+                   "Science/TrialsTrackers",
+                   "Science/Retractions",
+                   "Science/Conflicts of Interest",
+                   "Science/Policy",
+                   "Science/RCTs"]
+
+
+
+
 
 class InternalThing(models.Model):
     title = models.CharField(max_length=200)
@@ -17,6 +42,7 @@ class InternalThing(models.Model):
     created_at = models.DateField(auto_now_add=True)
     published_at = models.DateField(blank=True, null=True)
     authors = models.ManyToManyField('Author', blank=True)
+    topics = TagField(blank=True, null=True, to=Topics)
 
     @classmethod
     def model_name(cls):
@@ -76,38 +102,31 @@ class ExternalThing(InternalThing):
 
 
 class Topic(InternalThing):
-    tags = TagField(blank=True, null=True)
-
     def is_topic(self):
         return True
 
 
 class Blog(InternalThing):
-    tags = TagField()
-
     def show_date(self):
         return True
 
 
 class Author(InternalThing):
-    tags = TagField(blank=True, null=True)
-
     def is_author(self):
         return True
 
 
 class Paper(ExternalThing):
-    tags = TagField()
     citation = models.CharField(max_length=200)
 
 
 class Tool(ExternalThing):
-    tags = TagField()
+    pass
 
 
 class Software(ExternalThing):
-    tags = TagField()
+    pass
 
 
 class Dataset(ExternalThing):
-    tags = TagField()
+    pass
