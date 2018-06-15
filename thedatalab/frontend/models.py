@@ -83,6 +83,9 @@ class BaseThing(models.Model):
     def related_item_include_name(cls):
         return cls.include_name('related_item')
 
+    def long_text_has_images(self):
+        return self.long_text and "![" in self.long_text
+
     def get_class(self):
         """For use in templates
         """
