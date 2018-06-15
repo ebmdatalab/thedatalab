@@ -44,7 +44,7 @@
         <a class="nav-link active" id="thing-tab" data-toggle="tab" data-target="#thing" role="tab" aria-controls="thing" aria-selected="true">More recent {{ thing_plural }}</a>
       </li>
       {% endif %}
-      {% if topic.keys|length > 1 %}
+      {% if topics.keys|length > 1 %}
       {% for topic in topics.keys %}
       <li class="nav-item">
         <a class="nav-link {% if forloop.first and not other_things_of_same_type %}active{% endif%}" id="{{ topic.pathslug }}-tab" data-toggle="tab" data-target="#{{ topic.pathslug }}" role="tab" aria-controls="{{ topic.pathslug }}">{{ topic }}</a>
