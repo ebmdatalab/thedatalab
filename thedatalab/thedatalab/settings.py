@@ -26,7 +26,7 @@ SECRET_KEY = 'h_scu-9x78#c4x_%606ji8qy+lu30x&$(mmut$=3cqxno7(ou@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['thedatalab.ebmdatalab.net']
+ALLOWED_HOSTS = ['thedatalab.ebmdatalab.net', 'localhost']
 
 
 # Application definition
