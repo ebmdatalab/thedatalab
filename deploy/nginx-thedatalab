@@ -28,7 +28,7 @@ server {
     }
 
     location /static {
-        alias   /var/www/thedatalab/thedatalab/static;
+        alias   /var/www/thedatalab/thedatalab/thedatalab/static;
         expires max;
         access_log off;
     }
