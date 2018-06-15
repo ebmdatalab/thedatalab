@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-cd /var/www/thedatalab/thedatalab
+cd /var/www/thedatalab/thedatalab/thedatalab
 
-. /etc/profile.d/thedatalab.sh && exec ../../venv/bin/gunicorn frontend.wsgi -c ../deploy/gunicorn-thedatalab.conf.py
+. /etc/profile.d/thedatalab.sh && ../../venv/bin/gunicorn thedatalab.wsgi -c ../deploy/gunicorn-thedatalab.conf.py
