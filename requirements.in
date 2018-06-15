@@ -6,3 +6,4 @@ django-imagefit
 Pillow
 django-extensions
 django-markdownx
+gunicorn

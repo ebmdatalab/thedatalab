@@ -12,6 +12,7 @@ django-libsass==0.7
 django-markdownx==2.0.23
 django-tagulous==0.13.2
 django==2.0.6
+gunicorn==19.8.1
 libsass==0.14.5           # via django-libsass
 markdown==2.6.11          # via django-markdownx
 pillow==5.1.0
