@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import include
 from django.urls import path
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 from frontend import views
 from frontend.models import Topic
 from frontend.models import Blog
@@ -29,6 +30,7 @@ from frontend.models import Author
 
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='index.html')),
     path('admin/', admin.site.urls),
     path('paper/<slug:slug>/', views.show_thing, {'thing_type': Paper}, name='show_paper'),
     path('blog/<slug:slug>/', views.show_thing, {'thing_type': Blog}, name='show_blog'),
