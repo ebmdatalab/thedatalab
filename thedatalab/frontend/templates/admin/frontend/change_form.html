@@ -1,0 +1,12 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+{{ block.super }}
+<script>
+  $(document).ready(function() {
+    $("#id_title").keyup(function() {
+      $("#id_short_title").val($("#id_title").val());
+    })
+  });
+</script>
+{% endblock %}
