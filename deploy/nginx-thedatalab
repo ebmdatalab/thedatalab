@@ -8,7 +8,7 @@ upstream thedatalab {
 server {
     listen 80;
     listen [::]:80;
-    server_name thedatalab.embdatalab.net;
+    server_name thedatalab.ebmdatalab.net;
 
     resolver 8.8.8.8 8.8.4.4 valid=300s;
     resolver_timeout 5s;
