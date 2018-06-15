@@ -1,1 +1,1 @@
-tagulous/models/mmanagers.py L65 (changed there) has recursion with descriptions.py L137 __get__
+tagulous/models/managers.py L65 (changed there) has recursion with descriptions.py L137 __get__
