@@ -16,16 +16,6 @@ class TopicTags(tagulous.models.TagTreeModel):
     def topic(self):
         return self.topic_set.first()
 
-    def save(self, *args, **kwargs):
-        if self.topic_set.count() == 0:
-            self.topic_set.create(
-                title=self.label,
-                short_title=self.label,
-                description=self.label,
-
-            )
-        super(TopicTags, self).save(*args, **kwargs)
-
     class TagMeta:
         # Tag options
         force_lowercase = False
