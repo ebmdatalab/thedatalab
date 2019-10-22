@@ -1,7 +1,7 @@
 {% load imagefit %}
 {% load thedatalab_extras %}
 
-<div class="related">
+<section class="related">
   {% if thing.is_topic or thing.is_author %}
   <!-- Group related items by Resource type-->
   {% if thing.is_author %}
@@ -36,7 +36,7 @@
   {% else %}
   <!-- Group related items by Topic -->
   {% if related_title %}
-    <h3>{{ related_title }}</h3>
+    <div class="row"><h2 class="col">{{ related_title }}</h2></div>
   {% endif %}
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       {% if other_things_of_same_type %}
@@ -57,12 +57,7 @@
       {% if other_things_of_same_type %}
         <div class="tab-pane fade show active" id="thing" role="tabpanel" aria-labelledby="thing-tab">
         {% for related_thing in other_things_of_same_type %}
-          <div style="display: flex; margin-bottom: 1rem; border-bottom: solid gray 1px">
-            <img src="{{ related_thing.image.name|resize:'200x140c'}}" width="200" height="140" style="margin-right: 10px; width: 200px">
-            <div style="flex-direction: column">
-              {% include thing.get_class.related_item_include_name  %}
-            </div>
-          </div>
+           {% include thing.get_class.related_item_include_name  %}
         {% endfor %}
         <a href="{% url thing.get_class.index_url_name %}">View all {{ thing.get_class.model_name }}s</a>
         </div>
@@ -84,4 +79,4 @@
       {% endfor %}
     </div>
 {% endif %}
-</div>
+</section>

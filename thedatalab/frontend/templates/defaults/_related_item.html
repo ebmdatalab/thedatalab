@@ -1,19 +1,17 @@
+{% load imagefit %}
 {% load thedatalab_extras %}
-<div class="related-thing">
-  <span class="publication-date">
-      {{ related_thing.published_at|date:"d F, Y" }}
-  </span>
-  <h3 class="text-info"><a href="{{ related_thing.get_absolute_url }}">{{related_thing.title}}</a></h3>
-  <p class="resource-type text-success">
-    [{{ related_thing.get_class.model_name }}]
-  </p>
-
-  {% if related_thing.citation %}
-    <p class="citation">
-      {{ related_thing.citation }}
-    </p>
-  {% endif %}
-</div>
-<div>
-  {{related_thing.description|show_markdown|safe}}
+<div class="card related-thing" style="width: 18rem;">
+	<a href="{{ related_thing.get_absolute_url }}">
+		<img class="card-img-top" src="{{ related_thing.image.name|resize:'278x163c'}}">
+	</a>
+	<a href="{{ related_thing.get_absolute_url }}">
+		<div class="card-body">
+			<h5 class="card-title">{{related_thing.title}}</h5>
+			  <span class="publication-date">
+				  {{ related_thing.published_at|date:"d F, Y" }}
+			  </span>
+			[{{ related_thing.get_class.model_name }}]
+			{{related_thing.description|show_markdown|safe}}
+		</div>
+	</a>
 </div>

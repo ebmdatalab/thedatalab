@@ -2,12 +2,12 @@ from django.conf import settings
 from django.db import models
 from django.template.loader import select_template
 
+import tagulous.models
 from tagulous.models import SingleTagField, TagField
-from frontend import views
 from django.urls import reverse
 from markdownx.models import MarkdownxField
 
-import tagulous.models
+from . import views
 
 class TopicTags(tagulous.models.TagTreeModel):
     def pathslug(self):
@@ -15,6 +15,9 @@ class TopicTags(tagulous.models.TagTreeModel):
 
     def topic(self):
         return self.topic_set.first()
+        
+    def get_absolute_url(self):
+        return "asdf"
 
     class TagMeta:
         # Tag options

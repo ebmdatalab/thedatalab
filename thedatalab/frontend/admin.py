@@ -1,12 +1,12 @@
 from django.contrib import admin
 
-from frontend.models import Topic
-from frontend.models import Blog
-from frontend.models import Paper
-from frontend.models import Tool
-from frontend.models import Software
-from frontend.models import Dataset
-from frontend.models import Author
+from .models import Topic
+from .models import Blog
+from .models import Paper
+from .models import Tool
+from .models import Software
+from .models import Dataset
+from .models import Author
 
 from markdownx.admin import MarkdownxModelAdmin
 

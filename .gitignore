@@ -12,3 +12,5 @@ collected_static/
 data/
 */combined_letters.pdf
 db.sqlite3
+tmp
+CACHE

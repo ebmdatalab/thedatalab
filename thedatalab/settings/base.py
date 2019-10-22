@@ -13,9 +13,10 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_ROOT, '../static')
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(PROJECT_ROOT)
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -43,7 +44,7 @@ INSTALLED_APPS = [
     'imagefit',
     'markdownx',
     'compressor',
-    'frontend'
+    'thedatalab.frontend'
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,7 @@ WSGI_APPLICATION = 'thedatalab.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'tmp', 'db.sqlite3'),
     }
 }
 
@@ -125,16 +126,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "webroot/static")
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "public")
-MEDIA_URL = "/public/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "webroot/media")
+MEDIA_URL = "/media/"
 IMAGEFIT_ROOT = MEDIA_ROOT
 
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
 
-COMPRESS_ROOT = 'static'
+COMPRESS_ROOT = STATIC_ROOT
 
 COMPRESS_CSS_FILTERS = [
   'compressor.filters.css_default.CssAbsoluteFilter',
@@ -142,6 +144,10 @@ COMPRESS_CSS_FILTERS = [
 ]
 
 COMPRESS_ENABLED = False
+
+STATICFILES_DIRS = [
+	os.path.join(PROJECT_ROOT, 'static')
+]
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',

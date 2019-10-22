@@ -1,8 +1,8 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from frontend.models import Topic
-from frontend.models import TopicTags
+from .models import Topic
+from .models import TopicTags
 
 
 @receiver(post_save, sender=TopicTags)

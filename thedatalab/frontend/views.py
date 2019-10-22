@@ -13,13 +13,13 @@ def clean_klasses(klasses_dict, exclude_thing):
 
 
 def show_thing(request, slug, thing_type=None):
-    from frontend.models import Paper
-    from frontend.models import Blog
-    from frontend.models import Tool
-    from frontend.models import Software
-    from frontend.models import Dataset
-    from frontend.models import Topic
-    from frontend.models import TopicTags
+    from .models import Paper
+    from .models import Blog
+    from .models import Tool
+    from .models import Software
+    from .models import Dataset
+    from .models import Topic
+    from .models import TopicTags
 
     thing = thing_type.objects.get(pk=slug)
     thing_name = thing.__class__.__name__.lower()
@@ -65,19 +65,21 @@ def show_thing(request, slug, thing_type=None):
         if other_things_of_same_type.count():
             context['other_things_of_same_type'] = other_things_of_same_type
 
+        context['tags'] = thing.topics.weight()
+
     context['related_title'] = "Related resources"
     return render(request, 'thing.html', context=context)
 
 
 def thing_index(request, thing_type=None):
-    from frontend.models import Author
-    from frontend.models import Paper
-    from frontend.models import Blog
-    from frontend.models import Tool
-    from frontend.models import Software
-    from frontend.models import Dataset
-    from frontend.models import Topic
-    from frontend.models import TopicTags
+    from .models import Author
+    from .models import Paper
+    from .models import Blog
+    from .models import Tool
+    from .models import Software
+    from .models import Dataset
+    from .models import Topic
+    from .models import TopicTags
     context = {
         'title': "All {}s".format(thing_type.__name__),
         'root_topics': TopicTags.objects.filter(level=1)

@@ -19,14 +19,14 @@ from django.urls import include
 from django.urls import path
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
-from frontend import views
-from frontend.models import Topic
-from frontend.models import Blog
-from frontend.models import Paper
-from frontend.models import Tool
-from frontend.models import Software
-from frontend.models import Dataset
-from frontend.models import Author
+from .frontend import views
+from .frontend.models import Topic
+from .frontend.models import Blog
+from .frontend.models import Paper
+from .frontend.models import Tool
+from .frontend.models import Software
+from .frontend.models import Dataset
+from .frontend.models import Author
 
 
 urlpatterns = [
