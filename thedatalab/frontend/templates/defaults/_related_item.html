@@ -1,6 +1,6 @@
 {% load imagefit %}
 {% load thedatalab_extras %}
-<div class="card related-thing" style="width: 18rem;">
+<div class="card related-thing">
 	<a href="{{ related_thing.get_absolute_url }}">
 		<img class="card-img-top" src="{{ related_thing.image.name|resize:'278x163c'}}">
 	</a>

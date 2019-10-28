@@ -7,6 +7,12 @@ body {
 	font-weight: 300;
 }
 
+.footer { 
+	background: #0E2050;
+	margin-top: 100px;
+	min-height: 500px;
+}
+
 /* Typography */
 
 h1 {
@@ -134,7 +140,33 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 
 
+/* Carousel */
 
+.thing-carousel { 
+	margin-left: -8px; 
+	margin-right: -8px;
+	position: relative;
+	
+	.slick-arrow { 
+		background: #0e2050; 
+		border: 10px solid #ffffff; 
+		border-radius: 30px; 
+		width: 60px; 
+		height: 60px; 
+		overflow: hidden; 
+		position: absolute; 
+		z-index: 10; 
+		left: -20px; 
+		top: 120px;
+		outline: none;
+		padding: 0 15px 0 10px; 
+	}
+	
+	.slick-next { left: auto; right: -25px; padding: 0 10px 0 15px;  }
+	
+	.slick-prev img { width: 100%; }
+	.card { margin-left: 8px; margin-right: 8px; }
+}
 
 
 

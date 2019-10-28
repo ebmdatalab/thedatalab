@@ -38,11 +38,10 @@
   {% if related_title %}
     <div class="row"><h2 class="col">{{ related_title }}</h2></div>
   {% endif %}
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+
       {% if other_things_of_same_type %}
-      <li class="nav-item">
-        <a class="nav-link active" id="thing-tab" data-toggle="tab" data-target="#thing" role="tab" aria-controls="thing" aria-selected="true">More recent {{ thing_plural }}</a>
-      </li>
+		<div class="row"><h2 class="col">Recent {{ thing_plural }}</h2></div>
+
       {% endif %}
       {% if topics.keys|length > 1 %}
       {% for topic in topics.keys %}
@@ -53,14 +52,13 @@
       {% endif %}
     </ul>
 
-    <div class="tab-content" id="related-tab-content">
       {% if other_things_of_same_type %}
-        <div class="tab-pane fade show active" id="thing" role="tabpanel" aria-labelledby="thing-tab">
-        {% for related_thing in other_things_of_same_type %}
-           {% include thing.get_class.related_item_include_name  %}
-        {% endfor %}
+		<div class="thing-carousel">
+			{% for related_thing in other_things_of_same_type %}
+			   {% include thing.get_class.related_item_include_name  %}
+			{% endfor %}
+		</div>
         <a href="{% url thing.get_class.index_url_name %}">View all {{ thing.get_class.model_name }}s</a>
-        </div>
       {% endif %}
       {% for topic, related_things in topics.items %}
         <div class="tab-pane fade show {% if forloop.first and not other_things_of_same_type %}active{% endif%}" id="{{ topic.pathslug }}" role="tabpanel" aria-labelledby="{{ topic.pathslug }}-tab">
@@ -77,6 +75,6 @@
         {% endif %}
         </div>
       {% endfor %}
-    </div>
+
 {% endif %}
 </section>

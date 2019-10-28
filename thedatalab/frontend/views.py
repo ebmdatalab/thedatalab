@@ -63,7 +63,7 @@ def show_thing(request, slug, thing_type=None):
         context['topics'] = dict(context['topics'])
         other_things_of_same_type = thing_type.objects.exclude(pk=slug)
         if other_things_of_same_type.count():
-            context['other_things_of_same_type'] = other_things_of_same_type
+            context['other_things_of_same_type'] = list(other_things_of_same_type)*10
 
         context['tags'] = thing.topics.weight()
 
