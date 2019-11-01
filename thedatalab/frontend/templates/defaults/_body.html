@@ -1,7 +1,7 @@
 {% load thedatalab_extras %}
 {% load imagefit %}
 
-<div style="display: flex" class="text">
+<div class="text">
   {# hide the teaser image if images are in the long text already #}
   {% if not thing.long_text_has_images %}
   <div class="image"><img src="{{ thing.image.name|resize:'360x220c'}}" style="margin-right: 10px;"></div>
@@ -14,10 +14,6 @@
 	{% endif %}
   
   <div class="abstract">
-      {% if thing.long_text %}
-        {{ thing.long_text|show_markdown|safe }}
-      {% else %}
-        {{ thing.description|show_markdown|safe }}
-      {% endif %}
+      {{ thing.abstract|show_markdown|safe }}
     </div>
   </div>
