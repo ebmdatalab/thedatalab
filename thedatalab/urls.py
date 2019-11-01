@@ -20,7 +20,7 @@ from django.urls import path, re_path
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from .frontend import views
-from .frontend.models import Topic
+#from .frontend.models import Topic
 from .frontend.models import Blog
 from .frontend.models import Paper
 from .frontend.models import Tool
@@ -37,7 +37,7 @@ urlpatterns = [
     path('tools/<slug:slug>/', views.show_thing, {'thing_type': Tool}, name='show_tool'),
     path('software/<slug:slug>/', views.show_thing, {'thing_type': Software}, name='show_software'),
     path('datasets/<slug:slug>/', views.show_thing, {'thing_type': Dataset}, name='show_dataset'),
-    path('topics/<slug:slug>/', views.show_thing, {'thing_type': Topic}, name='show_topic'),
+    #path('topics/<slug:slug>/', views.show_thing, {'thing_type': Topic}, name='show_topic'),
     path('people/<slug:slug>/', views.show_thing, {'thing_type': Author}, name='show_author'),
 
     path('papers/', views.thing_index, {'thing_type': Paper}, name='paper_index'),
@@ -45,7 +45,7 @@ urlpatterns = [
     path('tools/', views.thing_index, {'thing_type': Tool}, name='tool_index'),
     path('software/', views.thing_index, {'thing_type': Software}, name='software_index'),
     path('datasets/', views.thing_index, {'thing_type': Dataset}, name='dataset_index'),
-    path('topics/', views.thing_index, {'thing_type': Topic}, name='topic_index'),
+    #path('topics/', views.thing_index, {'thing_type': Topic}, name='topic_index'),
     path('people/', views.thing_index, {'thing_type': Author}, name='author_index'),
 
     path('imagefit/', include('imagefit.urls')),

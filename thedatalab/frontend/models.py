@@ -43,10 +43,10 @@ class TopicTags(tagulous.models.TagTreeModel):
 
 class BaseThing(models.Model):
     title = models.CharField(max_length=200)
-    short_title = models.CharField(max_length=30)
-    description = MarkdownxField()
-    long_text = MarkdownxField(blank=True, null=True)
-    image = models.ImageField(default='default.png')
+    #short_title = models.CharField(max_length=30)
+    #description = MarkdownxField()
+    #long_text = MarkdownxField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True)
     created_at = models.DateField(auto_now_add=True)
     published_at = models.DateField(blank=True, null=True)
     authors = models.ManyToManyField('Author', blank=True)
@@ -100,18 +100,22 @@ class BaseThing(models.Model):
         return reverse('show_' + self.__class__.model_name(), args=[self.pk])
 
     def __str__(self):
-        return "{} ({})".format(self.short_title, self.title)
+        return self.title
+        #return "{} ({})".format(self.short_title, self.title)
 
     class Meta:
         abstract = True
         ordering = ('-published_at',)
 
 
+#class Thing(BaseThing):
+#    related = models.ManyToManyField('self', blank=True)
+
 class ThingWithTopics(BaseThing):
-    topics = TagField(blank=True, null=True, to=TopicTags)
+    related = models.ManyToManyField('self', blank=True)
+    topics = TagField(blank=True, to=TopicTags)
 
-
-class ExternalThing(ThingWithTopics):
+class ExternalThing(models.Model):
     doi = models.CharField(max_length=200, unique=True, blank=True, null=True)
     url = models.URLField(max_length=200, unique=True)
 
@@ -127,28 +131,32 @@ class Topic(BaseThing):
 
 
 class Blog(ThingWithTopics):
-    def show_date(self):
-        return True
+    body = MarkdownxField(blank=True)
+    #topics = TagField(blank=True, to=TopicTags)
 
+class Author(models.Model):
+    name = models.CharField(max_length=50, blank=True)
+    slug = models.CharField(max_length=50, blank=True)
+    institution = models.CharField(max_length=150, blank=True)
+    image = models.ImageField(blank=True, null=True)
+    url = models.URLField(max_length=200, blank=True)
+    topics = TagField(blank=True, to=TopicTags)
 
-class Author(ThingWithTopics):
-    def is_author(self):
-        return True
-
-
-class Paper(ExternalThing):
+class Paper(ThingWithTopics, ExternalThing):
+    description = models.CharField(max_length=250, blank=True, help_text="20 words max.")
+    abstract = MarkdownxField(blank=True)
+    #topics = TagField(blank=True, to=TopicTags)
+    
     citation = models.CharField(max_length=200)
 
 
-class Tool(ExternalThing):
+class Tool(ThingWithTopics, ExternalThing):
     pass
 
-
-class Software(ExternalThing):
+class Software(ThingWithTopics, ExternalThing):
     pass
 
-
-class Dataset(ExternalThing):
+class Dataset(ThingWithTopics, ExternalThing):
     pass
 
 class Page(MPTTModel):
