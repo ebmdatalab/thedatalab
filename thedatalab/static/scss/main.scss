@@ -55,16 +55,23 @@ h2 {
     font-family: 'Lato';
     font-size: 1.4em;
     color: #0e2050;
-    letter-spacing: 5px;
+    letter-spacing: 0.15em;
     font-weight: 700;
     margin-top: 35px;
     margin-bottom: 30px;
+}
+
+h4 {
+    font: 1.3em 'Lato';
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
 }
 
 a { color: #0e6FAB; }
 
 ul { list-style: none; margin: 0; padding: 0; }
 
+p + h4 { margin-top: 15px; }
 
 /* Menu */
 
