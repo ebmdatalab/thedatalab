@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include
-from django.urls import path
+from django.urls import path, re_path
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from .frontend import views
@@ -30,15 +30,15 @@ from .frontend.models import Author
 
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='index.html')),
+    #path('', TemplateView.as_view(template_name='index.html')),
     path('admin/', admin.site.urls),
-    path('paper/<slug:slug>/', views.show_thing, {'thing_type': Paper}, name='show_paper'),
-    path('blog/<slug:slug>/', views.show_thing, {'thing_type': Blog}, name='show_blog'),
-    path('tool/<slug:slug>/', views.show_thing, {'thing_type': Tool}, name='show_tool'),
+    path('papers/<slug:slug>/', views.show_thing, {'thing_type': Paper}, name='show_paper'),
+    path('blogs/<slug:slug>/', views.show_thing, {'thing_type': Blog}, name='show_blog'),
+    path('tools/<slug:slug>/', views.show_thing, {'thing_type': Tool}, name='show_tool'),
     path('software/<slug:slug>/', views.show_thing, {'thing_type': Software}, name='show_software'),
-    path('dataset/<slug:slug>/', views.show_thing, {'thing_type': Dataset}, name='show_dataset'),
-    path('topic/<slug:slug>/', views.show_thing, {'thing_type': Topic}, name='show_topic'),
-    path('person/<slug:slug>/', views.show_thing, {'thing_type': Author}, name='show_author'),
+    path('datasets/<slug:slug>/', views.show_thing, {'thing_type': Dataset}, name='show_dataset'),
+    path('topics/<slug:slug>/', views.show_thing, {'thing_type': Topic}, name='show_topic'),
+    path('people/<slug:slug>/', views.show_thing, {'thing_type': Author}, name='show_author'),
 
     path('papers/', views.thing_index, {'thing_type': Paper}, name='paper_index'),
     path('blogs/', views.thing_index, {'thing_type': Blog}, name='blog_index'),
@@ -50,6 +50,8 @@ urlpatterns = [
 
     path('imagefit/', include('imagefit.urls')),
     path('markdownx/', include('markdownx.urls')),
+
+    re_path(r'^(.*)$', views.page_index, name='page_index'),
 ]
 
 

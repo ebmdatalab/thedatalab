@@ -1,16 +1,20 @@
 /* Layout */
 
 body {
-	padding-top: 30px;
-	font: 16px Roboto;
-	line-height: 1.5em;
-	font-weight: 300;
+    padding-top: 30px;
+    font: 16px Roboto;
+    line-height: 1.5em;
+    font-weight: 300;
+}
+
+.header {
+    .logo { padding-left: 0; }
 }
 
 .footer { 
-	background: #0E2050;
-	margin-top: 100px;
-	min-height: 500px;
+    background: #0E2050;
+    margin-top: 100px;
+    min-height: 500px;
 }
 
 /* Typography */
@@ -24,12 +28,12 @@ h1 {
     font-weight: bold;
     width: 100%;
     float: left;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
 }
 
 h2 { 
-	text-transform: uppercase;
-	font-family: 'Lato';
+    text-transform: uppercase;
+    font-family: 'Lato';
     font-size: 1.4em;
     color: #0e2050;
     letter-spacing: 5px;
@@ -42,6 +46,46 @@ h2 {
 a { color: #0e6FAB; }
 
 ul { list-style: none; margin: 0; padding: 0; }
+
+
+/* Menu */
+
+ul.top-menu {
+    margin-top: 90px;
+    display: flex; 
+    
+    li { 
+        flex: 1 0 15%;
+        position: relative;
+        padding-bottom: 16px;
+        
+        a { 
+            color: #0e2050; 
+            font: 16px Lato;
+        }
+        
+        ul { 
+            display: none; 
+            position: absolute;
+            margin-left: -20px;
+            min-width: 200px;
+            z-index: 10;
+            margin-top: 12px;
+            background: #eeeeee;
+            padding: 10px 0 20px;
+                       
+            li { 
+                padding: 8px 20px; 
+                white-space: nowrap;
+             
+            }
+        }
+    }
+    
+    li:hover ul { display: block; }
+    
+}
+
 
 /* Page components */
 
@@ -57,13 +101,13 @@ ul { list-style: none; margin: 0; padding: 0; }
     border-top: solid 1px #eeeeee;
     
     
-	ul.breadcrumbs { margin: 0; padding: 0 0 20px; }
-	ul.breadcrumbs li { list-style-type: none; display: inline-block; margin-left: 0px; margin-right: 0px; }
-    
-	.page-header-inner-left { 
-		width: calc(100% - 60px);
-		float: left;
-	}
+    ul.breadcrumbs { margin: 0; padding: 0 0 20px; }
+    ul.breadcrumbs li { list-style-type: none; display: inline-block; margin-left: 0px; margin-right: 0px; }
+
+    .page-header-inner-left { 
+        width: calc(100% - 60px);
+        float: left;
+    }
 
 	.page-header-inner-right {
 		float: left;
@@ -130,6 +174,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .text {
 	display: flex;
 	flex-wrap: wrap;
+    margin-bottom: 30px;
 
 	p { color: #282828; font-size: 1em; font-weight: 300; line-height: 1.5em; }
 
@@ -137,7 +182,13 @@ ul { list-style: none; margin: 0; padding: 0; }
 	.image img { width: 100%; }
 }
 
-
+.spotlight {
+    background: #333333;
+    padding-bottom: 20px;
+    
+    h2 { color: #ffffff; margin-top: 30px; margin-bottom: 50px; }
+    .card { border: none; }
+}
 
 
 /* Carousel */

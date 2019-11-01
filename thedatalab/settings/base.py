@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'imagefit',
     'markdownx',
     'compressor',
+    'django_mptt_admin',
     'thedatalab.frontend'
 ]
 

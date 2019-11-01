@@ -1,14 +1,12 @@
 {% extends '_base.html' %}
+{% load thedatalab_extras thedatalab_menu %}
 
 {% block main %}
 	<div class="row">
 		<div class="col page-header">
 			<div class="page-header-inner-left">
-				<ul class="breadcrumbs" typeof="BreadcrumbList">
-					<li><a href="/">Home</a> &gt; </li> 
-					<li> <a href="../">Papers</a> &gt; </li>
-				</ul>		
-				<h1>{{ thing.title }}</h1>
+				{% page_breadcrumbs request.page %}
+				<h1>{{ request.page.menu_title }}</h1>
 			</div>
 			<div class="page-header-inner-right">
 				<ul class="social-links">
@@ -20,56 +18,8 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="info-left col-md-4 col-lg-3 col-xl-3 mr-lg-5">
-			<ul>
-				{% if thing.authors.count %}
-				<li>{% include "icons/keyboard.svg" %}
-					<span class="person-svg-label">
-						<b> Authors:</b>
-						<p>
-							{% for author in thing.authors.all %}
-								<a href="{{ author.get_absolute_url }}">{{ author.title }}</a><br />
-							{% endfor %}
-						</p>
-					</span>
-				</li>
-				{% endif %}
-				{% if thing.published_at %}
-				<li>{% include "icons/calendar.svg" %}
-					<span class="person-svg-label">
-						<b> Posted:</b>
-						<p>{{ thing.published_at|date:"d F Y" }}</p>
-					</span></li>
-				{% endif %}
-				{% if thing.citation %}
-				<li>{% include "icons/calendar.svg" %}
-					<span class="person-svg-label">
-						<b> Published in:</b>
-						<p>{{ thing.citation }}</p>
-					</span></li>
-				{% endif %}
-				{% if tags %}
-				<li>{% include "icons/tags.svg" %}<span class="person-svg-label">
-						<b> Tags:</b>
-						<p>
-							{% for tag in tags %}
-								<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
-							{% endfor %}
-						</p>
-					</span>
-				</li>
-				{% endif %}
-			</ul>
-		</div>
-				
-		<div class="col main-content" style="min-height: 0px;">
-			
-			
-			{% include thing.get_class.body_include_name %}
-		</div>
-				
+	<div class="text">
+		{{ request.page.body|show_markdown|safe }}
 	</div>
-
-  {% include thing.get_class.related_include_name %}
+	
 {% endblock %}

@@ -1,0 +1,5 @@
+<ul class="breadcrumbs" typeof="BreadcrumbList">
+	{% for item in breadcrumb_items %}
+		<li><a href="{{ item.url }}/">{{ item.title }}</a> &gt; </li>
+	{% endfor %}
+</ul>		

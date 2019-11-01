@@ -9,3 +9,5 @@ django-markdownx
 psycopg2
 gunicorn
 csscompressor
+django-mptt-admin
+

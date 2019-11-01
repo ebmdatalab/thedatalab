@@ -1,6 +1,9 @@
 from datetime import date
 from collections import defaultdict
+from django.http import Http404
 from django.shortcuts import render
+
+from .utils import page_resolve
 
 def clean_klasses(klasses_dict, exclude_thing):
     cleaned_klasses = defaultdict(list)
@@ -70,7 +73,7 @@ def show_thing(request, slug, thing_type=None):
     context['related_title'] = "Related resources"
     return render(request, 'thing.html', context=context)
 
-
+@page_resolve(strict=False)
 def thing_index(request, thing_type=None):
     from .models import Author
     from .models import Paper
@@ -99,4 +102,11 @@ def thing_index(request, thing_type=None):
         context['topics'] = clean_klasses(context['topics'], None)
     context['topics'] = dict(context['topics'])
     context['related_title'] = ""
+    
+    context['spotlight_items'] = Paper.objects.all()
+    
     return render(request, 'thing_index.html', context=context)
+
+@page_resolve(strict=True)
+def page_index(request, path):
+    return render(request, "page.html", {})

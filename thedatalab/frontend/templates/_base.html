@@ -1,5 +1,5 @@
-{% load compress %}
-<!doctype html>
+{% load compress thedatalab_menu %}
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -19,6 +19,18 @@
 
   <body>
     {% comment %}{% include "topnav.html" %}{% endcomment %}
+    <div class="container header">
+		<div class="row">
+			<div class="col-3 logo">
+				<img src="/static/images/logo-oxford-blue.svg" width="110" />
+			</div>
+			<div class="col-9">
+				{% render_menu %}
+			</div>
+		</div>
+	</div>
+    
+    
     <div class="container">
 	  {% block main %}
 	  

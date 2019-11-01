@@ -6,6 +6,7 @@ import tagulous.models
 from tagulous.models import SingleTagField, TagField
 from django.urls import reverse
 from markdownx.models import MarkdownxField
+from mptt.models import MPTTModel, TreeForeignKey
 
 from . import views
 
@@ -148,3 +149,28 @@ class Software(ExternalThing):
 
 class Dataset(ExternalThing):
     pass
+
+class Page(MPTTModel):
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    slug = models.SlugField(max_length=100, blank=True)
+    url = models.CharField(max_length=100, blank=True, editable=False)
+    
+    menu_title = models.CharField(max_length=150, blank=True)
+    show_in_menu = models.BooleanField(default=False)
+
+    meta_title = models.CharField(max_length=150, blank=True)
+    body = MarkdownxField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if self.parent is None:
+            self.url = ''
+        else:
+            self.url = self.parent.url + '/' + self.slug
+        
+        return super(Page, self).save(*args, **kwargs)
+
+    def __str__(self):
+        if not self.parent:
+            return self.menu_title or "Home"
+        return "[%s] %s"%(self.url, self.menu_title)
+
