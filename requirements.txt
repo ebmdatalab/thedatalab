@@ -9,8 +9,11 @@ django-appconf==1.0.3     # via django-compressor, django-imagefit
 django-compressor==2.3
 django-extensions==2.2.5
 django-imagefit==0.6.2
+django-js-asset==1.2.2    # via django-mptt
 django-libsass==0.7
 django-markdownx==2.0.28
+django-mptt-admin==0.7.2
+django-mptt==0.10.0       # via django-mptt-admin
 django-tagulous==0.14.1
 django==2.2.6
 gunicorn==19.9.0
@@ -21,9 +24,9 @@ psycopg2==2.8.4
 pytz==2019.3              # via django
 rcssmin==1.0.6            # via django-compressor
 rjsmin==1.1.0             # via django-compressor
-six==1.12.0               # via django-appconf, django-extensions, libsass
+six==1.12.0               # via django-appconf, django-extensions, django-mptt-admin, libsass
 sqlparse==0.3.0           # via django
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip==19.3.1               # via django-markdownx
-# setuptools==41.4.0        # via markdown
+# setuptools==41.6.0        # via markdown
