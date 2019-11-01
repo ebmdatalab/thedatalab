@@ -14,7 +14,26 @@ body {
 .footer { 
     background: #0E2050;
     margin-top: 100px;
-    min-height: 500px;
+    padding-top: 40px;
+    padding-bottom: 1px;
+    min-height: 350px;
+    color: #ffffff;
+    
+    .row { margin-bottom: 30px; }
+    
+    h2 { color: #ffffff; font-size: 16px; margin: 0 0 20px; }
+    
+    a { color: #6fc8ff; }
+    
+    p, li {
+	font: 15px Roboto;
+	line-height: 20px;
+    }
+    
+    p.copyright {
+	color: #a0a0a0;
+	font-size: 12px;
+    }
 }
 
 /* Typography */
@@ -38,7 +57,6 @@ h2 {
     color: #0e2050;
     letter-spacing: 5px;
     font-weight: 700;
-    float: left;
     margin-top: 35px;
     margin-bottom: 30px;
 }
@@ -55,35 +73,39 @@ ul.top-menu {
     display: flex; 
     
     li { 
-        flex: 1 0 15%;
-        position: relative;
-        padding-bottom: 16px;
-        
-        a { 
-            color: #0e2050; 
-            font: 16px Lato;
-        }
-        
-        ul { 
-            display: none; 
-            position: absolute;
-            margin-left: -20px;
-            min-width: 200px;
-            z-index: 10;
-            margin-top: 12px;
-            background: #eeeeee;
-            padding: 10px 0 20px;
-                       
-            li { 
-                padding: 8px 20px; 
-                white-space: nowrap;
-             
-            }
-        }
+	flex: 1 0 auto;
+	position: relative;
+	padding-bottom: 16px;
+	
+	a { 
+	    color: #0e2050; 
+	    font: 16px Lato;
+	}
+	
+	ul { 
+	    display: none; 
+	    position: absolute;
+	    margin-left: -20px;
+	    min-width: 200px;
+	    z-index: 10;
+	    margin-top: 12px;
+	    background: #eeeeee;
+	    padding: 10px 0 20px;
+		       
+	    li { 
+		padding: 8px 20px; 
+		white-space: nowrap;
+	     
+	    }
+	}
     }
     
     li:hover ul { display: block; }
-    
+    li.home {
+	flex: 1 0 1%;
+	svg { width: 18px; vertical-align: baseline; }
+	.icon { fill: #0e2050; width: 18px;}
+    }
 }
 
 
@@ -105,28 +127,28 @@ ul.top-menu {
     ul.breadcrumbs li { list-style-type: none; display: inline-block; margin-left: 0px; margin-right: 0px; }
 
     .page-header-inner-left { 
-        width: calc(100% - 60px);
-        float: left;
+	width: calc(100% - 60px);
+	float: left;
     }
 
-	.page-header-inner-right {
-		float: left;
-		height: auto;
-		width: 30px;
-		display: flex;
-		align-items: center;
+    .page-header-inner-right {
+	float: left;
+	height: auto;
+	width: 30px;
+	display: flex;
+	align-items: center;
 
-		ul.social-links {
-			width: 30px;
-			float: left;
-			height: 100px;
-			
-			li { margin-bottom: 4px; }
-			li svg { width: 30px; height: 30px; }
-			.icon { fill: #0e6FAB !important; -webkit-transition: fill 0.5s ease; }
-			a:hover .icon { fill: #0e2050 !important; }
-		}
+	ul.social-links {
+	    width: 30px;
+	    float: left;
+	    height: 100px;
+	    
+	    li { margin-bottom: 4px; }
+	    li svg { width: 30px; height: 30px; }
+	    .icon { fill: #0e6FAB !important; -webkit-transition: fill 0.5s ease; }
+	    a:hover .icon { fill: #0e2050 !important; }
 	}
+    }
 
 }
 
@@ -134,52 +156,52 @@ ul.top-menu {
     background-color: #fafafa;
     padding: 30px 15px 30px 30px;
     border-left: 5px solid #0e6FAB;
-	align-self: flex-start;
-	
-	b { font-weight: 600; }
+    align-self: flex-start;
+    
+    b { font-weight: 600; }
 
-	.icon { fill: #0e6FAB !important; }
-	ul li svg { width: 40px; height: 40px; float: left; }
-	ul li > span { 
-		margin-left: 15px;
-		min-height: 40px;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		display: inline-block;
-		word-wrap: break-word;
-		width: calc(100% - 70px);
-	}
+    .icon { fill: #0e6FAB !important; }
+    ul li svg { width: 40px; height: 40px; float: left; }
+    ul li > span { 
+	margin-left: 15px;
+	min-height: 40px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: inline-block;
+	word-wrap: break-word;
+	width: calc(100% - 70px);
+    }
 }
 
 .view-external-resource {
-	background: #0e6FAB;
-	padding: 15px 25px;
-	margin-bottom: 30px;
-	font-size: 1.5em;
-	font-weight: 600;
-	flex: 1 0 100%;
-	
-	a { color: #ffffff; }
+    background: #0e6FAB;
+    padding: 15px 25px;
+    margin-bottom: 30px;
+    font-size: 1.5em;
+    font-weight: 600;
+    flex: 1 0 100%;
+    
+    a { color: #ffffff; }
 }
 
 
 .card.related-thing {
-	.card-img-top { border-radius: 0; }
-	a { text-decoration: none; }
-	.card-body { background: #0E6FAB; color: #ffffff; }
+    .card-img-top { border-radius: 0; }
+    a { text-decoration: none; }
+    .card-body { background: #0E6FAB; color: #ffffff; }
 }
 
 /* Body text */
 
 .text {
-	display: flex;
-	flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
     margin-bottom: 30px;
 
-	p { color: #282828; font-size: 1em; font-weight: 300; line-height: 1.5em; }
+    p { color: #282828; font-size: 1em; font-weight: 300; line-height: 1.5em; }
 
-	.image { flex: 1 0 100%; margin-bottom: 30px; }
-	.image img { width: 100%; }
+    .image { flex: 1 0 100%; margin-bottom: 30px; }
+    .image img { width: 100%; }
 }
 
 .spotlight {
@@ -194,29 +216,29 @@ ul.top-menu {
 /* Carousel */
 
 .thing-carousel { 
-	margin-left: -8px; 
-	margin-right: -8px;
-	position: relative;
-	
-	.slick-arrow { 
-		background: #0e2050; 
-		border: 10px solid #ffffff; 
-		border-radius: 30px; 
-		width: 60px; 
-		height: 60px; 
-		overflow: hidden; 
-		position: absolute; 
-		z-index: 10; 
-		left: -20px; 
-		top: 120px;
-		outline: none;
-		padding: 0 15px 0 10px; 
-	}
-	
-	.slick-next { left: auto; right: -25px; padding: 0 10px 0 15px;  }
-	
-	.slick-prev img { width: 100%; }
-	.card { margin-left: 8px; margin-right: 8px; }
+    margin-left: -8px; 
+    margin-right: -8px;
+    position: relative;
+    
+    .slick-arrow { 
+	background: #0e2050; 
+	border: 10px solid #ffffff; 
+	border-radius: 30px; 
+	width: 60px; 
+	height: 60px; 
+	overflow: hidden; 
+	position: absolute; 
+	z-index: 10; 
+	left: -20px; 
+	top: 120px;
+	outline: none;
+	padding: 0 15px 0 10px; 
+    }
+    
+    .slick-next { left: auto; right: -25px; padding: 0 10px 0 15px;  }
+    
+    .slick-prev img { width: 100%; }
+    .card { margin-left: 8px; margin-right: 8px; }
 }
 
 

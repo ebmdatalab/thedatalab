@@ -20,33 +20,56 @@
   <body>
     {% comment %}{% include "topnav.html" %}{% endcomment %}
     <div class="container header">
-		<div class="row">
-			<div class="col-3 logo">
-				<img src="/static/images/logo-oxford-blue.svg" width="110" />
-			</div>
-			<div class="col-9">
-				{% render_menu %}
-			</div>
-		</div>
-	</div>
+                <div class="row">
+                        <div class="col-3 logo">
+                                <img src="/static/images/logo-oxford-blue.svg" width="110" />
+                        </div>
+                        <div class="col-9">
+                                {% render_menu %}
+                        </div>
+                </div>
+        </div>
     
     
     <div class="container">
-	  {% block main %}
-	  
-	  {% endblock %}
-		<div class="col col-sm-auto">
-		  {% include "sidenav.html" %}
-		</div>
-	</div>
+          {% block main %}
+          
+          {% endblock %}
+	    <div class="col col-sm-auto">
+	      {% include "sidenav.html" %}
+	    </div>
+        </div>
   
-		<div class="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col">Footer</div>
-				</div>
-			</div>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+		    <div class="col-sm-4">
+			<h2>EBM DataLab</h2>
+			<p>Centre for Evidence-Based Medicine<br />
+			Nuffield Department of Primary Care Health&nbsp;Sciences<br />
+			University of Oxford<br />
+			New Radcliffe House<br />
+			Woodstock Road<br />
+			Oxford OX2 6GG</p>
+		    </div>
+		    <div class="col-sm-4">
+			<h2>Follow us</h2>
+			<p>social links</p>
+		    </div>
+		    <div class="col-sm-4">
+			<h2>Information</h2>
+			<ul>
+			    <li><a href="">Funding</a></li>
+			</ul>
+		    </div>
 		</div>
+		<div class="row">
+		    <div class="col-sm-12">
+			<p class="copyright">© University of Oxford for the EBM DataLab {% now "Y" %}. This work may be copied freely for non-commercial research and study. If you wish to do any of the other acts restricted by the copyright you should apply in writing to ...</p>
+		    </div>
+		</div>
+	    </div>
+	</div>
       
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->

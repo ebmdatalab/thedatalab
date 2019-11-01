@@ -1,5 +1,5 @@
 <ul class="top-menu">
-	<li><a href="/">Home</a></li>
+	<li class="home"><a href="/">{% include "icons/home.svg" %}</a></li>
 {% for item in menu_items %}
 	<li><a href="{{ item.url }}/">{{ item.title }}</a>
 		{% if item.children %}

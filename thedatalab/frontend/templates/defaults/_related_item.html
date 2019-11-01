@@ -10,8 +10,10 @@
 			  <span class="publication-date">
 				  {{ related_thing.published_at|date:"d F, Y" }}
 			  </span>
-			[{{ related_thing.get_class.model_name }}]
+			  
+<!--
 			{{related_thing.description|show_markdown|safe}}
+-->
 		</div>
 	</a>
 </div>
