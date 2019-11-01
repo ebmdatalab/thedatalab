@@ -50,6 +50,8 @@ urlpatterns = [
 
     path('imagefit/', include('imagefit.urls')),
     path('markdownx/', include('markdownx.urls')),
+    
+    path('about-us/team/', views.team_index, name='team_index'),
 
     re_path(r'^(.*)$', views.page_index, name='page_index'),
 ]

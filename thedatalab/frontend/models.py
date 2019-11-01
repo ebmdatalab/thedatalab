@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.template.loader import select_template
 
 import tagulous.models
@@ -174,3 +175,23 @@ class Page(MPTTModel):
             return self.menu_title or "Home"
         return "[%s] %s"%(self.url, self.menu_title)
 
+class TeamMember(models.Model):
+    class Meta:
+        ordering = ['ordering']
+    
+    name = models.CharField(max_length=100, blank=True)
+    slug = models.SlugField(blank=True, editable=False)
+    position = models.CharField(max_length=250, blank=True)
+    biography = MarkdownxField(blank=True)
+    image = models.ImageField(blank=True, null=True)
+    
+    website_url = models.CharField(max_length=150, blank=True)
+    twitter_handle = models.CharField(max_length=150, blank=True)
+    
+    is_alumni = models.BooleanField(default=False)
+    visible = models.BooleanField(default=False)
+    ordering = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        return super(TeamMember, self).save(*args, **kwargs)

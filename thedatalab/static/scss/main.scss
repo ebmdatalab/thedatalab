@@ -198,6 +198,14 @@ ul.top-menu {
     .card-body { background: #0E6FAB; color: #ffffff; }
 }
 
+.team-member {
+    border-left: #0e6fab 5px solid;
+    
+    .name { font: 21px 'Lato';  font-weight: 500; color: #0e6FAB; margin: 0 0 20px; }
+    .position { font-weight: 600; margin: 0 0 20px; color: #282828; }
+    
+}
+
 /* Body text */
 
 .text {

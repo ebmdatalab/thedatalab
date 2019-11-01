@@ -8,6 +8,7 @@ from .models import Software
 from .models import Dataset
 from .models import Author
 from .models import Page
+from .models import TeamMember
 
 from markdownx.admin import MarkdownxModelAdmin
 from django_mptt_admin.admin import DjangoMpttAdmin
@@ -20,7 +21,10 @@ admin.site.register(Software, MarkdownxModelAdmin)
 admin.site.register(Dataset, MarkdownxModelAdmin)
 admin.site.register(Author, MarkdownxModelAdmin)
 
+@admin.register(TeamMember)
+class TeamMemberAdmin(MarkdownxModelAdmin):
+	list_display = ['name', 'position', 'is_alumni']
+
+@admin.register(Page)
 class PageAdmin(DjangoMpttAdmin, MarkdownxModelAdmin):
 	pass
-
-admin.site.register(Page, PageAdmin)

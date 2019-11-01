@@ -3,6 +3,7 @@ from collections import defaultdict
 from django.http import Http404
 from django.shortcuts import render
 
+from . import models
 from .utils import page_resolve
 
 def clean_klasses(klasses_dict, exclude_thing):
@@ -16,29 +17,21 @@ def clean_klasses(klasses_dict, exclude_thing):
 
 
 def show_thing(request, slug, thing_type=None):
-    from .models import Paper
-    from .models import Blog
-    from .models import Tool
-    from .models import Software
-    from .models import Dataset
-    from .models import Topic
-    from .models import TopicTags
-
     thing = thing_type.objects.get(pk=slug)
     thing_name = thing.__class__.__name__.lower()
     index_url_name =  thing_name + '_index'
     thing_plural = thing.__class__.__name__.lower() + "s"
-    klasses = {'Papers': Paper,
-               'Blogs': Blog,
-               'Tools': Tool,
-               'Software': Software,
-               'Datasets': Dataset}
+    klasses = {'Papers': models.Paper,
+               'Blogs': models.Blog,
+               'Tools': models.Tool,
+               'Software': models.Software,
+               'Datasets': models.Dataset}
     context = {
         'thing': thing,
         'index_url_name': index_url_name,
         'thing_plural': thing_plural,
         'klasses': {},
-        'root_topics': TopicTags.objects.filter(level=1)
+        'root_topics': models.TopicTags.objects.filter(level=1)
     }
     if thing.__class__.__name__ == 'Author':
         klass_filter = {'authors': thing}
@@ -75,24 +68,16 @@ def show_thing(request, slug, thing_type=None):
 
 @page_resolve(strict=False)
 def thing_index(request, thing_type=None):
-    from .models import Author
-    from .models import Paper
-    from .models import Blog
-    from .models import Tool
-    from .models import Software
-    from .models import Dataset
-    from .models import Topic
-    from .models import TopicTags
     context = {
         'title': "All {}s".format(thing_type.__name__),
-        'root_topics': TopicTags.objects.filter(level=1)
+        'root_topics': models.TopicTags.objects.filter(level=1)
     }
     context['topics'] = defaultdict(list)
     # If authors, we just want all of them
-    if thing_type == Author:
-        context['topics']['Authors'] = Author.objects.all()
+    if thing_type == models.Author:
+        context['topics']['Authors'] = models.Author.objects.all()
     else:
-        for topic in TopicTags.objects.all():
+        for topic in models.TopicTags.objects.all():
             klass_filter = {'topics': topic}
             context['topics'][topic].extend(thing_type.objects.filter(**klass_filter))
             # sort them, most recent first
@@ -103,10 +88,17 @@ def thing_index(request, thing_type=None):
     context['topics'] = dict(context['topics'])
     context['related_title'] = ""
     
-    context['spotlight_items'] = Paper.objects.all()
+    context['spotlight_items'] = models.Paper.objects.all()
     
     return render(request, 'thing_index.html', context=context)
 
 @page_resolve(strict=True)
 def page_index(request, path):
     return render(request, "page.html", {})
+
+@page_resolve(strict=True)
+def team_index(request):
+	team_members = models.TeamMember.objects.filter(visible=True, is_alumni=False)
+	
+	return render(request, "team.html", {'team_members':team_members})
+	
