@@ -11,7 +11,7 @@ admin.site.register(models.Tool, MarkdownxModelAdmin)
 admin.site.register(models.Software, MarkdownxModelAdmin)
 admin.site.register(models.Dataset, MarkdownxModelAdmin)
 
-admin.register(models.Author)
+@admin.register(models.Author)
 class AuthorAdmin(MarkdownxModelAdmin):
     pass
 
