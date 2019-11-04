@@ -13,6 +13,7 @@
                 <div class="col-sm-6">
                     <div class="name">{{ mem.name }}</div>
                     <div class="position">{{ mem.position }}</div>
+                    {{ mem.biography|show_markdown|safe }}
                 </div>
             </div>
             

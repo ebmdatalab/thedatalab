@@ -2,7 +2,7 @@
 	<li class="home"><a href="/">{% include "icons/home.svg" %}</a></li>
 {% for item in menu_items %}
 	<li><a href="{{ item.url }}/">{{ item.title }}</a>
-		{% if item.children %}
+		{% if item.children %}<span>▼</span>
 		<ul>
 			{% for child in item.children %}
 				<li><a href="{{ child.url }}/">{{ child.title }}</a></li>

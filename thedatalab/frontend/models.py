@@ -199,7 +199,7 @@ class TeamMember(models.Model):
     is_alumni = models.BooleanField(default=False)
     visible = models.BooleanField(default=False)
     ordering = models.IntegerField(default=0)
-
+    
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         return super(TeamMember, self).save(*args, **kwargs)

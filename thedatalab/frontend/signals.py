@@ -11,6 +11,6 @@ def create_topic_for_tag(sender, instance, created, **kwargs):
             models.Topic.objects.create(
                 topic_tag=instance,
                 title=instance.label,
-                short_title=instance.label,
-                description=instance.label
+                #short_title=instance.label,
+                #description=instance.label
             )
