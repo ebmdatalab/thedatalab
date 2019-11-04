@@ -155,3 +155,5 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
+
+MARKDOWNX_MEDIA_PATH = 'md/'

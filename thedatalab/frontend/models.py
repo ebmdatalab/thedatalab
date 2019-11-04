@@ -130,7 +130,7 @@ class ExternalThing(models.Model):
         abstract = True
         
     def get_url_domain(self):
-        return self.url.split('//', 1)[-1].split('/')[0]
+        return ".".join(self.url.split('//', 1)[-1].split('/')[0].rsplit(".", 2)[-2:])
 
 
 class Topic(BaseThing):
