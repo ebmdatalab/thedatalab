@@ -136,11 +136,21 @@ class Blog(ThingWithTopics):
 
 class Author(models.Model):
     name = models.CharField(max_length=50, blank=True)
-    slug = models.CharField(max_length=50, blank=True)
+    slug = models.CharField(max_length=50, blank=True, editable=False)
     institution = models.CharField(max_length=150, blank=True)
     image = models.ImageField(blank=True, null=True)
     url = models.URLField(max_length=200, blank=True)
     topics = TagField(blank=True, to=TopicTags)
+    
+    def get_absolute_url(self):
+        return '/authors/%s/'%self.slug
+        
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        return super(Author, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.name
 
 class Paper(ThingWithTopics, ExternalThing):
     description = models.CharField(max_length=250, blank=True, help_text="20 words max.")

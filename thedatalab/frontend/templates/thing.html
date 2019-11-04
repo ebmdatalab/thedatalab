@@ -29,7 +29,7 @@
 						<b> Authors:</b>
 						<p>
 							{% for author in thing.authors.all %}
-								<a href="{{ author.get_absolute_url }}">{{ author.title }}</a><br />
+								<a href="{{ author.get_absolute_url }}">{{ author.name }}</a><br />
 							{% endfor %}
 						</p>
 					</span>

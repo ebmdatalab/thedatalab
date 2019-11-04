@@ -2,18 +2,18 @@
 {% load imagefit %}
 
 <div class="text">
-  {# hide the teaser image if images are in the long text already #}
-  {% if thing.image %}
-  <div class="image"><img src="{{ thing.image.name|resize:'360x100c'}}" style="margin-right: 10px;"></div>
-  {% endif %}
+    {# hide the teaser image if images are in the long text already #}
+    {% if thing.image %}
+        <div class="image"><img src="{{ thing.image.name|resize:'360x100c'}}" style="margin-right: 10px;"></div>
+    {% endif %}
   
-	{% if thing.url %}
-		<div class="view-external-resource">
-		  <a href="{{ thing.url }}">Read the {{ thing.get_class.model_name }} &gt;</a>
-		</div>
-	{% endif %}
+    {% if thing.url %}
+        <div class="view-external-resource">
+            <a href="{{ thing.url }}">Read the {{ thing.get_class.model_name }} &gt;</a>
+        </div>
+    {% endif %}
   
-  <div class="abstract">
-      {{ thing.abstract|show_markdown|safe }}
+    <div class="abstract">
+        {{ thing.abstract|show_markdown|safe }}
     </div>
-  </div>
+</div>
