@@ -102,7 +102,7 @@ class BaseThing(models.Model):
     def __str__(self):
         return self.title
         #return "{} ({})".format(self.short_title, self.title)
-
+        
     class Meta:
         abstract = True
         ordering = ('-published_at',)
@@ -114,6 +114,13 @@ class BaseThing(models.Model):
 class ThingWithTopics(BaseThing):
     related = models.ManyToManyField('self', blank=True)
     topics = TagField(blank=True, to=TopicTags)
+    
+    def get_attachments(self):
+        ret = []
+        for rel in self.related.all():
+            if rel.dataset:
+                ret.append(rel)
+        return ret
 
 class ExternalThing(models.Model):
     doi = models.CharField(max_length=200, unique=True, blank=True, null=True)
@@ -121,6 +128,9 @@ class ExternalThing(models.Model):
 
     class Meta:
         abstract = True
+        
+    def get_url_domain(self):
+        return self.url.split('//', 1)[-1].split('/')[0]
 
 
 class Topic(BaseThing):
@@ -161,13 +171,13 @@ class Paper(ThingWithTopics, ExternalThing):
 
 
 class Tool(ThingWithTopics, ExternalThing):
-    pass
+    description = models.CharField(max_length=250, blank=True, help_text="20 words max.")
 
 class Software(ThingWithTopics, ExternalThing):
-    pass
+    description = models.CharField(max_length=250, blank=True, help_text="20 words max.")
 
 class Dataset(ThingWithTopics, ExternalThing):
-    pass
+    description = models.CharField(max_length=250, blank=True, help_text="20 words max.")
 
 class Page(MPTTModel):
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')

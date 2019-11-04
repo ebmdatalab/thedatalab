@@ -214,7 +214,19 @@ ul.top-menu {
     
     .name { font: 21px 'Lato';  font-weight: 500; color: #0e6FAB; margin: 0 0 20px; }
     .position { font-weight: 600; margin: 0 0 20px; color: #282828; }
+}
+
+.attachments { margin-top: 50px; }
+
+.attachment {
+    margin-bottom: 20px;
     
+    .icon {
+        a { border: 5px solid #eee; }
+        img { width: 100%; box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.1); }
+    }
+    a { display: block; font: 22px Lato; text-decoration: underline; margin-bottom: 10px; }
+    p { font-size: 14px; }
 }
 
 /* Body text */

@@ -64,9 +64,32 @@
 		</div>
 				
 		<div class="col main-content" style="min-height: 0px;">
-			
-			
 			{% include thing.get_class.body_include_name %}
+            
+            <div class="attachments">
+                <div class="row attachment">
+                    <div class="col-2 icon">
+                        <a href="{{ thing.url }}" target="_blank"><img src="/static/images/publication.png" /></a>
+                    </div>
+                    <div class="col-10">
+                        <a href="{{ thing.url }}" target="_blank">{{ thing.title }}</a>
+                        <p>Read the full paper at <strong>{{ thing.get_url_domain }}</strong></p>
+                    </div>
+                </div>
+                {% for attachment in thing.get_attachments %}
+                    {% if attachment.dataset %}
+                    <div class="row attachment">
+                        <div class="col-2 icon">
+                            <a href="{{ attachment.dataset.url }}" target="_blank"><img src="/static/images/publication.png" /></a>
+                        </div>
+                        <div class="col-10">
+                            <a href="{{ attachment.dataset.url }}" target="_blank">{{ attachment.title }}</a>
+                            <p>dataset?</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
 		</div>
 				
 	</div>
