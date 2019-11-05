@@ -1,7 +1,8 @@
 from datetime import date
 from collections import defaultdict
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.utils import timezone
 
 from . import models
 from .utils import page_resolve
@@ -101,4 +102,15 @@ def team_index(request):
 	team_members = models.TeamMember.objects.filter(visible=True, is_alumni=False)
 	
 	return render(request, "team.html", {'team_members':team_members})
+    
+@page_resolve(strict=True)
+def blog_index(request):
+	posts = models.Blog.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')
 	
+	return render(request, "blog.html", {'blog_posts':posts})
+
+#@page_resolve(strict=False)
+def blog_post_view(request, year, month, pk, slug):
+    print(year, month)
+    post = get_object_or_404(models.Blog.objects, published_at__year=year, published_at__month=month, pk=pk)
+    return render(request, "thing.html", {'thing':post})

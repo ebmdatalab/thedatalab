@@ -6,7 +6,9 @@
 			<div class="page-header-inner-left">
 				<ul class="breadcrumbs" typeof="BreadcrumbList">
 					<li><a href="/">Home</a> &gt; </li> 
+                    {% block breadcrumb %}
 					<li> <a href="../">Papers</a> &gt; </li>
+                    {% endblock %}
 				</ul>		
 				<h1>{{ thing.title }}</h1>
 			</div>
@@ -65,8 +67,8 @@
 				
 		<div class="col main-content" style="min-height: 0px;">
 			{% include thing.get_class.body_include_name %}
-            
             <div class="attachments">
+                {% if thing.paper %}
                 <div class="row attachment">
                     <div class="col-2 icon">
                         <a href="{{ thing.url }}" target="_blank"><img src="/static/images/publication.png" /></a>
@@ -76,6 +78,7 @@
                         <p>Read the full paper at <strong>{{ thing.get_url_domain }}</strong></p>
                     </div>
                 </div>
+                {% endif %}
                 {% for attachment in thing.get_attachments %}
                     {% if attachment.dataset %}
                     <div class="row attachment">

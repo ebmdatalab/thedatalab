@@ -41,17 +41,20 @@ urlpatterns = [
     path('people/<slug:slug>/', views.show_thing, {'thing_type': Author}, name='show_author'),
 
     path('papers/', views.thing_index, {'thing_type': Paper}, name='paper_index'),
-    path('blogs/', views.thing_index, {'thing_type': Blog}, name='blog_index'),
+    #path('blog/', views.thing_index, {'thing_type': Blog}, name='blog_index'),
     path('tools/', views.thing_index, {'thing_type': Tool}, name='tool_index'),
     path('software/', views.thing_index, {'thing_type': Software}, name='software_index'),
     path('datasets/', views.thing_index, {'thing_type': Dataset}, name='dataset_index'),
     #path('topics/', views.thing_index, {'thing_type': Topic}, name='topic_index'),
     path('people/', views.thing_index, {'thing_type': Author}, name='author_index'),
+    
 
     path('imagefit/', include('imagefit.urls')),
     path('markdownx/', include('markdownx.urls')),
     
     path('about-us/team/', views.team_index, name='team_index'),
+    path('blog/', views.blog_index, name='blog_index'),
+    path('blog/<int:year>/<int:month>/<int:pk>/<slug:slug>/', views.blog_post_view),
 
     re_path(r'^(.*)$', views.page_index, name='page_index'),
 ]

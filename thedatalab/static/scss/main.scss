@@ -229,6 +229,20 @@ ul.top-menu {
     p { font-size: 14px; }
 }
 
+/*.blog-preview-list { padding-left: 0; }
+.blog-preview-list > .row { margin-left: 0; }*/
+
+.blog-preview {
+    margin-bottom: 30px;
+    h2 { text-transform: none; letter-spacing: 0; font-weight: 500; margin: 0 0 20px; }
+    p.author { text-transform: uppercase; letter-spacing: 0.11em; color: #666; font: 15px Lato; }
+    
+    p img { width: 100%; }
+
+    &:after { content: ""; display: block; border-bottom: 1px solid #ccc; width: calc(100% - 30px); margin-left: 15px; padding-top: 20px; }
+    
+}
+
 /* Body text */
 
 .text {

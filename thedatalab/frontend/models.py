@@ -143,6 +143,14 @@ class Topic(BaseThing):
 class Blog(ThingWithTopics):
     body = MarkdownxField(blank=True)
     #topics = TagField(blank=True, to=TopicTags)
+    
+    def get_authors(self):
+        names = [a.name for a in self.authors.all()]
+        return ", ".join(names)
+        
+    def get_absolute_url(self):
+        return '/blog/%s/%d/%s/'%(self.published_at.strftime("%Y/%m"), self.pk, slugify(self.title))
+        
 
 class Author(models.Model):
     name = models.CharField(max_length=50, blank=True)
