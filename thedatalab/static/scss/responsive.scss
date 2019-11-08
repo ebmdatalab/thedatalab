@@ -1,0 +1,26 @@
+@media screen and (max-width: 719px) {
+    
+    ul.top-menu {
+	margin: 0; 
+	left: 0px;
+	top: 0px;
+	padding: 20px;
+	width: 100%;
+	background: #0E2050;
+	position: absolute;
+	flex-direction: column;
+	z-index: 10;
+	
+	li a { color: #ffffff; }
+	
+	> li { background: url('../images/arrow-down.svg') 100% 6px no-repeat; }
+	
+	li ul {
+	    position: static;
+	    background: inherit;
+	    margin-left: 0;
+	    padding-left: 0;
+	}
+    }
+    
+}
