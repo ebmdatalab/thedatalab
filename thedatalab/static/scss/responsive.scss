@@ -1,26 +1,49 @@
 @media screen and (max-width: 719px) {
     
+    .header {
+        max-height: 50px;
+        overflow: hidden;
+    }
+    
+    .header > .row { 
+        position: static;
+        display: block;
+    }
+    
+    .header > .row > .logo {
+        padding: 20px;
+    }
+    
+    ul.top-menu li.home .icon { display: none }
+    ul.top-menu li.home a:before { content: "Home"; display: inline; }
+        
+    .header > .row > .col-3, .header > .row > .col-9 {
+        background: #0E2050;
+        max-width: 100%;
+    }
+    
     ul.top-menu {
-	margin: 0; 
-	left: 0px;
-	top: 0px;
-	padding: 20px;
-	width: 100%;
-	background: #0E2050;
-	position: absolute;
-	flex-direction: column;
-	z-index: 10;
-	
-	li a { color: #ffffff; }
-	
-	> li { background: url('../images/arrow-down.svg') 100% 6px no-repeat; }
-	
-	li ul {
-	    position: static;
-	    background: inherit;
-	    margin-left: 0;
-	    padding-left: 0;
-	}
+        margin: 0; 
+        left: 0px;
+        top: 0px;
+        padding: 20px;
+        width: 100%;
+        background: #0E2050;
+        position: absolute;
+        flex-direction: column;
+        z-index: 10;
+        
+        li a { color: #ffffff; }
+        li span { display: none; }
+        
+        > li.has-children { background: url('../images/arrow-down.svg') 100% 6px no-repeat; }
+        
+        li ul {
+            position: static;
+            background: #0E2050;
+            margin-left: 0;
+            padding-left: 0;
+        }
     }
     
 }

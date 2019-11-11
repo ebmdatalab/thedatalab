@@ -1,7 +1,7 @@
 <ul class="top-menu">
 	<li class="home"><a href="/">{% include "icons/home.svg" %}</a></li>
 {% for item in menu_items %}
-	<li><a href="{{ item.url }}/">{{ item.title }}</a>
+	<li {% if item.children %}class="has-children"{% endif %}><a href="{{ item.url }}/">{{ item.title }}</a>
 		{% if item.children %}<span>▼</span>
 		<ul>
 			{% for child in item.children %}
