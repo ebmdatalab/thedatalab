@@ -20,15 +20,27 @@
   <body>
     {% comment %}{% include "topnav.html" %}{% endcomment %}
     <div class="container header">
-                <div class="row">
-                        <div class="col-3 logo">
-                                <img src="/static/images/logo-oxford-blue.svg" width="110" />
-                        </div>
-                        <div class="col-9">
-                                {% render_menu %}
-                        </div>
+        <div class="row">
+            <div class="mobile-menu">
+                <div id="menu-button" class="menu-closed">
+                    <div class="menu-line" id="menu-line-1"></div>
+                    <div class="menu-line" id="menu-line-2a"></div>
+                    <div class="menu-line" id="menu-line-2b"></div>
+                    <div class="menu-line" id="menu-line-3"></div>
                 </div>
+            </div>
+            <div class="col-3 logo">
+		<div class="ebm-logo">
+		    <img src="/static/images/ebm-logo.png" width="59" />
+		    <h1>EBM DataLab</h1>
+		</div>
+                <img src="/static/images/logo-oxford-blue.svg" width="110" />
+            </div>
+            <div class="col-9">
+                {% render_menu %}
+            </div>
         </div>
+    </div>
     
     
     <div class="container">

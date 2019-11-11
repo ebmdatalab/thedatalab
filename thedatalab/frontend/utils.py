@@ -22,11 +22,13 @@ def page_resolve(*args, **kwargs):
             #	n = find_node(path + "/")
             #	if n: return HttpResponseRedirect('/' + n.url)
 
-            #exact = True
-            #while node is None and not strict:
-            #	exact = False
-            #	path = ("/".join(path.strip("/").split("/")[:-1]) + "/").lstrip("/")
-            #	node = find_node(path)
+            exact = True
+            while page is None and not strict:
+                exact = False
+                
+                path = path.rsplit("/", 1)[0]
+                print('searching path', path)
+                page = find_page(path)
 
             if page is None:
                 raise Http404()

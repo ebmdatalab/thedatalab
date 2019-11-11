@@ -102,6 +102,11 @@ def team_index(request):
 	team_members = models.TeamMember.objects.filter(visible=True, is_alumni=False)
 	
 	return render(request, "team.html", {'team_members':team_members})
+
+@page_resolve(strict=False)
+def author_index(request, slug):
+    author = get_object_or_404(models.Author.objects, slug=slug)
+    return render(request, "author.html", {'author':author})
     
 @page_resolve(strict=True)
 def blog_index(request):
@@ -109,7 +114,7 @@ def blog_index(request):
 	
 	return render(request, "blog.html", {'blog_posts':posts})
 
-#@page_resolve(strict=False)
+@page_resolve(strict=False)
 def blog_post_view(request, year, month, pk, slug):
     print(year, month)
     post = get_object_or_404(models.Blog.objects, published_at__year=year, published_at__month=month, pk=pk)

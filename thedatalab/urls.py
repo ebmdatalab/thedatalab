@@ -46,13 +46,14 @@ urlpatterns = [
     path('software/', views.thing_index, {'thing_type': Software}, name='software_index'),
     path('datasets/', views.thing_index, {'thing_type': Dataset}, name='dataset_index'),
     #path('topics/', views.thing_index, {'thing_type': Topic}, name='topic_index'),
-    path('people/', views.thing_index, {'thing_type': Author}, name='author_index'),
+    #path('people/', views.thing_index, {'thing_type': Author}, name='author_index'),
     
 
     path('imagefit/', include('imagefit.urls')),
     path('markdownx/', include('markdownx.urls')),
     
     path('about-us/team/', views.team_index, name='team_index'),
+    path('authors/<slug:slug>/', views.author_index, name='author_index'),
     path('blog/', views.blog_index, name='blog_index'),
     path('blog/<int:year>/<int:month>/<int:pk>/<slug:slug>/', views.blog_post_view),
 
