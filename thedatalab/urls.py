@@ -56,6 +56,10 @@ urlpatterns = [
     path('authors/<slug:slug>/', views.author_index, name='author_index'),
     path('blog/', views.blog_index, name='blog_index'),
     path('blog/<int:year>/<int:month>/<int:pk>/<slug:slug>/', views.blog_post_view),
+    
+    path('projects/<slug:slug>/', views.project_view, name='project_view'),
+    
+    path('', views.home_view, name='home'),
 
     re_path(r'^(.*)$', views.page_index, name='page_index'),
 ]

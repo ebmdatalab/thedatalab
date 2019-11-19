@@ -94,6 +94,10 @@ def thing_index(request, thing_type=None):
     return render(request, 'thing_index.html', context=context)
 
 @page_resolve(strict=True)
+def home_view(request):
+    return render(request, "home.html", {})
+
+@page_resolve(strict=True)
 def page_index(request, path):
     return render(request, "page.html", {})
 
@@ -119,3 +123,11 @@ def blog_post_view(request, year, month, pk, slug):
     print(year, month)
     post = get_object_or_404(models.Blog.objects, published_at__year=year, published_at__month=month, pk=pk)
     return render(request, "thing.html", {'thing':post})
+
+@page_resolve(strict=True)
+def project_view(request, slug):
+    blog_posts = models.Blog.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')[:4]
+    
+    papers = models.Paper.objects.all()[:4]
+    
+    return render(request, "project.html", {'blog_posts':blog_posts, 'papers':papers})

@@ -1,3 +1,8 @@
+/* Colours */
+
+$green: #2b9439;
+
+
 /* Layout */
 
 body {
@@ -21,7 +26,7 @@ body {
     text-align: right;
     
     img { margin-bottom: 5px; }
-    h1 { color: #ffffff; text-transform: none; letter-spacing: 0; font: 19px Roboto; line-height: 20px; width: 100%; display: block; margin: -6px 0 0; text-align: left; font-weight: 400;  }
+    h1 { color: #ffffff !important; text-transform: none; letter-spacing: 0; font: 19px Roboto; line-height: 20px; width: 100%; display: block; margin: 13px 0 0; text-align: left; font-weight: 400;  }
 }
 
 .footer { 
@@ -141,6 +146,19 @@ ul.top-menu {
 
 /* Page components */
 
+.hero {
+    width: 100%;
+    height: 300px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    background-position: center;
+    background-size: cover;
+    
+    h2 { margin: 0; background: #0E2050; color: #ffffff; padding: 10px 20px; display: inline-block; }
+}
+
 .page-header {
     margin-bottom: 30px;
     float: left;
@@ -166,18 +184,21 @@ ul.top-menu {
         height: auto;
         width: 30px;
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-end;
+        
 
         ul.social-links {
-            width: 30px;
-            float: left;
-            height: 100px;
+            display: flex;
+            height: 70px;
             
-            li { margin-bottom: 4px; }
+            li { margin-left: 4px; }
             li svg { width: 30px; height: 30px; }
             .icon { fill: #0e6FAB !important; -webkit-transition: fill 0.5s ease; }
             a:hover .icon { fill: #0e2050 !important; }
         }
+        
+        .email { font-weight: 400; text-align: right; }
     }
 }
 
@@ -213,11 +234,36 @@ ul.top-menu {
     a { color: #ffffff; }
 }
 
+.project-intro {
+    background: #eeeeee;
+    padding: 30px;
+    margin-bottom: 30px; 
+    
+    .image { 
+        height: 250px; 
+        background-size: 100%; 
+        position: relative; 
+        
+        &:before { content: ""; position: absolute; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.1); }
+        .caption { position: absolute; background: #ffffff; z-index: 2; bottom: 10px; right: 10px; padding: 10px; max-width: calc(100% - 20px); font-size: 20px; font-weight: 500; }
+    }
+    
+    .text { 
+        padding: 20px 40px 0;
+        margin: 0;
+        
+        p { font-size: 17px;  font-weight: 400; }
+    }
+    
+    
+}
 
 .card.related-thing {
     .card-img-top { border-radius: 0; }
     a { text-decoration: none; }
-    .card-body { background: #0E6FAB; color: #ffffff; }
+    .card-body { background: #0E6FAB; color: #ffffff; height: 100%; }
+    
+    a:nth-child(2n) { flex: 1 0 auto; }
 }
 
 .team-member {
@@ -271,11 +317,46 @@ ul.top-menu {
 }
 
 .spotlight {
-    background: #333333;
-    padding-bottom: 20px;
+    padding: 5px 5px 1px;
+    display: flex;
+    margin-bottom: 30px;
     
-    h2 { color: #ffffff; margin-top: 30px; margin-bottom: 50px; }
-    .card { border: none; margin-bottom: 20px; }
+    div { display: flex; flex-direction: column; flex: 1 0 auto; }
+    
+    h2 { margin-top: 20px; margin-bottom: 25px; }
+    .card { border: none; margin-bottom: 25px; }
+
+    &.caption-overlays {
+        div { display: block; }
+        .card.related-thing a:nth-child(2n) { position: absolute; bottom: 10px; left: 10px; max-width: calc(100% - 20px); }
+        .card-img-top { height: 250px; }
+        .card-body { padding: 10px 10px; }
+        .card-title { margin: 0; }
+        .publication-date { display: none; }
+    }
+
+    &.light {
+        background: #eeeeee;
+    }
+
+    &.dark { 
+        background: #333333; 
+        h2 { color: #ffffff; }
+    }
+    
+}
+
+
+/* Colourise things */
+
+body.theme-green {
+    .page-header,
+    .info-left { border-color: $green; }
+    h1 { color: $green; }
+    a { color: $green; }
+    .info-left .icon,
+    .page-header .page-header-inner-right ul.social-links .icon { fill: $green !important; }
+    .card.related-thing .card-body { background: $green; }
 }
 
 
@@ -464,6 +545,8 @@ html {
   list-style: none;
 }
 */
+
+
 
 
 @import 'responsive';

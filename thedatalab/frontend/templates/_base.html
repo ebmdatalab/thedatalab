@@ -17,7 +17,7 @@
     <title>TheDataLab</title>
   </head>
 
-  <body>
+  <body class="{% block body_class %}{% endblock %}">
     {% comment %}{% include "topnav.html" %}{% endcomment %}
     <div class="container header">
         <div class="row">
@@ -31,8 +31,10 @@
             </div>
             <div class="col-3 logo">
 		<div class="ebm-logo">
-		    <img src="/static/images/ebm-logo.png" width="59" />
-		    <h1>EBM DataLab</h1>
+		    <a href="/">
+			<img src="/static/images/ebm-logo.png" width="59" />
+			<h1>DataLab</h1>
+		    </a>
 		</div>
                 <img src="/static/images/logo-oxford-blue.svg" width="110" />
             </div>
@@ -57,12 +59,7 @@
                 <div class="row">
 		    <div class="col-sm-4">
 			<h2>EBM DataLab</h2>
-			<p>Centre for Evidence-Based Medicine<br />
-			Nuffield Department of Primary Care Health&nbsp;Sciences<br />
-			University of Oxford<br />
-			New Radcliffe House<br />
-			Woodstock Road<br />
-			Oxford OX2 6GG</p>
+			<p>Radcliffe Primary Care Building<br />Radcliffe Observatory Quarter<br />Woodstock Rd<br />Oxford<br />OX2 6GG</p>
 		    </div>
 		    <div class="col-sm-4">
 			<h2>Follow us</h2>

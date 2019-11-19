@@ -1,0 +1,15 @@
+{% extends 'page.html' %}
+{% load thedatalab_extras thedatalab_menu %}
+
+{% block main %}
+	<div class="row">
+		<div class="hero" style="background-image: url('/static/images/oxford.jpg');">
+			<h2>We are improving medicine with evidence and data</h2>
+		</div>
+	</div>
+
+	<div class="text">
+		{{ request.page.body|show_markdown|safe }}
+	</div>
+	
+{% endblock %}

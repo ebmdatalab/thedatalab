@@ -14,12 +14,23 @@
 					<li><a href="https://www.facebook.com/sharer/sharer.php?u=https://www.oii.ox.ac.uk/blog/digital-technology-has-the-power-to-transform-health-care-but-is-only-part-of-the-solution/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path class="icon" d="M16,0C7.2,0,0,7.2,0,16s7.2,16,16,16s16-7.2,16-16S24.8,0,16,0z M6.7,22.2C6.7,22.2,6.7,22.2,6.7,22.2 C6.7,22.2,6.8,22.3,6.7,22.2C6.7,22.3,6.7,22.2,6.7,22.2z M20.6,9.8l-1.8,0c-1.4,0-1.7,0.7-1.7,1.7v2.2h3.4L20,17.1h-2.9v8.7l-3.5,0 v-8.7h-2.9v-3.4h2.9v-2.5c0-2.9,1.8-4.5,4.4-4.5c1.2,0,2.3,0.1,2.6,0.1V9.8z"></path></svg></a></li>
 					<li><a href="mailto:?subject=Digital%20technology%20has%20the%20power%20to%20transform%20health%20care,%20but%20is%20only%20part%20of%20the%20solution&amp;body=https://www.oii.ox.ac.uk/blog/digital-technology-has-the-power-to-transform-health-care-but-is-only-part-of-the-solution/" title="Send this article to a friend!"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g><path class="icon" d="M16,0A16,16,0,1,0,32,16,16,16,0,0,0,16,0ZM26.14,19.33l-7-3.7,5.08-6.14ZM6.43,11.89,24,8.54a.08.08,0,0,1,.08,0l-6.79,8.2L17,17.1l0,0,0,0a.57.57,0,0,1-.35.18h0a.69.69,0,0,1-.45-.06L6.37,11.93Zm.09,1,7,3.82-5.11,6ZM26.25,20.4,8.7,23.76a.1.1,0,0,1-.11-.08h0l5.6-6.62,1.61.87a1.45,1.45,0,0,0,1.77-.34l1.13-1.36,7.63,4.05v0A.1.1,0,0,1,26.25,20.4Z"></path></g></svg></a></li>
 				</ul>
+				<div class="email">
+					Get in touch:<br />
+					<a href="mailto:hello@ebmdatalab.net">hello@ebmdatalab.net</a>
+				</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="text">
-		{{ request.page.body|show_markdown|safe }}
+	{% block body %}
+	<div class="row">
+		<div class="text col-sm-9">
+			{{ request.page.body|show_markdown|safe }}
+		</div>
+		<div class="col-sm-3">
+			
+		</div>
 	</div>
+	{% endblock %}
 	
 {% endblock %}

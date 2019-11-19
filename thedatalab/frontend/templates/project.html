@@ -1,0 +1,42 @@
+{% extends 'page.html' %}
+{% load thedatalab_extras thedatalab_menu %}
+
+{% block body_class %}theme-green{% endblock %}
+
+{% block body %}
+
+	<div class="row project-intro">
+		<div class="image col-sm-4" style="background-image: url('/static/images/screenshot-open-prescribing.png');">
+			<div class="caption">Visit openprescribing.net &gt;</div>
+		</div>
+		<div class="col-sm-8 text">
+			<p>Every month, the NHS publishes anonymised data about the medicines prescribed by GPs across England. At over 600 million rows, the raw data is overwhelming.</p>
+			<p>With <strong>OpenPrescribing</strong>, we’re making it easy for anyone to monitor prescribing trends, spot unusual patterns, and see who is prescribing what in the NHS. GPs, medicines managers, or anybody, can use our tools to identify where there are improvements and savings to be made.</p>
+			<p><a href="#">Find out more &gt;</a></p>
+		</div>
+	</div>
+
+	{% if blog_posts %}
+	<div class="row spotlight dark caption-overlays">
+		<h2 class="col-12">Latest Blog Posts</h2>
+      
+		{% for related_thing in blog_posts %}
+			<div class="col-lg-3">{% include "defaults/_related_item.html" %}</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+	
+	{% if papers %}
+	<div class="row spotlight light">
+		<h2 class="col-12">Latest Publications</h2>
+      
+		{% for related_thing in papers %}
+			<div class="col-lg-3">{% include "defaults/_related_item.html" %}</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+
+	<div class="text">
+		{{ request.page.body|show_markdown|safe }}
+	</div>
+{% endblock %}
