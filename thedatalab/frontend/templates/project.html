@@ -5,13 +5,15 @@
 
 {% block body %}
 
-	{% if project.image %}
+	{% if project.introduction %}
 	<div class="row project-intro">
+		{% if project.image %}
 		<a href="{{ project.overlay_url }}" class="col-sm-4">
 			<div class="image" style="background-image: url('{{ project.image.url }}');">
 				<div class="caption">{{ project.overlay_text }}</div>
 			</div>
 		</a>
+		{% endif %}
 		<div class="col-sm-8 text">
 			{{ project.introduction|show_markdown|safe }}
 		</div>
@@ -20,7 +22,7 @@
 
 	{% if blog_posts %}
 	<div class="row spotlight dark caption-overlays">
-		<h2 class="col-12">Latest Blog Posts</h2>
+		<h2 class="col-12">Latest News</h2>
       
 		{% for related_thing in blog_posts %}
 			<div class="col-lg-3">{% include "defaults/_related_item.html" %}</div>
@@ -30,7 +32,7 @@
 	
 	{% if papers %}
 	<div class="row spotlight light">
-		<h2 class="col-12">Latest Publications</h2>
+		<h2 class="col-12">Recent Publications</h2>
       
 		{% for related_thing in papers %}
 			<div class="col-lg-3">{% include "defaults/_related_item.html" %}</div>

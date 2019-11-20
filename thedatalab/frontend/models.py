@@ -148,6 +148,22 @@ class Blog(ThingWithTopics):
         names = [a.name for a in self.authors.all()]
         return ", ".join(names)
         
+    def get_preview(self):
+        ret = ""
+        
+        truncated = False
+        
+        for bit in self.body.replace('\r', '').split('\n\n'):
+            if len(ret)>400:
+                truncated = True
+                break
+            ret += '\n\n' + bit
+            
+        if truncated:
+            ret += '\n\n[Read more...](%s)'%self.get_absolute_url()
+            
+        return ret
+        
     def get_absolute_url(self):
         return '/blog/%s/%d/%s/'%(self.published_at.strftime("%Y/%m"), self.pk, slugify(self.title))
         
