@@ -1,20 +1,22 @@
 {% extends 'page.html' %}
-{% load thedatalab_extras thedatalab_menu %}
+{% load thedatalab_extras thedatalab_menu imagefit %}
 
 {% block body_class %}theme-green{% endblock %}
 
 {% block body %}
 
+	{% if project.image %}
 	<div class="row project-intro">
-		<div class="image col-sm-4" style="background-image: url('/static/images/screenshot-open-prescribing.png');">
-			<div class="caption">Visit openprescribing.net &gt;</div>
-		</div>
+		<a href="{{ project.overlay_url }}" class="col-sm-4">
+			<div class="image" style="background-image: url('{{ project.image.url }}');">
+				<div class="caption">{{ project.overlay_text }}</div>
+			</div>
+		</a>
 		<div class="col-sm-8 text">
-			<p>Every month, the NHS publishes anonymised data about the medicines prescribed by GPs across England. At over 600 million rows, the raw data is overwhelming.</p>
-			<p>With <strong>OpenPrescribing</strong>, we’re making it easy for anyone to monitor prescribing trends, spot unusual patterns, and see who is prescribing what in the NHS. GPs, medicines managers, or anybody, can use our tools to identify where there are improvements and savings to be made.</p>
-			<p><a href="#">Find out more &gt;</a></p>
+			{{ project.introduction|show_markdown|safe }}
 		</div>
 	</div>
+	{% endif %}
 
 	{% if blog_posts %}
 	<div class="row spotlight dark caption-overlays">

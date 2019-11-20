@@ -22,3 +22,7 @@ class TeamMemberAdmin(MarkdownxModelAdmin):
 @admin.register(models.Page)
 class PageAdmin(DjangoMpttAdmin, MarkdownxModelAdmin):
 	pass
+
+@admin.register(models.Project)
+class ProjectAdmin(MarkdownxModelAdmin):
+    pass

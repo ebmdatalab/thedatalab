@@ -129,5 +129,6 @@ def project_view(request, slug):
     blog_posts = models.Blog.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')[:4]
     
     papers = models.Paper.objects.all()[:4]
+    project = request.page.project
     
-    return render(request, "project.html", {'blog_posts':blog_posts, 'papers':papers})
+    return render(request, "project.html", {'blog_posts':blog_posts, 'papers':papers, 'project':project})

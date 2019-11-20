@@ -198,6 +198,8 @@ class Page(MPTTModel):
     meta_title = models.CharField(max_length=150, blank=True)
     body = MarkdownxField(blank=True, null=True)
 
+    topics = TagField(blank=True, to=TopicTags)
+
     def save(self, *args, **kwargs):
         if self.parent is None:
             self.url = ''
@@ -210,6 +212,12 @@ class Page(MPTTModel):
         if not self.parent:
             return self.menu_title or "Home"
         return "[%s] %s"%(self.url, self.menu_title)
+
+class Project(Page):
+    image = models.ImageField(blank=True, null=True)
+    overlay_text = models.CharField(max_length=150, blank=True)
+    overlay_url = models.URLField(max_length=200, blank=True)
+    introduction = MarkdownxField(blank=True)
 
 class TeamMember(models.Model):
     class Meta:
