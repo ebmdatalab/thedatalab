@@ -53,7 +53,7 @@ urlpatterns = [
     path('markdownx/', include('markdownx.urls')),
     
     path('about-us/team/', views.team_index, name='team_index'),
-    path('authors/<slug:slug>/', views.author_index, name='author_index'),
+    path('authors/<slug:slug>/', views.author_view, name='author_view'),
     path('blog/', views.blog_index, name='blog_index'),
     path('blog/<int:year>/<int:month>/<int:pk>/<slug:slug>/', views.blog_post_view),
     

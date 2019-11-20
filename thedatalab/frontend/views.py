@@ -108,9 +108,11 @@ def team_index(request):
 	return render(request, "team.html", {'team_members':team_members})
 
 @page_resolve(strict=False)
-def author_index(request, slug):
+def author_view(request, slug):
     author = get_object_or_404(models.Author.objects, slug=slug)
-    return render(request, "author.html", {'author':author})
+    team_member = author.team_member.first()
+    papers = models.Paper.objects.filter(authors=author)
+    return render(request, "author.html", {'author':author, 'team_member':team_member, 'papers':papers})
     
 @page_resolve(strict=True)
 def blog_index(request):

@@ -247,10 +247,14 @@ class TeamMember(models.Model):
     
     website_url = models.CharField(max_length=150, blank=True)
     twitter_handle = models.CharField(max_length=150, blank=True)
+    author = models.ForeignKey(Author, blank=True, null=True, on_delete=models.SET_NULL, related_name="team_member")
     
     is_alumni = models.BooleanField(default=False)
     visible = models.BooleanField(default=False)
     ordering = models.IntegerField(default=0)
+    
+    def __str__(self):
+        return self.name
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)

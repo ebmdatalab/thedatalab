@@ -64,7 +64,6 @@ h1 {
     letter-spacing: 5px;
     font-weight: bold;
     width: 100%;
-    float: left;
     margin-bottom: 40px;
 }
 
@@ -137,9 +136,9 @@ ul.top-menu {
     
     li:hover ul { display: block; }
     li.home {
-    flex: 1 0 1%;
-    svg { width: 18px; vertical-align: baseline; }
-    .icon { fill: #0e2050; width: 18px;}
+        flex: 1 0 1%;
+        svg { width: 18px; vertical-align: baseline; }
+        .icon { fill: #0e2050; width: 18px;}
     }
 }
 
@@ -170,9 +169,15 @@ ul.top-menu {
     padding-right: 0px;
     border-top: solid 1px #eeeeee;
     
-    
     ul.breadcrumbs { margin: 0; padding: 0 0 20px; }
     ul.breadcrumbs li { list-style-type: none; display: inline-block; margin-left: 0px; margin-right: 0px; }
+
+    h4 { 
+        text-transform: none; 
+        letter-spacing: 0; 
+    }
+    
+    h1 + h4 { margin-top: -30px; margin-bottom: 5px; }
 
     .page-header-inner-left { 
         width: calc(100% - 60px);
@@ -299,6 +304,18 @@ ul.top-menu {
 
     &:after { content: ""; display: block; border-bottom: 1px solid #ccc; width: calc(100% - 30px); margin-left: 15px; padding-top: 20px; }
     
+}
+
+ul.links {
+    li { margin-bottom: 15px; }
+    svg { width: 40px; margin-right: 10px; }
+    .icon { fill: #0e6FAB; }
+}
+
+.person-info-left { 
+    margin-bottom: 15px; 
+    
+    .person-image { margin: 0 0 30px 50px; display: block; }
 }
 
 /* Body text */

@@ -1,4 +1,5 @@
 {% extends '_base.html' %}
+{% load thedatalab_extras imagefit %}
 
 {% block main %}
 	<div class="row">
@@ -11,6 +12,11 @@
                     {% endblock %}
 				</ul>		
 				<h1>{{ author.name }}</h1>
+				{% if team_member %}
+					<h4>{{ team_member.position }}</h4>
+				{% elif author.institution %}
+					<h4>{{ author.institution }}</h4>
+				{% endif %}
 			</div>
 			<div class="page-header-inner-right">
 				<ul class="social-links">
@@ -23,50 +29,30 @@
 	</div>
 
 	<div class="row">
-		<div class="info-left col-md-4 col-lg-3 col-xl-3 mr-lg-5">
-			<ul>
-				{% if thing.authors.count %}
-				<li>{% include "icons/keyboard.svg" %}
-					<span class="person-svg-label">
-						<b> Authors:</b>
-						<p>
-							{% for author in thing.authors.all %}
-								<a href="{{ author.get_absolute_url }}">{{ author.name }}</a><br />
-							{% endfor %}
-						</p>
-					</span>
-				</li>
+		<div class="col-sm-4 person-info-left">
+			{% if team_member and team_member.image %}<img class="person-image" src="{{ team_member.image.name|resize:'170x170c'}}">{% endif %}
+			<ul class="links">
+				{% if team_member.website_url %}
+					<li><a href="{{ team_member.website_url }}">{% include "icons/website.svg" %} {{ team_member.website_url }}</a></li>
 				{% endif %}
-				{% if thing.published_at %}
-				<li>{% include "icons/calendar.svg" %}
-					<span class="person-svg-label">
-						<b> Posted:</b>
-						<p>{{ thing.published_at|date:"d F Y" }}</p>
-					</span></li>
-				{% endif %}
-				{% if thing.citation %}
-				<li>{% include "icons/calendar.svg" %}
-					<span class="person-svg-label">
-						<b> Published in:</b>
-						<p>{{ thing.citation }}</p>
-					</span></li>
-				{% endif %}
-				{% if tags %}
-				<li>{% include "icons/tags.svg" %}<span class="person-svg-label">
-						<b> Tags:</b>
-						<p>
-							{% for tag in tags %}
-								<a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
-							{% endfor %}
-						</p>
-					</span>
-				</li>
+				{% if team_member.twitter_handle %}
+					<li><a href="{{ team_member.twitter_handle|twitter_url }}">{% include "icons/twitter.svg" %} Twitter</a></li>
 				{% endif %}
 			</ul>
 		</div>
-				
-		
-				
+		<div class="col-sm-7 text">
+			{{ team_member.biography|show_markdown|safe }}
+		</div>
 	</div>
+	
+	{% if papers %}
+		<div class="row spotlight">
+			<h2 class="col-12">Papers by {{ author.name }}</h2>
+		  
+			{% for related_thing in papers %}
+				<div class="col-lg-3">{% include "defaults/_related_item.html" %}</div>
+			{% endfor %}
+		</div>
+	{% endif %}
 
 {% endblock %}
