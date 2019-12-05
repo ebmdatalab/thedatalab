@@ -15,7 +15,7 @@ django-markdownx==2.0.28
 django-mptt-admin==0.7.2
 django-mptt==0.10.0       # via django-mptt-admin
 django-tagulous==0.14.1
-django==2.2.6
+django==2.2.8
 gunicorn==19.9.0
 libsass==0.19.3           # via django-libsass
 markdown==3.1.1           # via django-markdownx
@@ -28,5 +28,5 @@ six==1.12.0               # via django-appconf, django-extensions, django-mptt-a
 sqlparse==0.3.0           # via django
 
 # The following packages are considered to be unsafe in a requirements file:
-# pip==19.3.1               # via django-markdownx
-# setuptools==41.6.0        # via markdown
+# pip
+# setuptools
