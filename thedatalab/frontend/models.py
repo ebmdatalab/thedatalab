@@ -193,6 +193,10 @@ class Paper(ThingWithTopics, ExternalThing):
     
     citation = models.CharField(max_length=200)
 
+    def get_colour_scheme(self):
+        if hasattr(self, 'colour_scheme'):
+            return self.colour_scheme
+        return "unknown"
 
 class Tool(ThingWithTopics, ExternalThing):
     description = models.CharField(max_length=250, blank=True, help_text="20 words max.")

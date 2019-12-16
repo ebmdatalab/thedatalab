@@ -1,5 +1,7 @@
 from datetime import date
 from collections import defaultdict
+from django.db.models import Max
+from django.db.models.functions import Coalesce 
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
@@ -89,8 +91,13 @@ def thing_index(request, thing_type=None):
     context['topics'] = dict(context['topics'])
     context['related_title'] = ""
     
-    context['spotlight_items'] = models.Paper.objects.all()
     
+    papers = models.Paper.objects.order_by('-published_at')
+    papers = papers.annotate(colour_scheme=Max('topics__pages__project__colour_scheme'))
+    
+    context['spotlight_items'] = papers
+    for p in papers:
+       print(p.colour_scheme)
     #for p in models.Paper.objects.all():
         #print(models.Project.objects.filter(
         #print(p.topics.exclude(pages__colour_scheme='').

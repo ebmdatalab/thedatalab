@@ -375,6 +375,8 @@ body.theme-green {
     .page-header .page-header-inner-right ul.social-links .icon { fill: $green !important; }
     .card.related-thing .card-body { background: $green; }
 }
+.card.related-thing.theme-green .card-body { background: $green; }
+
 
 body.theme-orange {
     .page-header,
@@ -385,6 +387,7 @@ body.theme-orange {
     .page-header .page-header-inner-right ul.social-links .icon { fill: $orange !important; }
     .card.related-thing .card-body { background: $orange; }
 }
+.card.related-thing.theme-orange .card-body { background: $orange; }
 
 
 /* Carousel */
