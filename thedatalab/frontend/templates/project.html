@@ -1,14 +1,14 @@
 {% extends 'page.html' %}
 {% load thedatalab_extras thedatalab_menu imagefit %}
 
-{% block body_class %}theme-green{% endblock %}
+{% block body_class %}theme-{{ request.page.colour_scheme }}{% endblock %}
 
 {% block body %}
 
 	{% if project.introduction %}
 	<div class="row project-intro">
 		{% if project.image %}
-		<a href="{{ project.overlay_url }}" class="col-sm-4">
+		<a href="{{ project.overlay_url }}" target="_blank" class="col-sm-4">
 			<div class="image" style="background-image: url('{{ project.image.url }}');">
 				<div class="caption">{{ project.overlay_text }}</div>
 			</div>

@@ -213,6 +213,7 @@ class Page(MPTTModel):
 
     meta_title = models.CharField(max_length=150, blank=True)
     body = MarkdownxField(blank=True, null=True)
+    colour_scheme = models.CharField(max_length=150, blank=True, choices=[['', ''], ['green', 'Green'], ['orange', 'Orange']])
 
     topics = TagField(blank=True, to=TopicTags)
 
