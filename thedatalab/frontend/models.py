@@ -113,7 +113,7 @@ class BaseThing(models.Model):
 
 class ThingWithTopics(BaseThing):
     related = models.ManyToManyField('self', blank=True)
-    topics = TagField(blank=True, to=TopicTags)
+    topics = TagField(blank=True, to=TopicTags, related_name="things")
     
     def get_attachments(self):
         ret = []
@@ -215,7 +215,7 @@ class Page(MPTTModel):
     body = MarkdownxField(blank=True, null=True)
     colour_scheme = models.CharField(max_length=150, blank=True, choices=[['', ''], ['green', 'Green'], ['orange', 'Orange']])
 
-    topics = TagField(blank=True, to=TopicTags)
+    topics = TagField(blank=True, to=TopicTags, related_name="pages")
 
     def save(self, *args, **kwargs):
         if self.parent is None:

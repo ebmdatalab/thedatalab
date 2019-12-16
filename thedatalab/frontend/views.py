@@ -91,6 +91,14 @@ def thing_index(request, thing_type=None):
     
     context['spotlight_items'] = models.Paper.objects.all()
     
+    #for p in models.Paper.objects.all():
+        #print(models.Project.objects.filter(
+        #print(p.topics.exclude(pages__colour_scheme='').
+        #for t in p.topics.all():
+         #   for th in t.things.all():
+          #      print(th.project)
+    
+    
     return render(request, 'thing_index.html', context=context)
 
 @page_resolve(strict=True)
@@ -128,9 +136,16 @@ def blog_post_view(request, year, month, pk, slug):
 
 @page_resolve(strict=True)
 def project_view(request, slug):
-    blog_posts = models.Blog.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')[:4]
+    blog_posts = models.Blog.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')
     
     papers = models.Paper.objects.all()[:4]
     project = request.page.project
     
-    return render(request, "project.html", {'blog_posts':blog_posts, 'papers':papers, 'project':project})
+    #print(project.topics.filter())
+    
+    papers = models.Paper.objects.order_by('-published_at').filter(topics__in=project.topics.all())
+    blog_posts = blog_posts.filter(topics__in=project.topics.all())
+    
+    #print('topics:', project.topics.all())
+    
+    return render(request, "project.html", {'blog_posts':blog_posts[:4], 'papers':papers, 'project':project})

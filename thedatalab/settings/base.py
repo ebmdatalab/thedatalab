@@ -164,3 +164,5 @@ SERIALIZATION_MODULES = {
     'python': 'tagulous.serializers.python',
     'yaml':   'tagulous.serializers.pyyaml'
 }
+#TAGULOUS_ENHANCE_MODE = False
+
