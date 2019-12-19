@@ -40,21 +40,11 @@
     <div class="row"><h2 class="col">{{ related_title }}</h2></div>
   {% endif %}
 -->
+      
+
 
       {% if other_things_of_same_type %}
 		<div class="row"><h2 class="col">Recent {{ thing_plural }}</h2></div>
-
-      {% endif %}
-      {% if topics.keys|length > 1 %}
-      {% for topic in topics.keys %}
-      <li class="nav-item">
-        <a class="nav-link {% if forloop.first and not other_things_of_same_type %}active{% endif%}" id="{{ topic.pathslug }}-tab" data-toggle="tab" data-target="#{{ topic.pathslug }}" role="tab" aria-controls="{{ topic.pathslug }}">{{ topic }}</a>
-      </li>
-      {% endfor %}
-      {% endif %}
-    </ul>
-
-      {% if other_things_of_same_type %}
 		<div class="thing-carousel">
 			{% for related_thing in other_things_of_same_type %}
 			   {% include thing.get_class.related_item_include_name  %}
@@ -62,18 +52,18 @@
 		</div>
         <a href="{% url thing.get_class.index_url_name %}">View all {{ thing.get_class.model_name }}s</a>
       {% endif %}
+      
+      
       {% for topic, related_things in topics.items %}
-        <div class="tab-pane fade show {% if forloop.first and not other_things_of_same_type %}active{% endif%}" id="{{ topic.pathslug }}" role="tabpanel" aria-labelledby="{{ topic.pathslug }}-tab">
-        {% for related_thing in related_things %}
-            <div class="related-thing-container">
-              <img src="{{ related_thing.image.name|resize:'200x140c'}}" width="200" height="140" style="margin-right: 10px; width: 200px">
-              <div style="flex-direction: column">
-                {% include related_thing.get_class.related_item_include_name  %}
-              </div>
-            </div>
-        {% endfor %}
+        <div class="row"><h2 class="col">Topic "{{ topic }}"</h2></div>
+		<div class="thing-carousel">
+			{% for related_thing in related_things %}
+			   {% include thing.get_class.related_item_include_name  %}
+			{% endfor %}
+		</div>
+        
         {% if topic.topic_set.count %}
-            <a href="{% url 'show_topic' slug=topic.topic_set.first.pk %}">View everything in topic {{ topic.name }}</a>
+            <a href="asdf">View everything in topic {{ topic.name }}</a>
         {% endif %}
         </div>
       {% endfor %}

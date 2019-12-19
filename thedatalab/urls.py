@@ -40,7 +40,7 @@ urlpatterns = [
     #path('topics/<slug:slug>/', views.show_thing, {'thing_type': Topic}, name='show_topic'),
     path('people/<slug:slug>/', views.show_thing, {'thing_type': Author}, name='show_author'),
 
-    path('papers/', views.thing_index, {'thing_type': Paper}, name='paper_index'),
+#    path('papers/', views.thing_index, {'thing_type': Paper}, name='paper_index'),
     #path('blog/', views.thing_index, {'thing_type': Blog}, name='blog_index'),
     path('tools/', views.thing_index, {'thing_type': Tool}, name='tool_index'),
     path('software/', views.thing_index, {'thing_type': Software}, name='software_index'),
@@ -56,6 +56,7 @@ urlpatterns = [
     path('authors/<slug:slug>/', views.author_view, name='author_view'),
     path('blog/', views.blog_index, name='blog_index'),
     path('blog/<int:year>/<int:month>/<int:pk>/<slug:slug>/', views.blog_post_view),
+    path('papers/', views.paper_index, name='paper_index'),
     
     path('projects/<slug:slug>/', views.project_view, name='project_view'),
     

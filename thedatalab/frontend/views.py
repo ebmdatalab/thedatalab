@@ -17,6 +17,8 @@ def clean_klasses(klasses_dict, exclude_thing):
             cleaned_klasses[klass].extend(things)
     return cleaned_klasses
 
+def annotate_things(queryset):
+    return queryset.annotate(colour_scheme=Max('topics__pages__project__colour_scheme'))    
 
 
 def show_thing(request, slug, thing_type=None):
@@ -53,14 +55,14 @@ def show_thing(request, slug, thing_type=None):
         for topic in thing.topics.all():
             for var, klass in klasses.items():
                 klass_filter = {'topics': topic}
-                context['topics'][topic].extend(klass.objects.filter(**klass_filter))
+                context['topics'][topic].extend(annotate_things(klass.objects.filter(**klass_filter)))
             # sort them, most recent first
             context['topics'][topic] = sorted(
                 context['topics'][topic],
                 key=lambda x: date.today() - (x.published_at or date.today()))[:3]
         context['topics'] = clean_klasses(context['topics'], thing)
         context['topics'] = dict(context['topics'])
-        other_things_of_same_type = thing_type.objects.exclude(pk=slug)
+        other_things_of_same_type = annotate_things(thing_type.objects.exclude(pk=slug))
         if other_things_of_same_type.count():
             context['other_things_of_same_type'] = list(other_things_of_same_type)*10
 
@@ -82,7 +84,7 @@ def thing_index(request, thing_type=None):
     else:
         for topic in models.TopicTags.objects.all():
             klass_filter = {'topics': topic}
-            context['topics'][topic].extend(thing_type.objects.filter(**klass_filter))
+            context['topics'][topic].extend(annotate_things(thing_type.objects.filter(**klass_filter)))
             # sort them, most recent first
             context['topics'][topic] = sorted(
                 context['topics'][topic],
@@ -90,21 +92,13 @@ def thing_index(request, thing_type=None):
         context['topics'] = clean_klasses(context['topics'], None)
     context['topics'] = dict(context['topics'])
     context['related_title'] = ""
-    
-    
+ 
     papers = models.Paper.objects.order_by('-published_at')
-    papers = papers.annotate(colour_scheme=Max('topics__pages__project__colour_scheme'))
+    papers = annotate_things(papers)
     
     context['spotlight_items'] = papers
     for p in papers:
        print(p.colour_scheme)
-    #for p in models.Paper.objects.all():
-        #print(models.Project.objects.filter(
-        #print(p.topics.exclude(pages__colour_scheme='').
-        #for t in p.topics.all():
-         #   for th in t.things.all():
-          #      print(th.project)
-    
     
     return render(request, 'thing_index.html', context=context)
 
@@ -127,6 +121,7 @@ def author_view(request, slug):
     author = get_object_or_404(models.Author.objects, slug=slug)
     team_member = author.team_member.first()
     papers = models.Paper.objects.filter(authors=author)
+    papers = annotate_things(papers)
     return render(request, "author.html", {'author':author, 'team_member':team_member, 'papers':papers})
     
 @page_resolve(strict=True)
@@ -140,6 +135,25 @@ def blog_post_view(request, year, month, pk, slug):
     print(year, month)
     post = get_object_or_404(models.Blog.objects, published_at__year=year, published_at__month=month, pk=pk)
     return render(request, "thing.html", {'thing':post})
+
+
+@page_resolve(strict=False)
+def paper_index(request):
+    papers = models.Paper.objects.order_by('-published_at')
+    papers = annotate_things(papers)
+    
+    d = {}
+    d['spotlight_items'] = papers[:4]
+    
+    d['project_rows'] = []
+    for p in models.Project.objects.all():
+        row = {
+            'title':p.menu_title,
+            'items':papers.filter(topics__pages__project=p)
+        }
+        d['project_rows'].append(row)
+    
+    return render(request, "papers.html", d)
 
 @page_resolve(strict=True)
 def project_view(request, slug):
