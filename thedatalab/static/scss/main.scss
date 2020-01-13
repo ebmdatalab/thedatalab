@@ -59,20 +59,22 @@ body {
 h1 {
     font-family: 'Lato';
     font-size: 1.7em;
-    text-transform: uppercase;
     color: #0e6FAB;
-    letter-spacing: 5px;
+    letter-spacing: 0.04em;
+    /*text-transform: uppercase;
+    letter-spacing: 5px;*/
     font-weight: bold;
     width: 100%;
     margin-bottom: 40px;
 }
 
 h2 { 
-    text-transform: uppercase;
     font-family: 'Lato';
     font-size: 1.4em;
     color: #0e2050;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.05em;
+    /*text-transform: uppercase;
+    letter-spacing: 0.15em;*/
     font-weight: 700;
     margin-top: 35px;
     margin-bottom: 30px;
