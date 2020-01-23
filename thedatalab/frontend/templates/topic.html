@@ -1,0 +1,30 @@
+{% extends 'page.html' %}
+{% load thedatalab_extras thedatalab_menu imagefit %}
+
+{% block body_class %}theme-{{ request.page.colour_scheme }}{% endblock %}
+
+{% block header_title %}{{ topic.title }}{% endblock %}
+
+{% block body %}
+
+	{% if blog_posts %}
+	<div class="row spotlight dark caption-overlays">
+		<h2 class="col-12">Latest News</h2>
+      
+		{% for related_thing in blog_posts %}
+			<div class="col-lg-3">{% include "defaults/_related_item.html" %}</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+	
+	{% if papers %}
+	<div class="row spotlight light">
+		<h2 class="col-12">Recent Publications</h2>
+      
+		{% for related_thing in papers %}
+			<div class="col-lg-3">{% include "defaults/_related_item.html" %}</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+
+{% endblock %}

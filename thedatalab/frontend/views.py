@@ -59,7 +59,7 @@ def show_thing(request, slug, thing_type=None):
             # sort them, most recent first
             context['topics'][topic] = sorted(
                 context['topics'][topic],
-                key=lambda x: date.today() - (x.published_at or date.today()))[:3]
+                key=lambda x: date.today() - (x.published_at or date.today()))
         context['topics'] = clean_klasses(context['topics'], thing)
         context['topics'] = dict(context['topics'])
         other_things_of_same_type = annotate_things(thing_type.objects.exclude(pk=slug))
@@ -162,11 +162,24 @@ def project_view(request, slug):
     papers = models.Paper.objects.all()[:4]
     project = request.page.project
     
-    #print(project.topics.filter())
-    
     papers = models.Paper.objects.order_by('-published_at').filter(topics__in=project.topics.all())
     blog_posts = blog_posts.filter(topics__in=project.topics.all())
     
-    #print('topics:', project.topics.all())
+    return render(request, "project.html", {
+        'project':project,
+        'blog_posts':blog_posts[:4], 
+        'papers':papers, 
+        })
+
+@page_resolve(strict=False)
+def topic_view(request, slug):
+    topic = get_object_or_404(models.Topic.objects, topic_tag=slug)
     
-    return render(request, "project.html", {'blog_posts':blog_posts[:4], 'papers':papers, 'project':project})
+    blog_posts = models.Blog.objects.filter(topics=topic.topic_tag)[:4]
+    papers = models.Paper.objects.filter(topics=topic.topic_tag)[:4]
+    
+    return render(request, "topic.html", {
+        'topic':topic, 
+        'blog_posts':blog_posts[:4], 
+        'papers':papers
+        })

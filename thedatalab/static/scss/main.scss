@@ -52,6 +52,11 @@ body {
         color: #a0a0a0;
         font-size: 12px;
     }
+    
+    .logos { 
+        
+        img { margin: 0 20px 20px 0; }
+    }
 }
 
 /* Typography */
@@ -243,7 +248,7 @@ ul.top-menu {
 
 .project-intro {
     background: #eeeeee;
-    padding: 30px;
+    padding: 30px 20px;
     margin-bottom: 30px; 
     
     .image { 
@@ -266,10 +271,13 @@ ul.top-menu {
 }
 
 .card.related-thing {
+    border: none; 
+    
+    
     .card-img-top { border-radius: 0; }
-    a { text-decoration: none; }
+    a { text-decoration: none; display: flex; flex-direction: column; }
     h5.card-title { font-size: 18px; line-height: 25px; font-weight: 400; }
-    .card-body { background: #0E6FAB; color: #ffffff; height: 100%; }
+    .card-body { background: #eeeeee; color: #282828; border-bottom: 5px solid #ffffff; flex: 1 0 auto; }
     
     a:nth-child(2n) { flex: 1 0 auto; }
 }
@@ -357,6 +365,7 @@ ul.links {
 
     &.light {
         background: #eeeeee;
+        .card-body { background: #ffffff; }
     }
 
     &.dark { 
@@ -377,9 +386,9 @@ body.theme-green {
     a { color: $green; }
     .info-left .icon,
     .page-header .page-header-inner-right ul.social-links .icon { fill: $green !important; }
-    .card.related-thing .card-body { background: $green; }
+    .card.related-thing .card-body { border-color: $green; }
 }
-.card.related-thing.theme-green .card-body { background: $green; }
+.card.related-thing.theme-green .card-body { border-color: $green; }
 
 body.theme-orange {
     .page-header,
@@ -388,9 +397,9 @@ body.theme-orange {
     a { color: $orange; }
     .info-left .icon,
     .page-header .page-header-inner-right ul.social-links .icon { fill: $orange !important; }
-    .card.related-thing .card-body { background: $orange; }
+    .card.related-thing .card-body { border-color: $orange; }
 }
-.card.related-thing.theme-orange .card-body { background: $orange; }
+.card.related-thing.theme-orange .card-body { border-color: $orange; }
 
 
 /* Carousel */
@@ -402,7 +411,6 @@ body.theme-orange {
     
     .slick-slide {
         height: auto;
-        background: #0E6FAB;
     }
     
     .slick-track {
@@ -429,8 +437,19 @@ body.theme-orange {
     .slick-next { left: auto; right: -25px; padding: 0 10px 0 15px;  }
     
     .slick-prev img { width: 100%; }
-    .card { margin-left: 8px; margin-right: 8px; }
+    .card { margin-left: 8px; margin-right: 8px; display: flex; }
 }
+
+section.related {
+    .view-all {
+        text-align: right;
+        padding: 20px 0;
+        font-weight: 500;
+        font-size: 20px;
+    }
+}
+
+
 
 /* Animated mobile menu button */
 

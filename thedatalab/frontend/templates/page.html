@@ -6,7 +6,7 @@
 		<div class="col page-header">
 			<div class="page-header-inner-left">
 				{% page_breadcrumbs request.page %}
-				<h1>{{ request.page.menu_title }}</h1>
+				<h1>{% block header_title %}{{ request.page.menu_title }}{% endblock %}</h1>
 			</div>
 			<div class="page-header-inner-right">
 				<ul class="social-links">

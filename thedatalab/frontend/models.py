@@ -19,7 +19,7 @@ class TopicTags(tagulous.models.TagTreeModel):
         return self.topic_set.first()
         
     def get_absolute_url(self):
-        return "asdf"
+        return "/topics/%s/"%self.pathslug()
 
     class TagMeta:
         # Tag options
@@ -54,6 +54,10 @@ class BaseThing(models.Model):
     @classmethod
     def model_name(cls):
         return cls.__name__.lower()
+        
+    @classmethod
+    def plural_name(cls):
+        return cls.__name__ + 's'
 
     @classmethod
     def include_name(cls, part):
@@ -191,7 +195,7 @@ class Paper(ThingWithTopics, ExternalThing):
     abstract = MarkdownxField(blank=True)
     #topics = TagField(blank=True, to=TopicTags)
     
-    citation = models.CharField(max_length=200)
+    citation = models.CharField(max_length=2000)
 
     def get_colour_scheme(self):
         if hasattr(self, 'colour_scheme'):

@@ -59,6 +59,7 @@ urlpatterns = [
     path('papers/', views.paper_index, name='paper_index'),
     
     path('projects/<slug:slug>/', views.project_view, name='project_view'),
+    path('topics/<slug:slug>/', views.topic_view, name='topic_index'),
     
     path('', views.home_view, name='home'),
 
