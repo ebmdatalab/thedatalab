@@ -1,5 +1,7 @@
 {% extends '_base.html' %}
 
+{% block body_class %}theme-{{ thing.get_colour_scheme }}{% endblock %}
+
 {% block main %}
     <div class="row">
         <div class="col page-header">

@@ -1,6 +1,8 @@
 {% extends '_base.html' %}
 {% load thedatalab_extras thedatalab_menu %}
 
+{% block body_class %}theme-{{ request.page.colour_scheme }}{% endblock %}
+
 {% block main %}
 	<div class="row">
 		<div class="col page-header">
@@ -26,8 +28,8 @@
 		{% if request.page.introduction %}
 		<div class="row project-intro">
 			{% if request.page.image %}
-			<a href="{{ project.overlay_url }}" target="_blank" class="col-sm-4">
-				<div class="image" style="background-image: url('{{ project.image.url }}');">
+			<a href="{{ request.page.overlay_url }}" target="_blank" class="col-sm-4">
+				<div class="image" style="background-image: url('{{ request.page.image.url }}');">
 					<div class="caption">{{ request.page.overlay_text }}</div>
 				</div>
 			</a>

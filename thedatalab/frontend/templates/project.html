@@ -1,7 +1,6 @@
 {% extends 'page.html' %}
 {% load thedatalab_extras thedatalab_menu imagefit %}
 
-{% block body_class %}theme-{{ request.page.colour_scheme }}{% endblock %}
 {% block opengraph_image %}{% if project.image %}<meta property="og:image" content="https://{{ request.get_host }}{{ project.image.url }}" />{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 

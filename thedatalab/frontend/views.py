@@ -18,7 +18,7 @@ def clean_klasses(klasses_dict, exclude_thing):
     return cleaned_klasses
 
 def annotate_things(queryset):
-    return queryset.annotate(colour_scheme=Max('topics__pages__project__colour_scheme'))    
+    return queryset.annotate(colour_scheme=Max('topics__pages__project__colour_scheme'))
 
 
 def show_thing(request, slug, thing_type=None):

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.db.models import Max
 from django.template.defaultfilters import slugify
 from django.template.loader import select_template
 
@@ -200,7 +201,7 @@ class Paper(ThingWithTopics, ExternalThing):
     def get_colour_scheme(self):
         if hasattr(self, 'colour_scheme'):
             return self.colour_scheme
-        return "unknown"
+        return self.topics.all().aggregate(colour_scheme=Max('pages__project__colour_scheme'))['colour_scheme']
 
 class Tool(ThingWithTopics, ExternalThing):
     description = models.CharField(max_length=250, blank=True, help_text="20 words max.")
