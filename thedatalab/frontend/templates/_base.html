@@ -13,6 +13,11 @@
     {% compress css %}
     <link rel="stylesheet" type="text/x-scss" href="/static/scss/main.scss" />
     {% endcompress %}
+    
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="EBM Datalab" />
+    {% block opengraph_image %}{% endblock %}
+    {% block opengraph_title %}{% if request.page %}<meta property="og:title" content="{% if request.page.meta_title %}{{ request.page.meta_title }}{% else %}{{ request.page.menu_title }} | EBM Datalab{% endif %}" />{% endif %}{% endblock %}
 
     <title>TheDataLab</title>
   </head>
@@ -60,12 +65,17 @@
 		    </div>
 		    <div class="col-sm-4">
 			<h2>Follow us</h2>
-			<p>social links</p>
+			<ul>
+			    <li><a href="https://twitter.com/EBMDataLab" target="_new">@EBMDataLab</a></li>
+			    <li><a href="https://twitter.com/openprescribing" target="_new">@openprescribing</a></li>
+			    <li><a href="https://twitter.com/TrialsTracker" target="_new">@TrialsTracker</a></li>
+			    <li><a href="https://twitter.com/FDAAATracker" target="_new">@FDAAATracker</a></li>
+			</ul>
 		    </div>
 		    <div class="col-sm-4">
 			<h2>Information</h2>
 			<ul>
-			    <li><a href="">Funding</a></li>
+			    <li><a href="/about-us/funding/">Funding</a></li>
 			</ul>
 		    </div>
 		</div>

@@ -23,14 +23,29 @@
 	</div>
 
 	{% block body %}
-	<div class="row">
-		<div class="text col-sm-9">
-			{{ request.page.body|show_markdown|safe }}
+		{% if request.page.introduction %}
+		<div class="row project-intro">
+			{% if request.page.image %}
+			<a href="{{ project.overlay_url }}" target="_blank" class="col-sm-4">
+				<div class="image" style="background-image: url('{{ project.image.url }}');">
+					<div class="caption">{{ request.page.overlay_text }}</div>
+				</div>
+			</a>
+			{% endif %}
+			<div class="col-sm-8 text">
+				{{ request.page.introduction|show_markdown|safe }}
+			</div>
 		</div>
-		<div class="col-sm-3">
-			
+		{% endif %}
+	
+		<div class="row">
+			<div class="text col-sm-9">
+				{{ request.page.body|show_markdown|safe }}
+			</div>
+			<div class="col-sm-3">
+				
+			</div>
 		</div>
-	</div>
 	{% endblock %}
 	
 {% endblock %}

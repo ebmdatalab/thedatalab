@@ -220,6 +220,12 @@ class Page(MPTTModel):
     show_in_menu = models.BooleanField(default=False)
 
     meta_title = models.CharField(max_length=150, blank=True)
+    
+    image = models.ImageField(blank=True, null=True)
+    overlay_text = models.CharField(max_length=150, blank=True)
+    overlay_url = models.URLField(max_length=200, blank=True)
+    introduction = MarkdownxField(blank=True)
+    
     body = MarkdownxField(blank=True, null=True)
     colour_scheme = models.CharField(max_length=150, blank=True, choices=[['', ''], ['green', 'Green'], ['orange', 'Orange']])
 
@@ -239,10 +245,11 @@ class Page(MPTTModel):
         return "[%s] %s"%(self.url, self.menu_title)
 
 class Project(Page):
-    image = models.ImageField(blank=True, null=True)
-    overlay_text = models.CharField(max_length=150, blank=True)
-    overlay_url = models.URLField(max_length=200, blank=True)
-    introduction = MarkdownxField(blank=True)
+    pass
+    #image = models.ImageField(blank=True, null=True)
+    #overlay_text = models.CharField(max_length=150, blank=True)
+    #overlay_url = models.URLField(max_length=200, blank=True)
+    #introduction = MarkdownxField(blank=True)
 
 class TeamMember(models.Model):
     class Meta:

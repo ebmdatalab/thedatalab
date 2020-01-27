@@ -6,7 +6,7 @@
   {{ block.super }}
 
     <div class="row">
-        <div class="col-9 blog-preview-list">
+        <div class="col-12 blog-preview-list">
             {% for post in blog_posts %}
             <div class="row blog-preview">
                 <h2 class="col-12"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
