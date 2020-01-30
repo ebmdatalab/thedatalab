@@ -9,7 +9,7 @@
       <h2 class="col-12">Spotlight</h2>
       
       {% for related_thing in spotlight_items %}
-          <div class="col-lg-3">{% include "defaults/_related_item.html" %}</div>
+          <div class="col-xl-3 col-lg-4 col-md-6">{% include "defaults/_related_item.html" %}</div>
       {% endfor %}
   </div>
 
@@ -17,7 +17,7 @@
         <div class="row spotlight">
             <h2 class="col-12">{{ row.title }}</h2>
             {% for related_thing in row.items %}
-                <div class="col-lg-3">{% include "defaults/_related_item.html" %}</div>
+                <div class="col-xl-3 col-lg-4 col-md-6">{% include "defaults/_related_item.html" %}</div>
             {% endfor %}
         </div>
     {% endfor %}

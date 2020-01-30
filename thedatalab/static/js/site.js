@@ -1,9 +1,30 @@
 $('.thing-carousel').slick({
-  infinite: true,
-  slidesToShow: 4,
-  slidesToScroll: 4,
-  prevArrow: '<button class="slick-prev slick-arrow"><img src="/static/images/arrow-left.svg" /></button>',
-  nextArrow: '<button class="slick-next slick-arrow"><img src="/static/images/arrow-right.svg" /></button>'
+    infinite: true,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    prevArrow: '<button class="slick-prev slick-arrow"><img src="/static/images/arrow-left.svg" /></button>',
+    nextArrow: '<button class="slick-next slick-arrow"><img src="/static/images/arrow-right.svg" /></button>',
+    responsive: [
+        {
+            breakpoint: 992,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+            }
+        },{
+            breakpoint: 800,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+            }
+        },{
+            breakpoint: 450,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+            }
+        }]
+            
 });
 
 $(document).ready(function() {

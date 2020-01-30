@@ -151,6 +151,8 @@ def paper_index(request):
             'title':p.menu_title,
             'items':papers.filter(topics__pages__project=p)
         }
+        if not row['items'].count():
+            continue
         d['project_rows'].append(row)
     
     return render(request, "papers.html", d)

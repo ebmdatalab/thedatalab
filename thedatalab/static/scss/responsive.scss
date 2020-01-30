@@ -18,14 +18,15 @@
     }
     
     .header > .row > .logo {
-        padding: 60px 20px 20px;
+        padding: 20px 20px 20px;
+        border-top: 50px solid #0E2050;
     }
     
     ul.top-menu li.home .icon { display: none }
     ul.top-menu li.home a:before { content: "Home"; display: inline; }
         
     .header > .row > .col-3, .header > .row > .col-9 {
-        background: #0E2050;
+        background: #ffffff;
         max-width: 100%;
     }
     
@@ -54,4 +55,8 @@
         }
     }
     
+    .page-header,
+    .info-left { margin: 10px; }
+    
+    /*.footer .col-sm-4 { margin-bottom: 30px; }*/
 }

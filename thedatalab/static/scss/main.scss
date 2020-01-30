@@ -13,7 +13,7 @@ body {
 
 .header {
     margin-top: 20px; 
-    .logo { padding-left: 0; }
+    .logo { padding-left: 0; white-space: nowrap; }
 }
 
 .ebm-logo {
@@ -100,7 +100,9 @@ h4 {
 
 a { color: #0e6FAB; }
 
-ul { list-style: none; margin: 0; padding: 0; }
+ul { list-style: none; margin: 0 0 25px; padding: 0; }
+
+p { margin: 0 0 25px; }
 
 p + h3, blockquote + h3 { margin-top: 40px; }
 p + h4 { margin-top: 15px; }
@@ -257,7 +259,7 @@ ul.top-menu {
         position: relative; 
         
         &:before { content: ""; position: absolute; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.1); }
-        .caption { position: absolute; background: #ffffff; z-index: 2; bottom: 10px; right: 10px; padding: 10px; max-width: calc(100% - 20px); font-size: 20px; font-weight: 500; }
+        .caption { position: absolute; background: #ffffff; z-index: 2; bottom: 10px; right: 10px; padding: 10px; max-width: calc(100% - 20px); font-size: 20px; font-weight: 400; }
     }
     
     .text { 
@@ -277,7 +279,7 @@ ul.top-menu {
     .card-img-top { border-radius: 0; }
     a { text-decoration: none; display: flex; flex-direction: column; }
     h5.card-title { font-size: 18px; line-height: 25px; font-weight: 400; }
-    .card-body { background: #eeeeee; color: #282828; border-bottom: 5px solid #ffffff; flex: 1 0 auto; }
+    .card-body { background: #eeeeee; color: #282828; border-bottom: 5px solid #0e6FAB; flex: 1 0 auto; }
     
     a:nth-child(2n) { flex: 1 0 auto; }
 }
@@ -379,27 +381,26 @@ ul.links {
 
 /* Colourise things */
 
-body.theme-green {
-    .page-header,
-    .info-left { border-left-color: $green; }
-    h1 { color: $green; }
-    a { color: $green; }
-    .info-left .icon,
-    .page-header .page-header-inner-right ul.social-links .icon { fill: $green !important; }
-    .card.related-thing .card-body { border-color: $green; }
-}
-.card.related-thing.theme-green .card-body { border-color: $green; }
+$colours: ("green": $green, "orange": $orange);
 
-body.theme-orange {
-    .page-header,
-    .info-left { border-left-color: $orange; }
-    h1 { color: $orange; }
-    a { color: $orange; }
-    .info-left .icon,
-    .page-header .page-header-inner-right ul.social-links .icon { fill: $orange !important; }
-    .card.related-thing .card-body { border-color: $orange; }
+@each $name, $colour in $colours {
+    body.theme-#{$name} {
+        .page-header,
+        .info-left { border-left-color: $colour; }
+        h1 { color: $colour; }
+        .page-header a,
+        .main-content a,
+        .project-intro a,
+        .text a,
+        .info-left a { color: $colour; }
+        .info-left .icon,
+        .page-header .page-header-inner-right ul.social-links .icon { fill: $colour !important; }
+        .card.related-thing .card-body { border-color: $colour; }
+    }
+    .card.related-thing.theme-#{$name} .card-body { border-color: $colour; }
 }
-.card.related-thing.theme-orange .card-body { border-color: $orange; }
+
+
 
 
 /* Carousel */
@@ -444,8 +445,7 @@ section.related {
     .view-all {
         text-align: right;
         padding: 20px 0;
-        font-weight: 500;
-        font-size: 20px;
+        font-size: 18px;
     }
 }
 

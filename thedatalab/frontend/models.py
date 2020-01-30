@@ -147,6 +147,7 @@ class Topic(BaseThing):
 
 class Blog(ThingWithTopics):
     body = MarkdownxField(blank=True)
+    
     #topics = TagField(blank=True, to=TopicTags)
     
     def get_authors(self):

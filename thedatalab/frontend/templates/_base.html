@@ -17,9 +17,9 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="EBM Datalab" />
     {% block opengraph_image %}{% endblock %}
-    {% block opengraph_title %}{% if request.page %}<meta property="og:title" content="{% if request.page.meta_title %}{{ request.page.meta_title }}{% else %}{{ request.page.menu_title }} | EBM Datalab{% endif %}" />{% endif %}{% endblock %}
+    {% block opengraph_title %}{% if request.page %}<meta property="og:title" content="{% if request.page.meta_title %}{{ request.page.meta_title }}{% else %}{{ request.page.menu_title }} | DataLab{% endif %}" />{% endif %}{% endblock %}
 
-    <title>TheDataLab</title>
+    <title>{% block title %}{% if request.page %}{% if request.page.meta_title %}{{ request.page.meta_title }}{% else %}{{ request.page.menu_title }} | DataLab{% endif %}{% else %}DataLab{% endif %}{% endblock %}</title>
   </head>
 
   <body class="{% block body_class %}{% endblock %}">
@@ -59,11 +59,11 @@
         <div class="footer">
             <div class="container">
                 <div class="row">
-		    <div class="col-sm-4">
+		    <div class="col-6 col-sm-4">
 			<h2>EBM DataLab</h2>
 			<p>Radcliffe Primary Care Building<br />Radcliffe Observatory Quarter<br />Woodstock Rd<br />Oxford<br />OX2 6GG</p>
 		    </div>
-		    <div class="col-sm-4">
+		    <div class="col-6 col-sm-4">
 			<h2>Follow us</h2>
 			<ul>
 			    <li><a href="https://twitter.com/EBMDataLab" target="_new">@EBMDataLab</a></li>
@@ -72,7 +72,7 @@
 			    <li><a href="https://twitter.com/FDAAATracker" target="_new">@FDAAATracker</a></li>
 			</ul>
 		    </div>
-		    <div class="col-sm-4">
+		    <div class="col-6 col-sm-4">
 			<h2>Information</h2>
 			<ul>
 			    <li><a href="/about-us/funding/">Funding</a></li>

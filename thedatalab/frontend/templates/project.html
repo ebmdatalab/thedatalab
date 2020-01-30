@@ -10,13 +10,13 @@
 	{% if project.introduction %}
 	<div class="row project-intro">
 		{% if project.image %}
-		<a href="{{ project.overlay_url }}" target="_blank" class="col-sm-4">
+		<a href="{{ project.overlay_url }}" target="_blank" class="col-md-4">
 			<div class="image" style="background-image: url('{{ project.image.url }}');">
 				<div class="caption">{{ project.overlay_text }}</div>
 			</div>
 		</a>
 		{% endif %}
-		<div class="col-sm-8 text">
+		<div class="col-md-8 text">
 			{{ project.introduction|show_markdown|safe }}
 		</div>
 	</div>
@@ -27,7 +27,7 @@
 		<h2 class="col-12">Latest News</h2>
       
 		{% for related_thing in blog_posts %}
-			<div class="col-lg-3">{% include "defaults/_related_item.html" %}</div>
+			<div class="col-xl-3 col-lg-4 col-md-6">{% include "defaults/_related_item.html" %}</div>
 		{% endfor %}
 	</div>
 	{% endif %}
@@ -37,7 +37,7 @@
 		<h2 class="col-12">Recent Publications</h2>
       
 		{% for related_thing in papers %}
-			<div class="col-lg-3">{% include "defaults/_related_item.html" %}</div>
+			<div class="col-xl-3 col-lg-4 col-md-6">{% include "defaults/_related_item.html" %}</div>
 		{% endfor %}
 	</div>
 	{% endif %}
