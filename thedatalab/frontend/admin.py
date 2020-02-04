@@ -26,3 +26,16 @@ class PageAdmin(DjangoMpttAdmin, MarkdownxModelAdmin):
 @admin.register(models.Project)
 class ProjectAdmin(MarkdownxModelAdmin):
     pass
+
+class SeriesThingInline(admin.TabularInline):
+    model = models.SeriesThing
+    fields = ['thing', 'ordering']
+    extra = 1
+
+@admin.register(models.Series)
+class SeriesAdmin(MarkdownxModelAdmin):
+    inlines = [
+	SeriesThingInline
+    ]
+    pass
+

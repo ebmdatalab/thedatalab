@@ -24,6 +24,16 @@
         </div>
     </div>
 
+    {% for s in thing.serieses.all %}{% with pos=s.get_position %}
+        <div class="row">
+            <div class="series-bar col-12">
+                Part {{ pos.index }} of {{ pos.count }} in a series on <strong>{{ s.series.title }}</strong>
+                {% if pos.next %}
+                {% endif %}
+            </div>
+        </div>
+    {% endwith %}{% endfor %}
+
     <div class="row">
         <div class="info-left col-md-4 col-lg-3 col-xl-3 mr-lg-5">
             <ul>

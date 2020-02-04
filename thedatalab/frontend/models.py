@@ -277,3 +277,37 @@ class TeamMember(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         return super(TeamMember, self).save(*args, **kwargs)
+
+class Series(models.Model):
+    title = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.title
+    
+class SeriesThing(models.Model):
+    class Meta:
+        ordering = ['ordering']
+    
+    series = models.ForeignKey(Series, on_delete=models.CASCADE, related_name="things")
+    thing = models.ForeignKey(ThingWithTopics, on_delete=models.CASCADE, related_name="serieses")
+    
+    ordering = models.IntegerField(default=0)
+    
+    def get_position(self):
+        ids = list(self.series.things.values_list('id', flat=True))
+
+        pos = {
+            'index':ids.index(self.id)+1,
+            'count':len(ids),
+        }
+        
+        if pos['index']>1:
+            pos['prev'] = SeriesThing.objects.get(pk=ids[pos['index']-2]).thing
+            
+            
+            
+        if pos['index']<len(ids):
+            pos['next'] = SeriesThing.objects.get(pk=ids[pos['index']]).thing
+            
+        return pos
