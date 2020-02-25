@@ -18,7 +18,6 @@ django-mptt-admin==0.7.2
 django-mptt==0.10.0       # via django-mptt-admin
 django-tagulous==0.14.1
 django==2.2.6
-gunicorn==19.9.0
 libsass==0.19.3           # via django-libsass
 markdown==3.1.1           # via django-markdownx
 pillow==6.2.1
@@ -28,6 +27,7 @@ rcssmin==1.0.6            # via django-compressor
 rjsmin==1.1.0             # via django-compressor
 six==1.12.0               # via django-appconf, django-extensions, django-mptt-admin, libsass
 sqlparse==0.3.0           # via django
+uwsgi==2.0.18
 whitenoise==5.0.1         # via django-heroku
 
 # The following packages are considered to be unsafe in a requirements file:

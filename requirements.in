@@ -7,7 +7,8 @@ Pillow
 django-extensions
 django-markdownx
 psycopg2
-gunicorn
+#gunicorn
 csscompressor
 django-mptt-admin
 django-heroku
+uwsgi
