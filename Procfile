@@ -1,6 +1,5 @@
 release: python3 manage.py migrate && python3 manage.py collectstatic --noinput && python3 manage.py compress
-web: uwsgi --hook-master-start unix_signal:15 gracefully_kill_them_all \
-  --http-socket 0.0.0.0:8000 \
+web: uwsgi --http-socket 0.0.0.0:8000 \
   --workers 3 \
   --master \
   --enable-threads \
