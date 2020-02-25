@@ -5,9 +5,11 @@
 #    pip-compile --output-file=requirements.txt requirements.in
 #
 csscompressor==0.9.5
+dj-database-url==0.5.0    # via django-heroku
 django-appconf==1.0.3     # via django-compressor, django-imagefit
 django-compressor==2.3
 django-extensions==2.2.5
+django-heroku==0.3.1
 django-imagefit==0.6.2
 django-js-asset==1.2.2    # via django-mptt
 django-libsass==0.7
@@ -26,7 +28,8 @@ rcssmin==1.0.6            # via django-compressor
 rjsmin==1.1.0             # via django-compressor
 six==1.12.0               # via django-appconf, django-extensions, django-mptt-admin, libsass
 sqlparse==0.3.0           # via django
+whitenoise==5.0.1         # via django-heroku
 
 # The following packages are considered to be unsafe in a requirements file:
-# pip==19.3.1               # via django-markdownx
-# setuptools==41.6.0        # via markdown
+# pip==20.0.2               # via django-markdownx
+# setuptools==45.2.0        # via markdown
