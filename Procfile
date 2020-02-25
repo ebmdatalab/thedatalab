@@ -1,1 +1,1 @@
-web: gunicorn thedatalab.wsgi
+web: gunicorn --bind 0.0.0.0:8000 thedatalab.wsgi
