@@ -3,6 +3,12 @@ from django.http import Http404
 from . import models
 
 def page_resolve(*args, **kwargs):
+    """
+    Decorator to find a CMS page corresponding to the current URL and add it to the request object.
+    
+    If `strict` is `True` only match the exact URL, if `False` then find the the page matching the longest prefix of the URL.
+    
+    """
     strict = kwargs.get("strict", True)
     
     def arged_func(func):
@@ -27,7 +33,6 @@ def page_resolve(*args, **kwargs):
                 exact = False
                 
                 path = path.rsplit("/", 1)[0]
-                print('searching path', path)
                 page = find_page(path)
 
             if page is None:
