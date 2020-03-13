@@ -109,14 +109,13 @@ p + h4 { margin-top: 15px; }
 
 /* Menu */
 
-ul.top-menu {
-    margin-top: 90px;
+ul.menu {
     display: flex; 
     
     li { 
         flex: 1 0 auto;
         position: relative;
-        padding-bottom: 16px;
+        padding-bottom: 12px;
         
         a { 
             color: #0e2050; 
@@ -131,7 +130,7 @@ ul.top-menu {
             margin-left: -20px;
             min-width: 200px;
             z-index: 10;
-            margin-top: 12px;
+            margin-top: 6px;
             background: #eeeeee;
             padding: 10px 0 20px;
                    
@@ -150,6 +149,19 @@ ul.top-menu {
         .icon { fill: #0e2050; width: 18px;}
     }
 }
+
+ul.top-menu {
+    margin: 50px 0 0;
+}
+
+ul.secondary-menu {
+    
+    li a {
+        color: #0e6fab;
+        padding: 3px 6px;
+    }
+}
+
 
 
 /* Page components */

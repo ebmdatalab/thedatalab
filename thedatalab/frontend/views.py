@@ -97,8 +97,6 @@ def thing_index(request, thing_type=None):
     papers = annotate_things(papers)
     
     context['spotlight_items'] = papers
-    for p in papers:
-       print(p.colour_scheme)
     
     return render(request, 'thing_index.html', context=context)
 
@@ -132,7 +130,6 @@ def blog_index(request):
 
 @page_resolve(strict=False)
 def blog_post_view(request, year, month, pk, slug):
-    print(year, month)
     post = get_object_or_404(models.Blog.objects, published_at__year=year, published_at__month=month, pk=pk)
     return render(request, "thing.html", {'thing':post})
 

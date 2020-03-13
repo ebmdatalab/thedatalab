@@ -11,24 +11,29 @@ def render_menu(context):
     root = Page.objects.filter(url='', level=0).first()
     if not root: return []
     
-    ret = []
-    cur = None
-    
-    for child in root.get_descendants(include_self=False).filter(show_in_menu=True):
+    def generate_tree(queryset):
+        ret = []
         cur = None
-        if len(ret) and child.url.startswith(ret[-1]['url']):
-            cur = ret[-1]
-            while len(cur['children']) and child.url.startswith(cur['children'][-1]['url']):
-                cur = cur['children'][-1]
+        for child in queryset:
+            cur = None
+            if len(ret) and child.url.startswith(ret[-1]['url']):
+                cur = ret[-1]
+                while len(cur['children']) and child.url.startswith(cur['children'][-1]['url']):
+                    cur = cur['children'][-1]
 
-        (cur['children'] if cur else ret).append({
-            #'node':child,
-            'title':child.menu_title,
-            'url':child.url,
-            'children':[]
-        })
-    
-    return {'menu_items':ret}
+            (cur['children'] if cur else ret).append({
+                #'node':child,
+                'title':child.menu_title,
+                'url':child.url,
+                'children':[]
+            })
+        return ret
+        
+    return {
+        'home_menu_items':generate_tree(root.get_descendants(include_self=False).filter(show_in_home_menu=True)),
+        'primary_menu_items':generate_tree(root.get_descendants(include_self=False).filter(show_in_primary_menu=True)),
+        'secondary_menu_items':generate_tree(root.get_descendants(include_self=False).filter(show_in_secondary_menu=True)),
+            }
 
 @register.inclusion_tag("_breadcrumbs.html")
 def page_breadcrumbs(page):

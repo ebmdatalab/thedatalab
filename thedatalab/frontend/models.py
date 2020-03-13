@@ -219,7 +219,10 @@ class Page(MPTTModel):
     url = models.CharField(max_length=100, blank=True, editable=False)
     
     menu_title = models.CharField(max_length=150, blank=True)
-    show_in_menu = models.BooleanField(default=False)
+    show_in_home_menu = models.BooleanField(default=False)
+    show_in_primary_menu = models.BooleanField(default=False)
+    show_in_secondary_menu = models.BooleanField(default=False)
+    show_in_footer_menu = models.BooleanField(default=False)
 
     meta_title = models.CharField(max_length=150, blank=True)
     
@@ -227,6 +230,8 @@ class Page(MPTTModel):
     overlay_text = models.CharField(max_length=150, blank=True)
     overlay_url = models.URLField(max_length=200, blank=True)
     introduction = MarkdownxField(blank=True)
+    
+    #page_type = models.CharField(max_length=150, blank=True, choices=[['', 'Static page'], ['papers', 'Papers'], ['blog', 'Blog']])
     
     body = MarkdownxField(blank=True, null=True)
     colour_scheme = models.CharField(max_length=150, blank=True, choices=[['', ''], ['green', 'Green'], ['orange', 'Orange']])

@@ -23,9 +23,9 @@ class TeamMemberAdmin(MarkdownxModelAdmin):
 class PageAdmin(DjangoMpttAdmin, MarkdownxModelAdmin):
 	pass
 
-@admin.register(models.Project)
-class ProjectAdmin(MarkdownxModelAdmin):
-    pass
+#@admin.register(models.Project)
+#class ProjectAdmin(MarkdownxModelAdmin):
+#    pass
 
 class SeriesThingInline(admin.TabularInline):
     model = models.SeriesThing
