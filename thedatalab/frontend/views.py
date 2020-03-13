@@ -105,8 +105,22 @@ def home_view(request):
     return render(request, "home.html", {})
 
 @page_resolve(strict=True)
-def page_index(request, path):
-    return render(request, "page.html", {})
+def page_view(request, path):
+    
+    d = {}
+    topics = request.page.topics.all()
+    
+    if request.page.page_type == "papers":
+        d['papers'] = models.Paper.objects.all()
+        if len(topics):
+            d['papers'] = d['papers'].filter(topics__in=topics)
+
+    if request.page.page_type == "blog":
+        d['blog_posts'] = models.Blog.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')
+        if len(topics):
+            d['blog_posts'] = d['blog_posts'].filter(topics__in=topics)
+    
+    return render(request, "page.html", d)
 
 @page_resolve(strict=True)
 def team_index(request):

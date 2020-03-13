@@ -25,6 +25,7 @@ def render_menu(context):
                 #'node':child,
                 'title':child.menu_title,
                 'url':child.url,
+                'colour_scheme':child.colour_scheme,
                 'children':[]
             })
         return ret

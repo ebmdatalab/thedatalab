@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-{% load thedatalab_extras thedatalab_menu %}
+{% load thedatalab_extras thedatalab_menu imagefit %}
 
 {% block body_class %}theme-{{ request.page.colour_scheme }}{% endblock %}
 
@@ -49,5 +49,32 @@
 			</div>
 		</div>
 	{% endblock %}
+	
+	{% if papers %}
+		<div class="row spotlight">
+		  <h2 class="col-12">Spotlight</h2>
+		  
+		  {% for related_thing in papers %}
+			  <div class="col-xl-3 col-lg-4 col-md-6">{% include "defaults/_related_item.html" %}</div>
+		  {% endfor %}
+	  </div>
+	{% endif %}
+	
+	{% if blog_posts %}
+		<div class="row">
+			<div class="col-12 blog-preview-list">
+				{% for post in blog_posts %}
+				<div class="row blog-preview">
+					<h2 class="col-12"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+					<div class="col-sm-auto"><img src="{{ post.image.name|resize:'270x160c'}}"></div>
+					<div class="col">
+						<p class="author">{{ post.published_at|date:"j F Y" }} {% with authors=post.get_authors %}{% if authors %} &nbsp;|&nbsp; {{ authors }}{% endif %}{% endwith %}</p>
+						{{ post.get_preview|show_markdown|safe }}
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
 	
 {% endblock %}

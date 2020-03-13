@@ -9,7 +9,7 @@
 		{% endif %}
 	</li>
 {% for item in primary_menu_items %}
-	<li {% if item.children %}class="has-children"{% endif %}><a href="{{ item.url }}/">{{ item.title }}</a>
+	<li {% if item.children %}class="has-children colour-{{ item.colour_scheme }}"{% endif %}><a href="{{ item.url }}/">{{ item.title }}</a>
 		{% if item.children %}<span>▼</span>
 		<ul>
 			{% for child in item.children %}
@@ -22,7 +22,7 @@
 </ul>
 <ul class="menu secondary-menu">
 {% for item in secondary_menu_items %}
-	<li {% if item.children %}class="has-children"{% endif %}><a href="{{ item.url }}/">{{ item.title }}</a>
+	<li {% if item.children %}class="has-children colour-{{ item.colour_scheme }}"{% endif %}><a href="{{ item.url }}/">{{ item.title }}</a>
 		{% if item.children %}<span>▼</span>
 		<ul>
 			{% for child in item.children %}
