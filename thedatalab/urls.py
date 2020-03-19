@@ -52,9 +52,9 @@ urlpatterns = [
     path('imagefit/', include('imagefit.urls')),
     path('markdownx/', include('markdownx.urls')),
     
-    path('about-us/team/', views.team_index, name='team_index'),
+    path('about-us/', views.team_index, name='team_index'),
     path('authors/<slug:slug>/', views.author_view, name='author_view'),
-    path('blog/', views.blog_index, name='blog_index'),
+    #path('blog/', views.blog_index, name='blog_index'),
     path('blog/<int:year>/<int:month>/<int:pk>/<slug:slug>/', views.blog_post_view),
     path('papers/', views.paper_index, name='paper_index'),
     

@@ -119,6 +119,10 @@ def page_view(request, path):
         d['blog_posts'] = models.Blog.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')
         if len(topics):
             d['blog_posts'] = d['blog_posts'].filter(topics__in=topics)
+        types = request.page.types.all()
+        print('types is', types)
+        if len(types):
+            d['blog_posts'] = d['blog_posts'].filter(type__in=types)
     
     return render(request, "page.html", d)
 

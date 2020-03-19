@@ -41,6 +41,11 @@ class TopicTags(tagulous.models.TagTreeModel):
                    "Science/Policy",
                    "Science/RCTs"]
 
+class Types(tagulous.models.TagModel):
+    class TagMeta:
+        # Tag options
+        initial = "blog-post, podcast"
+        force_lowercase = True
 
 class BaseThing(models.Model):
     title = models.CharField(max_length=200)
@@ -147,6 +152,7 @@ class Topic(BaseThing):
 
 class Blog(ThingWithTopics):
     body = MarkdownxField(blank=True)
+    type = TagField(blank=False, to=Types, help_text="eg: blog-post, podcast")
     
     #topics = TagField(blank=True, to=TopicTags)
     
@@ -237,6 +243,7 @@ class Page(MPTTModel):
     colour_scheme = models.CharField(max_length=150, blank=True, choices=[['', ''], ['green', 'Green'], ['orange', 'Orange']])
 
     topics = TagField(blank=True, to=TopicTags, related_name="pages")
+    types = TagField(blank=True, to=Types)
 
     def save(self, *args, **kwargs):
         if self.parent is None:
