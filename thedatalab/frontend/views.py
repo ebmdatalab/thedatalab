@@ -110,21 +110,27 @@ def page_view(request, path):
     d = {}
     topics = request.page.topics.all()
     
-    if request.page.page_type == "papers":
+    if request.page.page_type in ["papers", "topic"]:
         d['papers'] = models.Paper.objects.all()
         if len(topics):
             d['papers'] = d['papers'].filter(topics__in=topics)
 
-    if request.page.page_type == "blog":
+    if request.page.page_type in ["blog", "topic"]:
         d['blog_posts'] = models.Blog.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')
         if len(topics):
             d['blog_posts'] = d['blog_posts'].filter(topics__in=topics)
         types = request.page.types.all()
-        print('types is', types)
         if len(types):
             d['blog_posts'] = d['blog_posts'].filter(type__in=types)
     
+    if request.page.page_type == "topic":
+        d['blog_posts'] = d['blog_posts'][:4]
+        d['papers'] = d['papers'][:4]
+            
+        return render(request, "topic.html", d)
+
     return render(request, "page.html", d)
+    
 
 @page_resolve(strict=True)
 def team_index(request):

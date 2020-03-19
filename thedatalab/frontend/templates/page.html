@@ -24,21 +24,22 @@
 		</div>
 	</div>
 
-	{% block body %}
-		{% if request.page.introduction %}
-		<div class="row project-intro">
-			{% if request.page.image %}
-			<a href="{{ request.page.overlay_url }}" target="_blank" class="col-md-4">
-				<div class="image" style="background-image: url('{{ request.page.image.url }}');">
-					<div class="caption">{{ request.page.overlay_text }}</div>
-				</div>
-			</a>
-			{% endif %}
-			<div class="col-md-8 text">
-				{{ request.page.introduction|show_markdown|safe }}
+	{% if request.page.introduction %}
+	<div class="row project-intro">
+		{% if request.page.image %}
+		<a href="{{ request.page.overlay_url }}" target="_blank" class="col-md-4">
+			<div class="image" style="background-image: url('{{ request.page.image.url }}');">
+				<div class="caption">{{ request.page.overlay_text }}</div>
 			</div>
-		</div>
+		</a>
 		{% endif %}
+		<div class="col-md-8 text">
+			{{ request.page.introduction|show_markdown|safe }}
+		</div>
+	</div>
+	{% endif %}
+		
+	{% block body %}
 	
 		<div class="row">
 			<div class="text col-sm-9">
@@ -48,33 +49,33 @@
 				
 			</div>
 		</div>
-	{% endblock %}
-	
-	{% if papers %}
-		<div class="row spotlight">
-		  <h2 class="col-12">Spotlight</h2>
-		  
-		  {% for related_thing in papers %}
-			  <div class="col-xl-3 col-lg-4 col-md-6">{% include "defaults/_related_item.html" %}</div>
-		  {% endfor %}
-	  </div>
-	{% endif %}
-	
-	{% if blog_posts %}
-		<div class="row">
-			<div class="col-12 blog-preview-list">
-				{% for post in blog_posts %}
-				<div class="row blog-preview">
-					<h2 class="col-12"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-					<div class="col-sm-auto"><img src="{{ post.image.name|resize:'270x160c'}}"></div>
-					<div class="col">
-						<p class="author">{{ post.published_at|date:"j F Y" }} {% with authors=post.get_authors %}{% if authors %} &nbsp;|&nbsp; {{ authors }}{% endif %}{% endwith %}</p>
-						{{ post.get_preview|show_markdown|safe }}
+		
+		{% if papers %}
+			<div class="row spotlight">
+			  <h2 class="col-12">Spotlight</h2>
+			  
+			  {% for related_thing in papers %}
+				  <div class="col-xl-3 col-lg-4 col-md-6">{% include "defaults/_related_item.html" %}</div>
+			  {% endfor %}
+		  </div>
+		{% endif %}
+		
+		{% if blog_posts %}
+			<div class="row">
+				<div class="col-12 blog-preview-list">
+					{% for post in blog_posts %}
+					<div class="row blog-preview">
+						<h2 class="col-12"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+						<div class="col-sm-auto"><img src="{{ post.image.name|resize:'270x160c'}}"></div>
+						<div class="col">
+							<p class="author">{{ post.published_at|date:"j F Y" }} {% with authors=post.get_authors %}{% if authors %} &nbsp;|&nbsp; {{ authors }}{% endif %}{% endwith %}</p>
+							{{ post.get_preview|show_markdown|safe }}
+						</div>
 					</div>
+					{% endfor %}
 				</div>
-				{% endfor %}
 			</div>
-		</div>
-	{% endif %}
+		{% endif %}
+	{% endblock %}
 	
 {% endblock %}
