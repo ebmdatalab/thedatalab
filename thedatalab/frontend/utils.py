@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 
 from . import models
 
@@ -40,6 +40,9 @@ def page_resolve(*args, **kwargs):
             
             request.root = root
             request.page = page
+            
+            if page.redirect_to:
+                return HttpResponseRedirect(page.redirect_to)
             
             return func(request, *args, **kwargs)
         return inner_func

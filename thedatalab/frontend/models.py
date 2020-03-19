@@ -223,6 +223,7 @@ class Page(MPTTModel):
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     slug = models.SlugField(max_length=100, blank=True)
     url = models.CharField(max_length=100, blank=True, editable=False)
+    redirect_to = models.CharField(max_length=250, blank=True)
     
     menu_title = models.CharField(max_length=150, blank=True)
     show_in_home_menu = models.BooleanField(default=False)
