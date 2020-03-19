@@ -36,6 +36,23 @@ def render_menu(context):
         'secondary_menu_items':generate_tree(root.get_descendants(include_self=False).filter(show_in_secondary_menu=True)),
             }
 
+@register.inclusion_tag("_footer_menu.html", takes_context=True)
+def render_footer_menu(context):
+    root = Page.objects.filter(url='', level=0).first()
+    if not root: return []
+    
+    print(root.get_descendants(include_self=True).filter(show_in_footer_menu=True))
+    
+    return {
+        'footer_menu_items':[
+            {
+                'title':i.menu_title,
+                'url':i.url
+            } for i in root.get_descendants(include_self=True).filter(show_in_footer_menu=True)
+            ]
+    }
+
+
 @register.inclusion_tag("_breadcrumbs.html")
 def page_breadcrumbs(page):
     if not page or not hasattr(page, 'get_ancestors'): return {}
