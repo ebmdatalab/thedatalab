@@ -23,22 +23,5 @@ EXPOSE 8000
 LABEL io.sitereview.pre-run="./manage.py migrate"
 LABEL io.sitereview.pre-link="python3 -c \"import urllib.request; assert urllib.request.urlopen('http://localhost:8000/').code==200\""
 
-CMD ["uwsgi", \
-	"--hook-master-start", "unix_signal:15 gracefully_kill_them_all", \
-	"--http-socket", "0.0.0.0:8000", \
-	"--cheaper", "1", \
-	"--cheaper-algo", "backlog", \
-	"--workers", "8", \
-	"--master", \
-	"--enable-threads", \
-	"--threads", "12", \
-	"--offload-threads", "12", \
-	"--harakiri", "300", \
-	"--http-harakiri", "300", \
-	"--static-map", "/media=storage/media", \
-	"--static-map", "/=webroot", \
-	"--static-expires-uri", ".* 86400", \
-	"--static-gzip-all", \
-	"--module", "thedatalab.wsgi"]
-
-
+# This has to be one long line for dokku compatibility
+CMD ["uwsgi --hook-master-start unix_signal:15 gracefully_kill_them_all --http-socket 0.0.0.0:8000 --cheaper 1 --cheaper-algo backlog --workers 8 --master --enable-threads --threads 12 --offload-threads 12 --harakiri 300 --http-harakiri 300 --static-map /media=storage/media --static-map /=webroot --static-expires-uri .* 86400 --static-gzip-all --module thedatalab.wsgi"]
