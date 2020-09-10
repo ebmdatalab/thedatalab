@@ -23,6 +23,10 @@ local$ git remote add dokku dokku@dokku2.ebmdatalab.net:thedatalab
 local$ git push dokku master
 ```
 
+### Use of Dockerfile
+
+[While Dokku normally defaults to using Heroku buildpacks, you can also use \[a\] Dockerfile](http://dokku.viewdocs.io/dokku~v0.21.4/deployment/methods/dockerfiles/)
+
 ### Configure environment
 
 Dokku auto-generates `DATABASE_URL`, but the app expects `POSTGRES_*`
