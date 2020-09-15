@@ -16,10 +16,12 @@ DATABASES = {
 	}
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'localhost')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', '25'))
+# Use django-anymail through mailgun for sending emails
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+ANYMAIL = {
+    "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY", ''),
+    "MAILGUN_SENDER_DOMAIN": "thedatalab.org",
+}
 
 COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True

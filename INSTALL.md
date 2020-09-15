@@ -48,6 +48,7 @@ MAILGUN_API_KEY=abcde_1234
 
 ```bash
 dokku config:set thedatalab DJANGO_SETTINGS_MODULE=thedatalab.settings.production
+dokku config:set thedatalab MAILGUN_API_KEY=abcde_1234
 ```
 
 #### PostgreSQL
