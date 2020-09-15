@@ -106,6 +106,17 @@ $ dokku plugin:install https://github.com/dokku/dokku-redirect.git
 $ dokku redirect:set thedatalab thedatalab.org www.thedatalab.org
 ```
 
+## Nginx config - increase  max_upload_size
+
+Default is 1Mb, photos for blogs are often 5+Mb. See this method from [the dokku docs](http://dokku.viewdocs.io/dokku/configuration/nginx/#customizing-via-configuration-files-included-by-the-default-tem)
+
+```bash
+root@dokku$ mkdir /home/dokku/thedatalab/nginx.conf.d/
+root@dokku$ echo 'client_max_body_size 50m;' > /home/dokku/thedatalab/nginx.conf.d/upload.conf
+root@dokku$ chown -R dokku:dokku /home/dokku/thedatalab/nginx.conf.d/
+root@dokku$ service nginx reload
+```
+
 ## https
 
 TODO!
