@@ -40,8 +40,8 @@ POSTGRES_USER=ebmdatalab_production
 POSTGRES_PASSWORD=asdasd123
 POSTGRES_HOST=pgdbhost
 POSTGRES_PORT=5432
-EMAIL_HOST=1.2.3.4
 DJANGO_MEDIA_ROOT=/code/storage/media
+MAILGUN_API_KEY=abcde_1234
 ```
 
 #### Django
@@ -119,4 +119,7 @@ root@dokku$ service nginx reload
 
 ## https
 
-TODO!
+* Currently using CloudFlare "flexible"
+  * site available https, encrypted between browser & CloudFlare
+* create CloudFlare page rule
+  * `www.thedatalab.org/*` -> `Always Use HTTPS`
