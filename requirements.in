@@ -1,14 +1,18 @@
+# To add or remove dependencies, update this file and then run `pip compile` to
+# update requirements.txt.
+
 django
 django_compressor
-django-libsass
-django-tagulous
-django-imagefit
-Pillow
+django-anymail[mailgun]
 django-extensions
+django-heroku
+django-imagefit
+django-libsass
 django-markdownx
+django-mptt-admin
+django-tagulous
+Pillow
 psycopg2
 #gunicorn
 csscompressor
-django-mptt-admin
-django-heroku
 uwsgi
