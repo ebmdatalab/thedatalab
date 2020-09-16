@@ -123,35 +123,3 @@ root@dokku$ service nginx reload
   * site available https, encrypted between browser & CloudFlare
 * create CloudFlare page rule
   * `www.thedatalab.org/*` -> `Always Use HTTPS`
-
-## Backup
-
-### Install gsutil on dokku host server
-
-As per [google's instructions](https://cloud.google.com/storage/docs/gsutil_install#deb):
-
-```bash
-echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-sudo apt-get install apt-transport-https ca-certificates gnupg
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-sudo apt-get update && sudo apt-get install google-cloud-sdk
-gcloud init
-```
-
-* Default config:
-  * region: `europe-west2-a`
-  * project: _TEST_PROJECT_NAME_
-    * we can override with `--project _REAL_PROJECT_NAME_` if necessary
-
-Very simple backup script, which you could run from cron:
-
-```bash
-#!/bin/bash
-d=$(date +%Y-%m-%d)
-google_cloud_storage_url="gs://my_gs_bucket_name"
-
-dokku postgres:export thedatalab_production > /root/thedatalab_backup/thedatalab_production.dump
-gsutil cp /root/thedatalab_backup/thedatalab_production.dump $google_cloud_storage_url/thedatalab_production-$d.dump
-tar -cf /root/thedatalab_backup/thedatalab_storage.tar /var/lib/dokku/data/storage/thedatalab
-gsutil cp /root/thedatalab_backup/thedatalab_storage.tar $google_cloud_storage_url/thedatalab_storage-$d.tar
-```
