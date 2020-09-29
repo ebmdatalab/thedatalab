@@ -106,7 +106,9 @@ $ dokku plugin:install https://github.com/dokku/dokku-redirect.git
 $ dokku redirect:set thedatalab thedatalab.org www.thedatalab.org
 ```
 
-## Nginx config - increase  max_upload_size
+## Nginx config tweaks
+
+### increase  max_upload_size
 
 Default is 1Mb, photos for blogs are often 5+Mb. See this method from [the dokku docs](http://dokku.viewdocs.io/dokku/configuration/nginx/#customizing-via-configuration-files-included-by-the-default-tem)
 
@@ -115,6 +117,27 @@ root@dokku$ mkdir /home/dokku/thedatalab/nginx.conf.d/
 root@dokku$ echo 'client_max_body_size 50m;' > /home/dokku/thedatalab/nginx.conf.d/upload.conf
 root@dokku$ chown -R dokku:dokku /home/dokku/thedatalab/nginx.conf.d/
 root@dokku$ service nginx reload
+```
+
+### Add redirects from old urls to new urls
+
+#### Redirect paths
+
+Conf file is in `/deploy/redirects.conf`, but it needs to be outside of the container to add it to the nginx setup, so you'll need to copy the file to the dokku host manually.
+
+```bash
+root@dokku$ cp MY_REDIRECTS_CONF /home/dokku/thedatalab/nginx.conf.d/redirects.conf
+root@dokku$ chown -R dokku:dokku /home/dokku/thedatalab/nginx.conf.d/
+root@dokku$ service nginx reload
+```
+
+#### Redirect domain name
+
+We can use the dokku plugin set up earlier:
+
+```bash
+$ dokku domains:add thedatalab ebmdatalab.net
+$ dokku redirect:set thedatalab ebmdatalab.net www.thedatalab.org
 ```
 
 ## https
