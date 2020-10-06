@@ -15,7 +15,7 @@
     {% endcompress %}
     
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="EBM Datalab" />
+    <meta property="og:site_name" content="Datalab" />
     {% block opengraph_image %}{% endblock %}
     {% block opengraph_title %}{% if request.page %}<meta property="og:title" content="{% if request.page.meta_title %}{{ request.page.meta_title }}{% else %}{{ request.page.menu_title }} | DataLab{% endif %}" />{% endif %}{% endblock %}
 
@@ -35,12 +35,14 @@
                 </div>
             </div>
             <div class="col-3 logo">
-		<div class="ebm-logo">
-		    <a href="/">
-			<img src="/static/images/ebm-logo-blue.png" width="110" alt="DataLab" />
-		    </a>
-		</div>
-                <img src="/static/images/logo-oxford-blue.svg" width="110" />
+                <div class="ebm-logo">
+                    <a href="/">
+                    <img src="/static/images/ebm-logo-blue.png" width="100%" alt="DataLab" />
+                    </a>
+                </div>
+                <div class="oxford-logo">
+                    <img src="/static/images/logo-oxford-blue.svg" width="100%" alt="University of Oxford" />
+                </div>
             </div>
             <div class="col-9">
                 {% render_menu %}
@@ -59,7 +61,7 @@
             <div class="container">
                 <div class="row">
 		    <div class="col-6 col-sm-4">
-			<h2>EBM DataLab</h2>
+			<h2>DataLab</h2>
 			<p>Radcliffe Primary Care Building<br />Radcliffe Observatory Quarter<br />Woodstock Rd<br />Oxford<br />OX2 6GG</p>
 		    </div>
 		    <div class="col-6 col-sm-4">
@@ -91,7 +93,7 @@
 		</div>
 		<div class="row">
 		    <div class="col-sm-12">
-			<p class="copyright">© University of Oxford for the EBM DataLab {% now "Y" %}. This work may be copied freely for non-commercial research and study. If you wish to do any of the other acts restricted by the copyright you should apply in writing to <a href="mailto:ebmdatalab@phc.ox.ac.uk">ebmdatalab@phc.ox.ac.uk</a>.</p>
+			<p class="copyright">© University of Oxford for the DataLab {% now "Y" %}. This work may be copied freely for non-commercial research and study. If you wish to do any of the other acts restricted by the copyright you should apply in writing to <a href="mailto:ebmdatalab@phc.ox.ac.uk">ebmdatalab@phc.ox.ac.uk</a>.</p>
 		    </div>
 		</div>
 	    </div>
