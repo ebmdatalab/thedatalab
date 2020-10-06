@@ -1,6 +1,6 @@
 <ul class="menu top-menu">
 	<li class="home {% if home_menu_items %}has-children{% endif %}"><a href="/">{% include "icons/home.svg" %} &nbsp; Home</a>
-		{% if home_menu_items %}<span>▼</span>
+		{% if home_menu_items %}
 		<ul>
 			{% for child in home_menu_items %}
 				<li><a href="{{ child.url }}/">{{ child.title }}</a></li>
@@ -10,7 +10,7 @@
 	</li>
 {% for item in primary_menu_items %}
 	<li {% if item.children %}class="has-children colour-{{ item.colour_scheme }}"{% endif %}><a href="{{ item.url }}/">{{ item.title }}</a>
-		{% if item.children %}<span>▼</span>
+		{% if item.children %}
 		<ul>
 			{% for child in item.children %}
 				<li><a href="{{ child.url }}/">{{ child.title }}</a></li>
@@ -23,7 +23,7 @@
 <ul class="menu secondary-menu">
 {% for item in secondary_menu_items %}
 	<li {% if item.children %}class="has-children colour-{{ item.colour_scheme }}"{% endif %}><a href="{{ item.url }}/">{{ item.title }}</a>
-		{% if item.children %}<span>▼</span>
+		{% if item.children %}
 		<ul>
 			{% for child in item.children %}
 				<li><a href="{{ child.url }}/">{{ child.title }}</a></li>
