@@ -136,8 +136,9 @@ root@dokku$ service nginx reload
 We can use the dokku plugin set up earlier:
 
 ```bash
-$ dokku domains:add thedatalab ebmdatalab.net
+$ dokku domains:add thedatalab ebmdatalab.net www.ebmdatalab.net
 $ dokku redirect:set thedatalab ebmdatalab.net www.thedatalab.org
+$ dokku redirect:set thedatalab www.ebmdatalab.net www.thedatalab.org
 ```
 
 ## https
