@@ -20,7 +20,7 @@ django-tagulous==0.14.1   # via -r requirements.in
 django==2.2.13            # via -r requirements.in, django-appconf, django-heroku, django-markdownx, django-mptt
 libsass==0.19.3           # via django-libsass
 markdown==3.1.1           # via django-markdownx
-pillow==6.2.1             # via -r requirements.in, django-markdownx
+pillow==7.1.0             # via -r requirements.in, django-markdownx
 psycopg2==2.8.4           # via -r requirements.in, django-heroku
 pytz==2019.3              # via django
 rcssmin==1.0.6            # via django-compressor
