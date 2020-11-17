@@ -4,32 +4,32 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
-csscompressor==0.9.5
+csscompressor==0.9.5      # via -r requirements.in
 dj-database-url==0.5.0    # via django-heroku
 django-appconf==1.0.3     # via django-compressor, django-imagefit
-django-compressor==2.3
-django-extensions==2.2.5
-django-heroku==0.3.1
-django-imagefit==0.6.2
+django-compressor==2.3    # via -r requirements.in, django-libsass
+django-extensions==2.2.5  # via -r requirements.in
+django-heroku==0.3.1      # via -r requirements.in
+django-imagefit==0.6.2    # via -r requirements.in
 django-js-asset==1.2.2    # via django-mptt
-django-libsass==0.7
-django-markdownx==2.0.28
-django-mptt-admin==0.7.2
+django-libsass==0.7       # via -r requirements.in
+django-markdownx==2.0.28  # via -r requirements.in
+django-mptt-admin==0.7.2  # via -r requirements.in
 django-mptt==0.10.0       # via django-mptt-admin
-django-tagulous==0.14.1
-django==2.2.6
+django-tagulous==0.14.1   # via -r requirements.in
+django==2.2.13            # via -r requirements.in, django-appconf, django-heroku, django-markdownx, django-mptt
 libsass==0.19.3           # via django-libsass
 markdown==3.1.1           # via django-markdownx
-pillow==6.2.1
-psycopg2==2.8.4
+pillow==6.2.1             # via -r requirements.in, django-markdownx
+psycopg2==2.8.4           # via -r requirements.in, django-heroku
 pytz==2019.3              # via django
 rcssmin==1.0.6            # via django-compressor
 rjsmin==1.1.0             # via django-compressor
 six==1.12.0               # via django-appconf, django-extensions, django-mptt-admin, libsass
 sqlparse==0.3.0           # via django
-uwsgi==2.0.18
+uwsgi==2.0.18             # via -r requirements.in
 whitenoise==5.0.1         # via django-heroku
 
 # The following packages are considered to be unsafe in a requirements file:
-# pip==20.0.2               # via django-markdownx
-# setuptools==45.2.0        # via markdown
+# pip
+# setuptools
