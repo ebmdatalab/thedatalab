@@ -68,7 +68,7 @@ urlpatterns = [
 
     path('', views.home_view, name='home'),
 
-    re_path(r'^(.*)$', views.page_view, name='page_view'),
+    re_path(r'^(.*)/$', views.page_view, name='page_view'),
 ]
 
 
