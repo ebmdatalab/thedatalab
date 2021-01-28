@@ -253,7 +253,7 @@ class Page(MPTTModel):
     overlay_url = models.URLField(max_length=200, blank=True)
     introduction = MarkdownxField(blank=True)
     
-    page_type = models.CharField(max_length=150, blank=True, choices=[['', 'Static page'], ['papers', 'Papers'], ['blog', 'Blog'], ['topic', 'Topic']])
+    page_type = models.CharField(max_length=150, blank=True, choices=[['', 'Static page'], ['papers', 'Papers'], ['blog', 'Blog'], ['softwares', 'Software'], ['topic', 'Topic']])
     
     body = MarkdownxField(blank=True, null=True)
     colour_scheme = models.CharField(max_length=150, blank=True, choices=[['', ''], ['green', 'Green'], ['orange', 'Orange'], ['blue', 'Blue'], ['red', 'Red']])

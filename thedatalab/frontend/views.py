@@ -127,7 +127,7 @@ def page_view(request, path):
         if len(types):
             d['blog_posts'] = d['blog_posts'].filter(type__in=types)
 
-    if request.page.page_type in ["topic"]:
+    if request.page.page_type in ["topic", 'softwares']:
         d['softwares'] = models.Software.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')
         if len(topics):
             d['softwares'] = d['softwares'].filter(topics__in=topics)
