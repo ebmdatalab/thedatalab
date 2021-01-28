@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-sm-auto"><img src="{{ mem.image.name|tdl_resize:'170x170c'}}" style="margin-left: 10px;" alt="{{mem.name}}"></div>
                 <div class="col-sm-6">
-                    <div class="name">{{ mem.name }}</div>
+                    <div class="name">{% if mem.author %}<a href="{{ mem.author.get_absolute_url }}">{{ mem.name }}</a>{% else %}{{ mem.name }}{% endif %}</div>
                     <div class="position">{{ mem.position }}</div>
                     {{ mem.biography|show_markdown|safe }}
                 </div>

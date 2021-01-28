@@ -40,7 +40,7 @@ def render_footer_menu(context):
     root = Page.objects.filter(url='', level=0).first()
     if not root: return []
     
-    print(root.get_descendants(include_self=True).filter(show_in_footer_menu=True))
+    #print(root.get_descendants(include_self=True).filter(show_in_footer_menu=True))
     
     return {
         'footer_menu_items':[

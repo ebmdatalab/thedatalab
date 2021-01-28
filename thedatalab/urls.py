@@ -55,7 +55,8 @@ urlpatterns = [
     path('about-us/', views.team_index, name='team_index'),
     path('authors/<slug:slug>/', views.author_view, name='author_view'),
     #path('blog/', views.blog_index, name='blog_index'),
-    path('blog/<int:year>/<int:month>/<int:pk>/<slug:slug>/', views.blog_post_view),
+    path('blog/<int:year>/<int:month>/<int:pk>/<slug:slug>/', views.blog_post_redirect_view),
+    path('blog/<int:pk>/<slug:slug>/', views.blog_post_view),
     path('papers/', views.paper_index, name='paper_index'),
     
     path('projects/<slug:slug>/', views.project_view, name='project_view'),
@@ -69,10 +70,16 @@ urlpatterns = [
     path('search/', views.search_view, name='search'),
 
     path('', views.home_view, name='home'),
-
-    re_path(r'^(.*)$', views.page_view, name='page_view'),
 ]
 
 
 if settings.DEBUG is True:
     urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if 'debug_toolbar' in settings.INSTALLED_APPS:
+    import debug_toolbar
+    urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)))
+
+urlpatterns.extend([
+    re_path(r'^(.*)$', views.page_view, name='page_view'),
+])

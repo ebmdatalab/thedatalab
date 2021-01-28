@@ -12,33 +12,18 @@
 			<div class="page-header-inner-left">
 				{% page_breadcrumbs request.page %}
 				<h1>Search results for &ldquo;{{ query }}&rdquo;</h1>
+                {% if summary %}
+                <p>Found {% for s in summary %}{{ s }}{% if forloop.revcounter0 > 1 %}, {% elif forloop.revcounter0 == 1 %} and {% endif %}{% endfor %}.</p>
+                {% endif %}
 			</div>
 			
 		</div>
 	</div>
 
 	{% block body %}
-        {% if papers %}
-        <div class="row">
-            <h2 class="col-12">Matching papers</h2>
-            <div class="col-12 blog-preview-list">
-                {% for post in papers %}
-                <div class="row blog-preview">
-                    <div class="col-sm-auto"><img src="{{ post.image.name|tdl_resize:'270x160c'}}" alt=""></div>
-                    <div class="col">
-                        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-                        <p class="author">{{ post.published_at|date:"j F Y" }} {% with authors=post.get_authors %}{% if authors %} &nbsp;|&nbsp; {{ authors }}{% endif %}{% endwith %}</p>
-                        {{ post.abstract|show_markdown|safe }}
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>	
-        {% endif %}
-
         {% if pages %}
          <div class="row">
-            <h2 class="col-12">Matching pages</h2>
+            <h2 class="col-12" id="pages">Pages</h2>
             <div class="col-12">
                 {% for post in pages %}
                 <div class="col-lg-3">
@@ -59,9 +44,29 @@
         <br /><br />
         {% endif %}
 
+
+        {% if papers %}
+        <div class="row">
+            <h2 class="col-12" id="papers">Papers</h2>
+            <div class="col-12 blog-preview-list">
+                {% for post in papers %}
+                <div class="row blog-preview">
+                    <div class="col-sm-auto"><img src="{{ post.image.name|tdl_resize:'270x160c'}}" alt=""></div>
+                    <div class="col">
+                        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                        <p class="author">{{ post.published_at|date:"j F Y" }} {% with authors=post.get_authors %}{% if authors %} &nbsp;|&nbsp; {{ authors }}{% endif %}{% endwith %}</p>
+                        {{ post.abstract|show_markdown|safe }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>	
+        {% endif %}
+
+
         {% if blog_posts %}
         <div class="row">
-            <h2 class="col-12">Matching blog posts</h2>
+            <h2 class="col-12" id="blog-posts">Blog posts</h2>
             <div class="col-12 blog-preview-list">
                 {% for post in blog_posts %}
                 <div class="row blog-preview">
@@ -78,5 +83,9 @@
         {% endif %}
 
         
+        {% if not papers and not pages and not blog_posts %}
+            <p>No results found.</p>
+        {% endif %}
+
     {% endblock %}
 {% endblock %}

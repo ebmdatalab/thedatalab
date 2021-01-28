@@ -183,7 +183,7 @@ class Blog(ThingWithTopics):
         return ret
         
     def get_absolute_url(self):
-        return '/blog/%s/%d/%s/'%(self.published_at.strftime("%Y/%m"), self.pk, slugify(self.title))
+        return '/blog/%d/%s/'%(self.pk, slugify(self.title))
         
 
 class Author(models.Model):
