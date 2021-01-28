@@ -2,6 +2,8 @@
 
 {% block body_class %}theme-{{ thing.get_colour_scheme }}{% endblock %}
 
+{% block title %}{{ thing.title }} | {{ block.super }}{% endblock %}
+
 {% block main %}
     <div class="row">
         <div class="col page-header">

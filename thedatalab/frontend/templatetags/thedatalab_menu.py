@@ -5,7 +5,6 @@ from ..models import Page
 
 register = template.Library()
 
-
 @register.inclusion_tag("_top_menu.html", takes_context=True)
 def render_menu(context):
     root = Page.objects.filter(url='', level=0).first()
