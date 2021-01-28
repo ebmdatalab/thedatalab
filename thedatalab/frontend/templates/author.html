@@ -30,7 +30,7 @@
 
 	<div class="row">
 		<div class="col-sm-4 person-info-left">
-			{% if team_member and team_member.image %}<img class="person-image" src="{{ team_member.image.name|resize:'170x170c'}}">{% endif %}
+			{% if team_member and team_member.image %}<img class="person-image" src="{{ team_member.image.name|resize:'170x170c'}}" alt="{{team_member.name}}">{% endif %}
 			<ul class="links">
 				{% if team_member.website_url %}
 					<li><a href="{{ team_member.website_url }}">{% include "icons/website.svg" %} {{ team_member.website_url }}</a></li>
