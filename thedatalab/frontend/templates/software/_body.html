@@ -1,0 +1,26 @@
+{% load thedatalab_extras %}
+
+<div class="text">
+    {# hide the teaser image if images are in the long text already #}
+    {% if thing.image %}
+        <div class="image"><img src="{{ thing.image.name|tdl_resize:'777x100c'}}" style="margin-right: 10px;" alt=""></div>
+    {% endif %}
+  
+    <div class="abstract">
+        {{ thing.body|show_markdown|safe }}
+    </div>
+</div>
+
+{% if thing.url %}
+<div class="attachments">
+    <div class="row attachment">
+        <div class="col-2 icon">
+            <a href="{{ thing.url }}" target="_blank"><span>&lt;/&gt;</span></a>
+        </div>
+        <div class="col-10">
+            <a href="{{ thing.url }}" target="_blank">{{ thing.title }}</a>
+            <p>View the code at <strong>{{ thing.get_url_domain }}</strong></p>
+        </div>
+    </div>
+</div>
+{% endif %}

@@ -126,10 +126,16 @@ def page_view(request, path):
         types = request.page.types.all()
         if len(types):
             d['blog_posts'] = d['blog_posts'].filter(type__in=types)
-    
+
+    if request.page.page_type in ["topic"]:
+        d['softwares'] = models.Software.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')
+        if len(topics):
+            d['softwares'] = d['softwares'].filter(topics__in=topics)
+
     if request.page.page_type == "topic":
         d['blog_posts'] = d['blog_posts'][:4]
         d['papers'] = d['papers'][:4]
+        d['softwares'] = d['softwares'][:4]
             
         return render(request, "topic.html", d)
 
@@ -207,11 +213,13 @@ def topic_view(request, slug):
     
     blog_posts = models.Blog.objects.filter(topics=topic.topic_tag)[:4]
     papers = models.Paper.objects.filter(topics=topic.topic_tag)[:4]
+    softwares = models.Software.objects.filter(topics=topic.topic_tag)[:4]
     
     return render(request, "topic.html", {
         'topic':topic, 
         'blog_posts':blog_posts[:4], 
-        'papers':papers
+        'papers':papers,
+        softwares:softwares
         })
 
 

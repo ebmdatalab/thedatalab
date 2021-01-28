@@ -63,7 +63,7 @@ class BaseThing(models.Model):
         
     @classmethod
     def plural_name(cls):
-        if cls.__name__ in ["Blog"]:
+        if cls.__name__ in ["Blog", "Software"]:
             return cls.__name__
         return cls.__name__ + 's'
 
@@ -76,6 +76,8 @@ class BaseThing(models.Model):
 
         """
         template_name = "_{}.html".format(part)
+        print("{}/{}".format(cls.model_name(), template_name),
+             "defaults/{}".format(template_name))
         return select_template(
             ["{}/{}".format(cls.model_name(), template_name),
              "defaults/{}".format(template_name)])
@@ -128,6 +130,9 @@ class BaseThing(models.Model):
 #    related = models.ManyToManyField('self', blank=True)
 
 class ThingWithTopics(BaseThing):
+    class Meta:
+        ordering = ['title']
+
     related = models.ManyToManyField('self', blank=True)
     topics = TagField(blank=True, to=TopicTags, related_name="things")
     
@@ -187,6 +192,9 @@ class Blog(ThingWithTopics):
         
 
 class Author(models.Model):
+    class Meta:
+        ordering = ['name']
+    
     name = models.CharField(max_length=50, blank=True)
     slug = models.CharField(max_length=50, blank=True, editable=False)
     institution = models.CharField(max_length=150, blank=True)
@@ -220,7 +228,8 @@ class Tool(ThingWithTopics, ExternalThing):
     description = models.CharField(max_length=250, blank=True, help_text="20 words max.")
 
 class Software(ThingWithTopics, ExternalThing):
-    description = models.CharField(max_length=250, blank=True, help_text="20 words max.")
+    body = MarkdownxField(blank=True)
+
 
 class Dataset(ThingWithTopics, ExternalThing):
     description = models.CharField(max_length=250, blank=True, help_text="20 words max.")
