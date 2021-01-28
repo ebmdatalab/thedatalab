@@ -26,7 +26,9 @@ def show_thing(request, slug, thing_type=None):
     thing = thing_type.objects.get(pk=slug)
     thing_name = thing.__class__.__name__.lower()
     index_url_name =  thing_name + '_index'
-    thing_plural = thing.__class__.__name__.lower() + "s"
+    thing_plural = {
+        'blog':'blog'
+    }.get(thing.__class__.__name__.lower(), thing.__class__.__name__.lower() + "s")
     klasses = {'Papers': models.Paper,
                'Blogs': models.Blog,
                'Tools': models.Tool,

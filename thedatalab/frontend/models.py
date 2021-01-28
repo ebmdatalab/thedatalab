@@ -63,6 +63,8 @@ class BaseThing(models.Model):
         
     @classmethod
     def plural_name(cls):
+        if cls.__name__ in ["Blog"]:
+            return cls.__name__
         return cls.__name__ + 's'
 
     @classmethod
@@ -81,6 +83,10 @@ class BaseThing(models.Model):
     @classmethod
     def index_url_name(cls):
         return cls.model_name() + '_index'
+
+    @classmethod
+    def index_url(cls):
+        return '/%s/'%cls.plural_name().lower()
 
     @classmethod
     def header_include_name(cls):

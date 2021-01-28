@@ -16,7 +16,7 @@
                 <ul class="breadcrumbs" typeof="BreadcrumbList">
                     <li><a href="/">Home</a> &gt; </li> 
                     {% block breadcrumb %}
-                    <li> <a href="../">{{ thing.plural_name }}</a> &gt; </li>
+                    <li> <a href="{{ thing.index_url }}">{{ thing.plural_name }}</a> &gt; </li>
                     {% endblock %}
                 </ul>		
                 <h1>{{ thing.title }}</h1>
