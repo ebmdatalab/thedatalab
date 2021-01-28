@@ -1,5 +1,6 @@
 from datetime import date
 from collections import defaultdict
+from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Max
 from django.db.models.functions import Coalesce 
 from django.http import Http404
@@ -206,3 +207,40 @@ def topic_view(request, slug):
         'blog_posts':blog_posts[:4], 
         'papers':papers
         })
+
+
+def search_view(request):
+    q = request.GET.get('q') or ''
+
+    if False:
+        #date order
+        blog_posts = models.Blog.objects.annotate(
+            search=SearchVector('title', 'body')
+        ).filter(search=q)
+    else:
+        blog_posts = models.Blog.objects.annotate(
+            rank=SearchRank(
+                SearchVector('title', weight='A') + SearchVector('body', weight='B'),
+                SearchQuery(q)
+            )).filter(rank__gte=0.3).order_by('-rank')
+
+    papers = models.Paper.objects.annotate(
+        rank=SearchRank(
+            SearchVector('title', weight='A') + SearchVector('abstract', weight='B'),
+            SearchQuery(q)
+        )
+    ).filter(rank__gte=0.3).order_by('-rank')
+
+    pages = models.Page.objects.annotate(
+        rank=SearchRank(
+            SearchVector('menu_title', weight='A') + SearchVector('introduction', weight='B') + SearchVector('body', weight='C'),
+            SearchQuery(q)
+        )
+    ).filter(rank__gte=0.3).order_by('-rank')
+
+    return render(request, "search.html", {
+        'query':q,
+        'blog_posts':blog_posts,
+        'papers':papers,
+        'pages':pages
+    })

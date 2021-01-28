@@ -1,4 +1,3 @@
-{% load imagefit %}
 {% load thedatalab_extras %}
 
 <section class="related">
@@ -50,7 +49,7 @@
       {% for related_thing in related_things %}
         {% if related_thing != thing %}
           <div class="related-thing-container">
-            <img src="{{ related_thing.image.name|resize:'200x140c'}}" width="200" height="140" style="margin-right: 10px; width: 200px">
+            <img src="{{ related_thing.image.name|tdl_resize:'200x140c'}}" width="200" height="140" style="margin-right: 10px; width: 200px">
             <div style="flex-direction: column">
               {% include thing.get_class.related_item_include_name  %}
             </div>

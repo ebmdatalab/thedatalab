@@ -1,6 +1,8 @@
 from django import template
 from markdownx.utils import markdownify
 
+from imagefit.templatetags.imagefit import resize
+
 register = template.Library()
 
 @register.simple_tag
@@ -29,3 +31,10 @@ def show_markdown(text):
 def twitter_url(url):
     if url.startswith("@"):
         return "https://www.twitter.com/" + url[1:]
+
+@register.filter
+def tdl_resize(img, size):
+    ret = resize(img, size)
+    if ret.startswith("/"):
+        return "https://www.thedatalab.org" + ret
+    return ret

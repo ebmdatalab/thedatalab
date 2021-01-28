@@ -1,10 +1,9 @@
 {% load thedatalab_extras %}
-{% load imagefit %}
 
 <div class="text">
     {# hide the teaser image if images are in the long text already #}
     {% if thing.image %}
-        <div class="image"><img src="{{ thing.image.name|resize:'360x100c'}}" style="margin-right: 10px;" alt=""></div>
+        <div class="image"><img src="{{ thing.image.name|tdl_resize:'360x100c'}}" style="margin-right: 10px;" alt=""></div>
     {% endif %}
   
     {% comment %}

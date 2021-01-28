@@ -60,11 +60,13 @@ urlpatterns = [
     
     path('projects/<slug:slug>/', views.project_view, name='project_view'),
     path('topics/<slug:slug>/', views.topic_view, name='topic_index'),
-    
+
     path(
         r"robots.txt",
         TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
     ),
+    
+    path('search/', views.search_view, name='search'),
 
     path('', views.home_view, name='home'),
 

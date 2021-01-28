@@ -1,0 +1,82 @@
+{% extends '_base.html' %}
+{% load thedatalab_extras thedatalab_menu %}
+
+{% block body_class %}theme-{{ request.page.colour_scheme }}{% endblock %}
+
+{% block title %}Search results for &ldquo;{{ query }}&rdquo; | Oxford DataLab{% endblock %}
+
+
+{% block main %}
+	<div class="row">
+		<div class="col page-header">
+			<div class="page-header-inner-left">
+				{% page_breadcrumbs request.page %}
+				<h1>Search results for &ldquo;{{ query }}&rdquo;</h1>
+			</div>
+			
+		</div>
+	</div>
+
+	{% block body %}
+        {% if papers %}
+        <div class="row">
+            <h2 class="col-12">Matching papers</h2>
+            <div class="col-12 blog-preview-list">
+                {% for post in papers %}
+                <div class="row blog-preview">
+                    <h2 class="col-12"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                    <div class="col-sm-auto"><img src="{{ post.image.name|tdl_resize:'270x160c'}}" alt=""></div>
+                    <div class="col">
+                        <p class="author">{{ post.published_at|date:"j F Y" }} {% with authors=post.get_authors %}{% if authors %} &nbsp;|&nbsp; {{ authors }}{% endif %}{% endwith %}</p>
+                        {{ post.abstract|show_markdown|safe }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>	
+        {% endif %}
+
+        {% if pages %}
+         <div class="row">
+            <h2 class="col-12">Matching pages</h2>
+            <div class="col-12">
+                {% for post in pages %}
+                <div class="col-lg-3">
+                    <div class="card related-thing theme-">
+                        <a href="{{ post.url }}">
+                            <img class="card-img-top" src="{{ post.image.name|tdl_resize:'278x163c'}}" alt="">
+                        </a>
+                        <a href="{{ post.url }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{post.menu_title}}</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>	
+        <br /><br />
+        {% endif %}
+
+        {% if blog_posts %}
+        <div class="row">
+            <h2 class="col-12">Matching blog posts</h2>
+            <div class="col-12 blog-preview-list">
+                {% for post in blog_posts %}
+                <div class="row blog-preview">
+                    <h2 class="col-12"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                    <div class="col-sm-auto"><img src="{{ post.image.name|tdl_resize:'270x160c'}}" alt=""></div>
+                    <div class="col">
+                        <p class="author">{{ post.published_at|date:"j F Y" }} {% with authors=post.get_authors %}{% if authors %} &nbsp;|&nbsp; {{ authors }}{% endif %}{% endwith %}</p>
+                        {{ post.get_preview|show_markdown|safe }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>	
+        {% endif %}
+
+        
+    {% endblock %}
+{% endblock %}
