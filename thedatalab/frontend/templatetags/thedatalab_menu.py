@@ -53,10 +53,13 @@ def render_footer_menu(context):
 
 
 @register.inclusion_tag("_breadcrumbs.html")
-def page_breadcrumbs(page):
+def page_breadcrumbs(page, skip_parent=False):
     if not page or not hasattr(page, 'get_ancestors'): return {}
     
     ret = []
+
+    if skip_parent:
+        page = page.parent
     
     for item in page.get_ancestors():
         ret.append({

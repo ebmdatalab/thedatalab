@@ -5,10 +5,19 @@
 
 {% block main %}
 	<div class="row">
-		<div class="col page-header">
+		<div class="col page-header {% if request.page.level < 3 %}page-header-large{% endif %}">
 			<div class="page-header-inner-left">
-				{% page_breadcrumbs request.page %}
-				<h1>{% block header_title %}{{ request.page.menu_title }}{% endblock %}</h1>
+				{% if request.page.level == 1 %}
+					{% page_breadcrumbs request.page %}
+					<h1>{{ request.page.menu_title }}</h1>
+				{% elif request.page.level == 2 %}
+					{% page_breadcrumbs request.page skip_parent=True %}
+				<h1>{{ request.page.parent.menu_title }}</h1>
+					<h2>{{ request.page.menu_title }}</h2>
+				{% else %}
+					{% page_breadcrumbs request.page %}
+					<h1>{{ request.page.menu_title }}</h1>
+				{% endif %}
 			</div>
 			<div class="page-header-inner-right">
 				<ul class="social-links">

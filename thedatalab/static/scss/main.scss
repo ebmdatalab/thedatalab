@@ -118,8 +118,6 @@ p { margin: 0 0 25px; }
 p + h3, blockquote + h3 { margin-top: 40px; }
 p + h4 { margin-top: 15px; }
 
-.page-topic h1 { font-size: 3.5em; }
-
 /* Menu */
 
 ul.menu {
@@ -213,11 +211,21 @@ ul.secondary-menu {
     ul.breadcrumbs { margin: 0; padding: 0 0 20px; }
     ul.breadcrumbs li { list-style-type: none; display: inline-block; margin-left: 0px; margin-right: 0px; }
 
+    &.page-header-large {
+        h1 { font-size: 3em; margin: 0px 0 10px; }
+    }
+
+    h2 {
+        font-size: 1.7em;
+        margin: 0 0 20px;
+    }
+
     h4 { 
         text-transform: none; 
         letter-spacing: 0; 
     }
     
+    h2 { color: #0e6FAB; }
     h1 + h4 { margin-top: -30px; margin-bottom: 5px; }
 
     .page-header-inner-left { 
@@ -233,7 +241,6 @@ ul.secondary-menu {
         flex-direction: column;
         align-items: flex-end;
         justify-content: space-between;
-        
 
         ul.social-links {
             display: flex;
@@ -431,7 +438,7 @@ $colours: ("green": $green, "orange": $orange, "blue": $blue, "red": $red);
     body.theme-#{$name} {
         .page-header,
         .info-left { border-left-color: $colour; }
-        h1 { color: $colour; }
+        h1, .page-header h2 { color: $colour; }
         .page-header a,
         .main-content a,
         .project-intro a,
