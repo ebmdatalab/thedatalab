@@ -63,6 +63,8 @@ class BaseThing(models.Model):
         
     @classmethod
     def plural_name(cls):
+        if cls.__name__ in ["Blog", "Software"]:
+            return cls.__name__
         return cls.__name__ + 's'
 
     @classmethod
@@ -74,6 +76,8 @@ class BaseThing(models.Model):
 
         """
         template_name = "_{}.html".format(part)
+        print("{}/{}".format(cls.model_name(), template_name),
+             "defaults/{}".format(template_name))
         return select_template(
             ["{}/{}".format(cls.model_name(), template_name),
              "defaults/{}".format(template_name)])
@@ -81,6 +85,10 @@ class BaseThing(models.Model):
     @classmethod
     def index_url_name(cls):
         return cls.model_name() + '_index'
+
+    @classmethod
+    def index_url(cls):
+        return '/%s/'%cls.plural_name().lower()
 
     @classmethod
     def header_include_name(cls):
@@ -122,6 +130,9 @@ class BaseThing(models.Model):
 #    related = models.ManyToManyField('self', blank=True)
 
 class ThingWithTopics(BaseThing):
+    class Meta:
+        ordering = ['title']
+
     related = models.ManyToManyField('self', blank=True)
     topics = TagField(blank=True, to=TopicTags, related_name="things")
     
@@ -177,10 +188,13 @@ class Blog(ThingWithTopics):
         return ret
         
     def get_absolute_url(self):
-        return '/blog/%s/%d/%s/'%(self.published_at.strftime("%Y/%m"), self.pk, slugify(self.title))
+        return '/blog/%d/%s/'%(self.pk, slugify(self.title))
         
 
 class Author(models.Model):
+    class Meta:
+        ordering = ['name']
+    
     name = models.CharField(max_length=50, blank=True)
     slug = models.CharField(max_length=50, blank=True, editable=False)
     institution = models.CharField(max_length=150, blank=True)
@@ -214,7 +228,8 @@ class Tool(ThingWithTopics, ExternalThing):
     description = models.CharField(max_length=250, blank=True, help_text="20 words max.")
 
 class Software(ThingWithTopics, ExternalThing):
-    description = models.CharField(max_length=250, blank=True, help_text="20 words max.")
+    body = MarkdownxField(blank=True)
+
 
 class Dataset(ThingWithTopics, ExternalThing):
     description = models.CharField(max_length=250, blank=True, help_text="20 words max.")
@@ -238,7 +253,7 @@ class Page(MPTTModel):
     overlay_url = models.URLField(max_length=200, blank=True)
     introduction = MarkdownxField(blank=True)
     
-    page_type = models.CharField(max_length=150, blank=True, choices=[['', 'Static page'], ['papers', 'Papers'], ['blog', 'Blog'], ['topic', 'Topic']])
+    page_type = models.CharField(max_length=150, blank=True, choices=[['', 'Static page'], ['papers', 'Papers'], ['blog', 'Blog'], ['softwares', 'Software'], ['topic', 'Topic']])
     
     body = MarkdownxField(blank=True, null=True)
     colour_scheme = models.CharField(max_length=150, blank=True, choices=[['', ''], ['green', 'Green'], ['orange', 'Orange'], ['blue', 'Blue'], ['red', 'Red']])

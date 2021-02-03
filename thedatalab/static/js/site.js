@@ -2,8 +2,8 @@ $('.thing-carousel').slick({
     infinite: true,
     slidesToShow: 4,
     slidesToScroll: 4,
-    prevArrow: '<button class="slick-prev slick-arrow"><img src="/static/images/arrow-left.svg" /></button>',
-    nextArrow: '<button class="slick-next slick-arrow"><img src="/static/images/arrow-right.svg" /></button>',
+    prevArrow: '<button class="slick-prev slick-arrow"><img src="/static/images/arrow-left.svg" alt="Go left" /></button>',
+    nextArrow: '<button class="slick-next slick-arrow"><img src="/static/images/arrow-right.svg" alt="Go right" /></button>',
     responsive: [
         {
             breakpoint: 992,

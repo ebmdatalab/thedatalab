@@ -1,6 +1,13 @@
 {% extends '_base.html' %}
+{% load thedatalab_extras %}
 
 {% block body_class %}theme-{{ thing.get_colour_scheme }}{% endblock %}
+
+{% block title %}{{ thing.title }} | {{ block.super }}{% endblock %}
+
+{% block opengraph_title %}<meta property="og:title" content="{{ thing.title }} | Oxford DataLab" />{% endblock %}
+{% block opengraph_image %}{% if thing.image %}<meta property="og:image" content="https://www.thedatalab.org{{ thing.image.name|tdl_resize:'1200x630c' }}" />{% endif %}{% endblock %}
+{% block twitter_card %}<meta name="twitter:card" content="summary_large_image" />{% endblock %}
 
 {% block main %}
     <div class="row">
@@ -9,7 +16,7 @@
                 <ul class="breadcrumbs" typeof="BreadcrumbList">
                     <li><a href="/">Home</a> &gt; </li> 
                     {% block breadcrumb %}
-                    <li> <a href="../">{{ thing.plural_name }}</a> &gt; </li>
+                    <li> <a href="{{ thing.index_url }}">{{ thing.plural_name }}</a> &gt; </li>
                     {% endblock %}
                 </ul>		
                 <h1>{{ thing.title }}</h1>
@@ -81,19 +88,19 @@
                 {% if thing.paper %}
                 <div class="row attachment">
                     <div class="col-2 icon">
-                        <a href="{{ thing.url }}" target="_blank"><img src="/static/images/publication.png" /></a>
+                        <a href="{{ thing.url }}" target="_blank"><img src="/static/images/publication.png" alt="Publication" /></a>
                     </div>
                     <div class="col-10">
                         <a href="{{ thing.url }}" target="_blank">{{ thing.title }}</a>
                         <p>Read the full paper at <strong>{{ thing.get_url_domain }}</strong></p>
                     </div>
                 </div>
-                {% endif %}
+                {% endif %}               
                 {% for attachment in thing.get_attachments %}
                     {% if attachment.dataset %}
                     <div class="row attachment">
                         <div class="col-2 icon">
-                            <a href="{{ attachment.dataset.url }}" target="_blank"><img src="/static/images/publication.png" /></a>
+                            <a href="{{ attachment.dataset.url }}" target="_blank"><img src="/static/images/publication.png" alt="Attachment" /></a>
                         </div>
                         <div class="col-10">
                             <a href="{{ attachment.dataset.url }}" target="_blank">{{ attachment.title }}</a>

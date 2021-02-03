@@ -1,4 +1,4 @@
-{% load compress thedatalab_menu %}
+{% load compress thedatalab_menu thedatalab_extras %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,15 +25,17 @@
     {% endcompress %}
     
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Datalab" />
+    <meta property="og:site_name" content="Oxford DataLab" />
+    {% block opengraph_title %}<meta property="og:title" content="{% page_title request.page suffix="Oxford DataLab" %}" />{% endblock %}
     {% block opengraph_image %}{% endblock %}
-    {% block opengraph_title %}{% if request.page %}<meta property="og:title" content="{% if request.page.meta_title %}{{ request.page.meta_title }}{% else %}{{ request.page.menu_title }} | DataLab{% endif %}" />{% endif %}{% endblock %}
+    {% block twitter_card %}<meta name="twitter:card" content="summary" />{% endblock %}
+    {% block twitter_site %}<meta name="twitter:site" content="@ebmdatalab"></meta>{% endblock %}
 
-    <title>{% block title %}{% if request.page %}{% if request.page.meta_title %}{{ request.page.meta_title }}{% else %}{{ request.page.menu_title }} | DataLab{% endif %}{% else %}DataLab{% endif %}{% endblock %}</title>
+
+    <title>{% block title %}{% page_title request.page suffix="Oxford DataLab" %}{% endblock %}</title>
   </head>
 
   <body class="{% block body_class %}{% endblock %}">
-    {% comment %}{% include "topnav.html" %}{% endcomment %}
     <div class="container header">
         <div class="row">
             <div class="mobile-menu">
@@ -55,6 +57,10 @@
                 </div>
             </div>
             <div class="col-9">
+                <form method="get" action="/search/">
+                    <label for="search_term" class="visuallyhidden">Search term</label>
+                    <input type="text" placeholder="Search..." class="search" id="search_term" name="q">
+                </form>
                 {% render_menu %}
             </div>
         </div>
@@ -89,6 +95,8 @@
 			{% render_footer_menu %}
 		    </div>
 		</div>
+        {% comment %}
+        - logos disabled due to being out of date/needing approvals
 		<div class="row">
 		    <div class="col-sm-12 logos">
 			<img src="/static/images/logos/hdruk.png" />
@@ -102,6 +110,7 @@
 			<img src="/static/images/logos/who.png" />
 		    </div>
 		</div>
+        {% endcomment %}
 		<div class="row">
 		    <div class="col-sm-12">
 			<p class="copyright">© University of Oxford for the DataLab {% now "Y" %}. This work may be copied freely for non-commercial research and study. If you wish to do any of the other acts restricted by the copyright you should apply in writing to <a href="mailto:ebmdatalab@phc.ox.ac.uk">ebmdatalab@phc.ox.ac.uk</a>.</p>

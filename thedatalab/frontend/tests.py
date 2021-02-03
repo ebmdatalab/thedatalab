@@ -50,7 +50,7 @@ class ThingTestCase(TestCase):
         assert 'x93idd02o' in content
         
         # Check that the footer is present
-        assert '<img src="/static/images/logos/nhs-england.png" />' in content
+        assert '<h2>Follow us</h2>' in content
         
     def test_paper_rendering(self):
         content = self.client.get('/papers/%d/'%self.paper.id).content.decode('utf-8')

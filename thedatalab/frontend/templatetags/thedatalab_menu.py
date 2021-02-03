@@ -5,7 +5,6 @@ from ..models import Page
 
 register = template.Library()
 
-
 @register.inclusion_tag("_top_menu.html", takes_context=True)
 def render_menu(context):
     root = Page.objects.filter(url='', level=0).first()
@@ -41,7 +40,7 @@ def render_footer_menu(context):
     root = Page.objects.filter(url='', level=0).first()
     if not root: return []
     
-    print(root.get_descendants(include_self=True).filter(show_in_footer_menu=True))
+    #print(root.get_descendants(include_self=True).filter(show_in_footer_menu=True))
     
     return {
         'footer_menu_items':[
@@ -54,10 +53,13 @@ def render_footer_menu(context):
 
 
 @register.inclusion_tag("_breadcrumbs.html")
-def page_breadcrumbs(page):
+def page_breadcrumbs(page, skip_parent=False):
     if not page or not hasattr(page, 'get_ancestors'): return {}
     
     ret = []
+
+    if skip_parent:
+        page = page.parent
     
     for item in page.get_ancestors():
         ret.append({

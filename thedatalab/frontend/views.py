@@ -1,10 +1,12 @@
 from datetime import date
 from collections import defaultdict
+from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Max
 from django.db.models.functions import Coalesce 
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
+from django.utils.html import format_html
 
 from . import models
 from .utils import page_resolve
@@ -25,7 +27,9 @@ def show_thing(request, slug, thing_type=None):
     thing = thing_type.objects.get(pk=slug)
     thing_name = thing.__class__.__name__.lower()
     index_url_name =  thing_name + '_index'
-    thing_plural = thing.__class__.__name__.lower() + "s"
+    thing_plural = {
+        'blog':'blog'
+    }.get(thing.__class__.__name__.lower(), thing.__class__.__name__.lower() + "s")
     klasses = {'Papers': models.Paper,
                'Blogs': models.Blog,
                'Tools': models.Tool,
@@ -122,16 +126,21 @@ def page_view(request, path):
         types = request.page.types.all()
         if len(types):
             d['blog_posts'] = d['blog_posts'].filter(type__in=types)
-    
+
+    if request.page.page_type in ["topic", 'softwares']:
+        d['softwares'] = models.Software.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')
+        if len(topics):
+            d['softwares'] = d['softwares'].filter(topics__in=topics)
+
     if request.page.page_type == "topic":
         d['blog_posts'] = d['blog_posts'][:4]
         d['papers'] = d['papers'][:4]
+        d['softwares'] = d['softwares'][:4]
             
         return render(request, "topic.html", d)
 
     return render(request, "page.html", d)
     
-
 @page_resolve(strict=True)
 def team_index(request):
 	team_members = models.TeamMember.objects.filter(visible=True, is_alumni=False)
@@ -146,17 +155,13 @@ def author_view(request, slug):
     papers = annotate_things(papers)
     return render(request, "author.html", {'author':author, 'team_member':team_member, 'papers':papers})
     
-@page_resolve(strict=True)
-def blog_index(request):
-	posts = models.Blog.objects.filter(published_at__lte=timezone.now()).order_by('-published_at')
-	
-	return render(request, "blog.html", {'blog_posts':posts})
+def blog_post_redirect_view(request, year, month, pk, slug):
+    return HttpResponseRedirect("/blog/%d/%s/"%(pk, slug))
 
 @page_resolve(strict=False)
-def blog_post_view(request, year, month, pk, slug):
-    post = get_object_or_404(models.Blog.objects, published_at__year=year, published_at__month=month, pk=pk)
+def blog_post_view(request, pk, slug):
+    post = get_object_or_404(models.Blog.objects, pk=pk)
     return render(request, "thing.html", {'thing':post})
-
 
 @page_resolve(strict=False)
 def paper_index(request):
@@ -200,9 +205,61 @@ def topic_view(request, slug):
     
     blog_posts = models.Blog.objects.filter(topics=topic.topic_tag)[:4]
     papers = models.Paper.objects.filter(topics=topic.topic_tag)[:4]
+    softwares = models.Software.objects.filter(topics=topic.topic_tag)[:4]
     
     return render(request, "topic.html", {
         'topic':topic, 
         'blog_posts':blog_posts[:4], 
-        'papers':papers
+        'papers':papers,
+        softwares:softwares
         })
+
+def search_view(request):
+    q = request.GET.get('q') or ''
+    summary = []
+
+    pages = models.Page.objects.annotate(
+        rank=SearchRank(
+            SearchVector('menu_title', weight='A') + SearchVector('introduction', weight='B') + SearchVector('body', weight='C'),
+            SearchQuery(q)
+        )
+    ).filter(rank__gte=0.3).order_by('-rank')
+
+    if len(pages):
+        summary.append(format_html('<a href="#pages">{} pages</a>', len(pages)))
+
+
+    papers = models.Paper.objects.annotate(
+        rank=SearchRank(
+            SearchVector('title', weight='A') + SearchVector('abstract', weight='B'),
+            SearchQuery(q)
+        )
+    ).filter(rank__gte=0.3).order_by('-rank').prefetch_related('thingwithtopics_ptr__authors')
+
+    if len(papers):
+        summary.append(format_html('<a href="#papers">{} papers</a>', len(papers)))
+
+
+    if False:
+        #date order
+        blog_posts = models.Blog.objects.annotate(
+            search=SearchVector('title', 'body')
+        ).filter(search=q)
+    else:
+        blog_posts = models.Blog.objects.annotate(
+            rank=SearchRank(
+                SearchVector('title', weight='A') + SearchVector('body', weight='B'),
+                SearchQuery(q)
+            )).filter(rank__gte=0.3).order_by('-rank').prefetch_related('authors')
+
+    if len(blog_posts):
+        summary.append(format_html('<a href="#blog-posts">{} blog posts</a>', len(blog_posts)))
+
+
+    return render(request, "search.html", {
+        'query':q,
+        'summary':summary,
+        'blog_posts':blog_posts,
+        'papers':papers,
+        'pages':pages
+    })

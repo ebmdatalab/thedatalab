@@ -1,19 +1,17 @@
-{% load imagefit %}
 {% load thedatalab_extras %}
 
 <section class="related">
     {% for topic, related_things in topics.items %}
-        <div class="row"><h2 class="col">Topic "{{ topic }}"</h2></div>
-		<div class="thing-carousel">
-			{% for related_thing in related_things %}
-			   {% include thing.get_class.related_item_include_name  %}
-			{% endfor %}
-		</div>
+      <div class="row"><h2 class="col">Topic "{{ topic }}"</h2></div>
+      <div class="thing-carousel">
+        {% for related_thing in related_things %}
+          {% include thing.get_class.related_item_include_name  %}
+        {% endfor %}
+      </div>
         
-        {% if topic.topic_set.count %}
-            <p class="view-all"><a href="/topics/{{topic.slug}}/">View everything in topic {{ topic.name }} &gt;&gt;</a></p>
-        {% endif %}
-        </div>
+      {% if topic.topic_set.count %}
+          <p class="view-all"><a href="/topics/{{topic.slug}}/">View everything in topic {{ topic.name }} &gt;&gt;</a></p>
+      {% endif %}
     {% empty %}
         {% if other_things_of_same_type %}
             <div class="row"><h2 class="col">Recent {{ thing_plural }}</h2></div>
@@ -50,7 +48,7 @@
       {% for related_thing in related_things %}
         {% if related_thing != thing %}
           <div class="related-thing-container">
-            <img src="{{ related_thing.image.name|resize:'200x140c'}}" width="200" height="140" style="margin-right: 10px; width: 200px">
+            <img src="{{ related_thing.image.name|tdl_resize:'200x140c'}}" width="200" height="140" style="margin-right: 10px; width: 200px">
             <div style="flex-direction: column">
               {% include thing.get_class.related_item_include_name  %}
             </div>
