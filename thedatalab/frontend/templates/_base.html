@@ -58,7 +58,8 @@
             </div>
             <div class="col-9">
                 <form method="get" action="/search/">
-                    <input type="text" placeholder="Search..." class="search" name="q">
+                    <label for="search_term" class="visuallyhidden">Search term</label>
+                    <input type="text" placeholder="Search..." class="search" id="search_term" name="q">
                 </form>
                 {% render_menu %}
             </div>
