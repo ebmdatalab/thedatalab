@@ -141,7 +141,6 @@ def page_view(request, path):
 
     return render(request, "page.html", d)
     
-
 @page_resolve(strict=True)
 def team_index(request):
 	team_members = models.TeamMember.objects.filter(visible=True, is_alumni=False)
@@ -156,12 +155,6 @@ def author_view(request, slug):
     papers = annotate_things(papers)
     return render(request, "author.html", {'author':author, 'team_member':team_member, 'papers':papers})
     
-@page_resolve(strict=True)
-def blog_index(request):
-	posts = models.Blog.objects.filter(published_at__lte=timezone.now()).order_by('-published_at').prefetch_related('authors')
-	
-	return render(request, "blog.html", {'blog_posts':posts})
-
 def blog_post_redirect_view(request, year, month, pk, slug):
     return HttpResponseRedirect("/blog/%d/%s/"%(pk, slug))
 
@@ -169,7 +162,6 @@ def blog_post_redirect_view(request, year, month, pk, slug):
 def blog_post_view(request, pk, slug):
     post = get_object_or_404(models.Blog.objects, pk=pk)
     return render(request, "thing.html", {'thing':post})
-
 
 @page_resolve(strict=False)
 def paper_index(request):
@@ -221,7 +213,6 @@ def topic_view(request, slug):
         'papers':papers,
         softwares:softwares
         })
-
 
 def search_view(request):
     q = request.GET.get('q') or ''

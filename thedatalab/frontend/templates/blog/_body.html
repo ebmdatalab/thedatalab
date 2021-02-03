@@ -6,14 +6,6 @@
         <div class="image"><img src="{{ thing.image.name|tdl_resize:'360x100c'}}" style="margin-right: 10px;" alt=""></div>
     {% endif %}
   
-    {% comment %}
-    {% if thing.url %}
-        <div class="view-external-resource">
-            <a href="{{ thing.url }}">Read the {{ thing.get_class.model_name }} &gt;</a>
-        </div>
-    {% endif %}
-    {% endcomment %}
-  
     <div class="abstract">
         {{ thing.body|show_markdown|safe }}
     </div>
