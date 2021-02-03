@@ -42,9 +42,9 @@ urlpatterns = [
 
 #    path('papers/', views.thing_index, {'thing_type': Paper}, name='paper_index'),
     #path('blog/', views.thing_index, {'thing_type': Blog}, name='blog_index'),
-    path('tools/', views.thing_index, {'thing_type': Tool}, name='tool_index'),
-    path('software/', views.thing_index, {'thing_type': Software}, name='software_index'),
-    path('datasets/', views.thing_index, {'thing_type': Dataset}, name='dataset_index'),
+    #path('tools/', views.thing_index, {'thing_type': Tool}, name='tool_index'),
+    #path('software/', views.thing_index, {'thing_type': Software}, name='software_index'),
+    #path('datasets/', views.thing_index, {'thing_type': Dataset}, name='dataset_index'),
     #path('topics/', views.thing_index, {'thing_type': Topic}, name='topic_index'),
     #path('people/', views.thing_index, {'thing_type': Author}, name='author_index'),
     

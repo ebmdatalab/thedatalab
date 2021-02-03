@@ -1,7 +1,7 @@
 {% extends '_base.html' %}
 {% load thedatalab_extras thedatalab_menu %}
 
-{% block body_class %}theme-{{ request.page.colour_scheme }}{% endblock %}
+{% block body_class %}theme-{% page_colour_scheme request.page %}{% endblock %}
 
 {% block main %}
 	<div class="row">

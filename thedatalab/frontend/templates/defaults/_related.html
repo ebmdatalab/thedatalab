@@ -2,17 +2,16 @@
 
 <section class="related">
     {% for topic, related_things in topics.items %}
-        <div class="row"><h2 class="col">Topic "{{ topic }}"</h2></div>
-		<div class="thing-carousel">
-			{% for related_thing in related_things %}
-			   {% include thing.get_class.related_item_include_name  %}
-			{% endfor %}
-		</div>
+      <div class="row"><h2 class="col">Topic "{{ topic }}"</h2></div>
+      <div class="thing-carousel">
+        {% for related_thing in related_things %}
+          {% include thing.get_class.related_item_include_name  %}
+        {% endfor %}
+      </div>
         
-        {% if topic.topic_set.count %}
-            <p class="view-all"><a href="/topics/{{topic.slug}}/">View everything in topic {{ topic.name }} &gt;&gt;</a></p>
-        {% endif %}
-        </div>
+      {% if topic.topic_set.count %}
+          <p class="view-all"><a href="/topics/{{topic.slug}}/">View everything in topic {{ topic.name }} &gt;&gt;</a></p>
+      {% endif %}
     {% empty %}
         {% if other_things_of_same_type %}
             <div class="row"><h2 class="col">Recent {{ thing_plural }}</h2></div>

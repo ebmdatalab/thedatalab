@@ -23,6 +23,17 @@ def page_title(page, suffix=""):
 
     return " | ".join(i for i in bits if i)
 
+@register.simple_tag
+def page_colour_scheme(page):
+    if page.colour_scheme:
+        return page.colour_scheme
+
+    for p in page.get_ancestors():
+        if p.colour_scheme:
+            return p.colour_scheme
+
+    return ''
+
 @register.filter
 def show_markdown(text):
     return markdownify(text)
