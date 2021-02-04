@@ -129,6 +129,7 @@ Conf file is in `/deploy/redirects.conf`, but it needs to be outside of the cont
 root@dokku$ cp MY_REDIRECTS_CONF /home/dokku/thedatalab/nginx.conf.d/redirects.conf
 root@dokku$ chown -R dokku:dokku /home/dokku/thedatalab/nginx.conf.d/
 root@dokku$ service nginx reload
+root@dokku$ dokku ps:rebuild thedatalab
 ```
 
 #### Redirect domain name
