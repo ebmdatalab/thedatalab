@@ -71,7 +71,7 @@ def restart_gunicorn():
 def reload_nginx():
     sudo_script("reload_nginx.sh")
 
-def setup(environment, branch='master'):
+def setup(environment, branch='main'):
     if environment not in environments:
         abort("Specified environment must be one of %s" %
               ",".join(environments.keys()))
@@ -83,7 +83,7 @@ def setup(environment, branch='master'):
 
 
 @task
-def deploy(environment, branch='master'):
+def deploy(environment, branch='main'):
     env = setup(environment, branch)
     make_directory()
     with cd(env.path):
