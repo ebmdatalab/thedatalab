@@ -16,10 +16,10 @@ root@dokku$ dokku ssh-keys:add newperson /root/newperson_rsa.pub
 
 ```bash
 root@dokku$ dokku apps:create thedatalab
+root@dokku$ dokku git:set thedatalab deploy-branch main
 root@dokku$ dokku plugin:install https://github.com/dokku/dokku-postgres.git
 root@dokku$ dokku postgres:create thedatalab_production 
 root@dokku$ dokku postgres:link thedatalab_production thedatalab
-root@dokku$ dokku git:set thedatalab_production deploy-branch main
 local$ git clone git@github.com:ebmdatalab/thedatalab.git
 local$ cd thedatalab
 local$ git remote add dokku dokku@DOKU_HOSTNAME:thedatalab
