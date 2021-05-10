@@ -12,6 +12,17 @@
       gtag('config', 'UA-96324817-12');
     </script>
 
+    <script>
+      if (document.location.hostname === "www.thedatalab.org") {
+        var script = document.createElement("script");
+        script.async = true;
+        script.defer = true;
+        script.setAttribute("data-domain", "thedatalab.org");
+        script.src = "https://pa.thedatalab.org/js/index.js";
+        document.head.appendChild(script);
+      }
+    </script>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
