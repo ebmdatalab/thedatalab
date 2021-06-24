@@ -54,6 +54,6 @@ if (document.location.hostname === "www.thedatalab.org") {
     script.async = true;
     script.defer = true;
     script.setAttribute("data-domain", "thedatalab.org");
-    script.src = "https://pa.thedatalab.org/js/index.js";
+    script.src = "https://plausible.io/js/plausible.compat.js";
     document.head.appendChild(script);
 }
