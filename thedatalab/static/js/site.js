@@ -54,8 +54,8 @@ $(document).ready(function () {
 
 if (document.location.hostname === "www.thedatalab.org") {
   var script = document.createElement("script");
-  script.async = true;
   script.defer = true;
+  script.id = "plausible";
   script.setAttribute("data-domain", "thedatalab.org");
   script.src = "https://plausible.io/js/plausible.compat.js";
   document.head.appendChild(script);
