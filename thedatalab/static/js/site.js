@@ -48,3 +48,12 @@ $(document).ready(function() {
         
     });
 });
+
+if (document.location.hostname === "www.thedatalab.org") {
+    var script = document.createElement("script");
+    script.async = true;
+    script.defer = true;
+    script.setAttribute("data-domain", "thedatalab.org");
+    script.src = "https://pa.thedatalab.org/js/index.js";
+    document.head.appendChild(script);
+}
