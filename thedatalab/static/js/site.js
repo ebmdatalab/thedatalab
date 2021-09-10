@@ -60,3 +60,19 @@ if (document.location.hostname === "www.thedatalab.org") {
   script.src = "https://plausible.io/js/plausible.compat.js";
   document.head.appendChild(script);
 }
+
+(function () {
+  var bennettBanner = document.getElementById("bennett-banner");
+  var closeBtn = bennettBanner.querySelector(".close");
+
+  closeBtn.addEventListener("click", function () {
+    localStorage.setItem("hideBennettBanner", "true");
+  });
+
+  var isHidden = localStorage.getItem("hideBennettBanner");
+  if (isHidden !== "true") {
+    bennettBanner.classList.remove("hide");
+    bennettBanner.classList.add("show");
+    bennettBanner.removeAttribute("hidden");
+  }
+})();
