@@ -13,7 +13,7 @@
     {% compress css %}
     <link rel="stylesheet" type="text/x-scss" href="/static/scss/main.scss" />
     {% endcompress %}
-    
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Oxford DataLab" />
     {% block opengraph_title %}<meta property="og:title" content="{% page_title request.page suffix="Oxford DataLab" %}" />{% endblock %}
@@ -26,6 +26,19 @@
   </head>
 
   <body class="{% block body_class %}{% endblock %}">
+
+    <div id="bennett-banner" class="alert alert-primary alert-dismissible fade hide" hidden>
+        <div class="container">
+            <p class="text-center mb-0 font-weight-bold">
+                DataLab is becoming the Bennett Institute.
+                <a class="alert-link" href="https://www.ox.ac.uk/news/2021-09-16-oxford-announces-founding-new-bennett-institute-applied-data-science">Read more here &rarr;</a>
+            </p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
     <div class="container header">
         <div class="row">
             <div class="mobile-menu">
@@ -55,21 +68,21 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <div class="container">
           {% block main %}
-          
+
           {% endblock %}
         </div>
-  
+
         <div class="footer">
             <div class="container">
                 <div class="row">
 		    <div class="col-6 col-sm-4">
 			<h2>DataLab</h2>
 			<p>Nuffield Dept of Primary Care Health Sciences<br />Radcliffe Primary Care Building<br />Radcliffe Observatory Quarter<br />Woodstock Rd<br />Oxford<br />OX2 6GG</p>
-            <p><img src="/static/images/nuffield.png" class="footer__nuffield"></p>
+            <p><img src="/static/images/nuffield.png" class="footer__nuffield" alt="Nuffield Dept of Primary Care Health Sciences logo"></p>
 		    </div>
 		    <div class="col-6 col-sm-4">
 			<h2>Follow us</h2>
@@ -109,7 +122,7 @@
 		</div>
 	    </div>
 	</div>
-      
+
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
