@@ -5,7 +5,7 @@
     {% if thing.image %}
         <img
             src="{{ thing.image.name|tdl_resize:'642x385c'}}"
-            class="img-fluid w-100"
+            class="img-fluid w-100 mb-3"
             srcset="
                 {{ thing.image.name|tdl_resize:'777x216c'}} 1140w,
                 {{ thing.image.name|tdl_resize:'642x385c'}} 960w,
