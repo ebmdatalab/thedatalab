@@ -3,9 +3,18 @@
 <div class="text">
     {# hide the teaser image if images are in the long text already #}
     {% if thing.image %}
-        <div class="image"><img src="{{ thing.image.name|tdl_resize:'360x100c'}}" style="margin-right: 10px;" alt=""></div>
+        <img
+            src="{{ thing.image.name|tdl_resize:'642x385c'}}"
+            class="img-fluid w-100"
+            srcset="
+                {{ thing.image.name|tdl_resize:'777x216c'}} 1140w,
+                {{ thing.image.name|tdl_resize:'642x385c'}} 960w,
+                {{ thing.image.name|tdl_resize:'545x327c'}} 540w
+            "
+            sizes="(min-width: 1200px) 1140px, (min-width: 992px) 960px, (min-width: 768px) 720px, 540px"
+        />
     {% endif %}
-  
+
     <div class="abstract">
         {{ thing.body|show_markdown|safe }}
     </div>
