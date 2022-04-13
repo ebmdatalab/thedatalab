@@ -1,6 +1,6 @@
 # thedatalab.org
 
-This is the django project for http://thedatalab.org
+This was the django project for http://thedatalab.org - this project has been replaced by https://github.com/ebmdatalab/bennett.ox.ac.uk
 
 ## Install
 
